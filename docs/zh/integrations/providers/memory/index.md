@@ -4,7 +4,7 @@
 
 ## 有哪些
 
-- [内置](/zh/integrations/providers/memory/builtin.md)：默认自带，可关、稀疏、稠密三档，全可自建。
+- [内置](/zh/integrations/providers/memory/builtin.md)：默认自带：记忆图存 PostgreSQL，配了 embedding 模型后可加 pgvector 语义检索，全可自建。
 - [Mem0](/zh/integrations/providers/memory/mem0.md)：走 Mem0 云 API，要密钥。
 - [OpenViking](/zh/integrations/providers/memory/openviking.md)：自建或 SaaS，自有 API。
 

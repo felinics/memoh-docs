@@ -13,6 +13,13 @@ const copy = computed(() => {
       sections: [
         {
           tone: 'guide',
+          icon: 'rocket',
+          title: '快速开始',
+          text: '十分钟部署 Memoh、添加模型、创建第一个机器人并接入聊天平台。',
+          href: '/zh/guides/quick-start',
+        },
+        {
+          tone: 'guide',
           icon: 'book',
           title: '教程',
           text: '学习如何创建机器人、管理会话并使用 Memoh 的核心功能。',
@@ -38,6 +45,13 @@ const copy = computed(() => {
 
   return {
     sections: [
+      {
+        tone: 'guide',
+        icon: 'rocket',
+        title: 'Quick Start',
+        text: 'Deploy Memoh, add a model, create your first bot, and connect a channel in ten minutes.',
+        href: '/guides/quick-start',
+      },
       {
         tone: 'guide',
         icon: 'book',
@@ -75,7 +89,12 @@ const copy = computed(() => {
         :href="section.href"
       >
         <span class="docs-home__icon" aria-hidden="true">
-          <svg v-if="section.icon === 'book'" viewBox="0 0 24 24" role="img">
+          <svg v-if="section.icon === 'rocket'" viewBox="0 0 24 24" role="img">
+            <path d="M14 4c3 0 6 3 6 6-2 4-6 8-10 10l-4-4C8 12 11 6 14 4Z" />
+            <path d="M9 15 6 18M4 20l2-2" />
+            <circle cx="14.5" cy="9.5" r="1.5" />
+          </svg>
+          <svg v-else-if="section.icon === 'book'" viewBox="0 0 24 24" role="img">
             <path d="M4 5.5C4 4.7 4.7 4 5.5 4H10c1.1 0 2 .9 2 2v14c0-1.1-.9-2-2-2H5.5C4.7 18 4 17.3 4 16.5v-11Z" />
             <path d="M20 5.5C20 4.7 19.3 4 18.5 4H14c-1.1 0-2 .9-2 2v14c0-1.1.9-2 2-2h4.5c.8 0 1.5-.7 1.5-1.5v-11Z" />
           </svg>
@@ -103,7 +122,7 @@ const copy = computed(() => {
 
 .docs-home__cards {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
 }
 
@@ -154,6 +173,12 @@ const copy = computed(() => {
 .docs-home__card-text {
   color: var(--vp-c-text-2);
   line-height: 1.55;
+}
+
+@media (max-width: 1080px) {
+  .docs-home__cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 720px) {

@@ -1,25 +1,24 @@
 # Self-hosted Overview
 
-Memoh is distributed in two forms: a native desktop client for personal/local use, and a server deploy stack for always-on shared usage. Choose the one that matches how you want bots to run.
+Memoh runs as a server stack; the Web UI and the Desktop app are clients for it. Pick the server option first, then decide how you want to access it.
 
 | Use case | Choose | Why |
 |----------|--------|-----|
-| Personal desktop workflow, local memory, quick trial, single-user usage | [Desktop](/self-hosted/desktop) | The app starts and stops its own local server, embedded Qdrant, local storage, and bundled CLI. |
-| Shared server, remote access, public/private channels, production uptime, multi-user or multi-tenant usage | [Server Deploy](/self-hosted/docker) | The Docker Compose stack keeps the backend, Web UI, database, memory services, and workspace runtime online. |
-
-## Desktop
-
-Use Desktop when you want Memoh to behave like a local app. It manages a local `memoh-server` on `127.0.0.1:18731`, prepares local storage, starts embedded Qdrant for memory search, and connects the UI automatically.
-
-Desktop is the easiest path for trying Memoh on your own computer. It is not the right choice for bots that must keep serving external channels while your computer is offline.
+| Try Memoh with nothing to install | [Memoh Cloud](https://memoh.ai) | Hosted service, same product, no server to run. |
+| Shared server, remote access, public/private channels, production uptime, multi-user or multi-tenant usage | [Server Deploy](/self-hosted/docker) | The Docker Compose stack keeps the backend, Web UI, PostgreSQL (with pgvector for memory), and workspace runtime online. |
+| A native app on your own computer, optionally shared with bots as a Computer | [Desktop](/self-hosted/desktop) | Native client that connects to Cloud or your server; it does not run a local server. |
 
 ## Server Deploy
 
-Use Server Deploy when Memoh should be reachable by multiple users, run continuously, or connect to external channels such as Telegram, Discord, Lark, WeChat, WeChat Official Account, Email, and more.
+Use Server Deploy when Memoh should be reachable by multiple users, run continuously, or connect to external channels such as Telegram, Discord, Feishu, WeChat, WeChat Official Account, Email, and more.
 
-Start with [Server Deploy](/self-hosted/docker) for a Docker Compose deployment.
+Start with the [Quick Start](/guides/quick-start) for the fastest route, then read [Server Deploy](/self-hosted/docker) for the full reference.
+
+## Desktop
+
+Use Desktop when you want Memoh to behave like a native app with a tray icon and shortcuts, or when you want server-side bots to use your computer's files, shell, and browser. Desktop always connects to a server (Cloud or self-hosted); see [Desktop](/self-hosted/desktop).
 
 ## Related
 
 - [Workspace Backends](/self-hosted/workspace-backends) explains Docker, containerd, Apple, and local workspace runtime choices.
-- [SQLite deployment](/self-hosted/sqlite) covers lighter single-node server deployments.
+- [Computers](/guides/computers) covers sharing your own machines with bots.

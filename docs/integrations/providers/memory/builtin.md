@@ -7,21 +7,20 @@ The built-in memory provider is the standard memory backend shipped with Memoh. 
 - Manual memory creation and editing
 - Memory compaction and rebuild workflows
 
-The built-in provider operates in one of three **memory modes**, each with different infrastructure requirements and retrieval capabilities.
-
 ---
 
-## Memory Modes
+## How It Works
 
-| Mode | Index | Requirements | Use Case |
-|------|-------|-------------|----------|
-| **Off** | File-based only | None | Lightweight setup, no vector search |
-| **Sparse** | Neural sparse vectors | Sparse service + Qdrant (`--profile sparse`) | Good retrieval quality without embedding API costs |
-| **Dense** | Dense embeddings | Embedding model + Qdrant (`--profile qdrant`) | Highest-quality semantic search |
+The built-in provider runs in **graph** mode. Memory nodes and edges are stored in PostgreSQL as the source of truth, and a Markdown view (the `memory/` bundle plus `MEMORY.md` in the bot workspace) is derived from them for the agent to read and edit.
 
-### How Sparse Mode Works
+Semantic retrieval is optional and layered on top:
 
-Sparse mode uses the [`opensearch-neural-sparse-encoding-multilingual-v1`](https://huggingface.co/opensearch-project/opensearch-neural-sparse-encoding-multilingual-v1) model (from the OpenSearch project) to convert text into sparse vectors — compact lists of token indices with importance weights. Unlike dense mode, which requires an external embedding API, the sparse model runs locally in the `sparse` container with no API key or cost. It supports multiple languages and provides significantly better retrieval quality than keyword-only search.
+| Layer | Storage | Requirements | What it adds |
+|-------|---------|--------------|--------------|
+| **Graph** (always on) | PostgreSQL memory nodes/edges | None beyond the main database | Structured recall, relations between memories, compaction, rebuild |
+| **Semantic index** (optional) | `pgvector` database | The `[pgvector]` database from the Compose stack **and** an embedding model selected on the provider | Vector similarity search over memory nodes |
+
+If no embedding model is set, or the `pgvector` database is not configured, the provider still works in graph-only mode; semantic search is simply skipped.
 
 ---
 
@@ -42,9 +41,7 @@ After creating a provider, select it from the list and configure its settings.
 
 | Field | Description |
 |-------|-------------|
-| **Memory Mode** | `off` (default), `sparse`, or `dense`. Controls how memories are indexed and retrieved. |
-| **Embedding Model** | Embedding model for dense vector search. Only used in `dense` mode. |
-| **Qdrant Collection** | Qdrant collection name. Defaults to `memory_sparse`. |
+| **Embedding Model** | Optional. An embedding model from one of your LLM providers. When set (and `pgvector` is available), memory nodes are embedded and semantic search is enabled. Leave empty for graph-only mode. |
 
 ### Managing Providers
 
@@ -55,42 +52,26 @@ After creating a provider, select it from the list and configure its settings.
 
 ## Infrastructure Requirements
 
-### Off Mode
+### Graph-only
 
-No additional infrastructure required. Memories are stored and retrieved using file-based indexing only.
+No additional infrastructure beyond the main PostgreSQL database.
 
-### Sparse Mode
+### Semantic index
 
-Requires the **sparse service** (runs the [`opensearch-neural-sparse-encoding-multilingual-v1`](https://huggingface.co/opensearch-project/opensearch-neural-sparse-encoding-multilingual-v1) model locally) and **Qdrant** vector database. Enable both with Docker Compose profiles:
-
-```bash
-docker compose --profile qdrant --profile sparse up -d
-```
-
-The following sections must be present in `config.toml`:
+The default Docker Compose stack already includes a `pgvector` service and the matching section in `config.toml`:
 
 ```toml
-[qdrant]
-base_url = "http://qdrant:6334"
-
-[sparse]
-base_url = "http://sparse:8085"
+[pgvector]
+enabled = true
+host = "pgvector"
+port = 5432
+user = "memoh"
+password = "memoh123"
+database = "memoh_vector"
+sslmode = "disable"
 ```
 
-### Dense Mode
-
-Requires an **embedding model** (configured in the provider settings) and **Qdrant**:
-
-```bash
-docker compose --profile qdrant up -d
-```
-
-The Qdrant section must be present in `config.toml`:
-
-```toml
-[qdrant]
-base_url = "http://qdrant:6334"
-```
+Then pick an **Embedding Model** on the provider. Embeddings are generated through the selected LLM provider (OpenAI, Gemini, Ollama, ...), so that provider must expose an embedding-capable model.
 
 ---
 

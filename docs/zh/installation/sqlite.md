@@ -7,10 +7,10 @@ title: Redirecting
 import { onMounted } from 'vue'
 
 onMounted(() => {
-  window.location.replace('/zh/self-hosted/sqlite')
+  window.location.replace('/zh/self-hosted/docker')
 })
 </script>
 
-<meta http-equiv="refresh" content="0; url=/zh/self-hosted/sqlite">
+<meta http-equiv="refresh" content="0; url=/zh/self-hosted/docker">
 
-Redirecting to [/zh/self-hosted/sqlite](/zh/self-hosted/sqlite).
+Redirecting to [/zh/self-hosted/docker](/zh/self-hosted/docker).

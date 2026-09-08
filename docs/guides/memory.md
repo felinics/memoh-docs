@@ -17,7 +17,7 @@ Without a memory provider, the bot will not have an active memory backend config
 
 ## Concept: Memory Retrieval
 
-Memories are stored and retrieved through the assigned memory provider. Depending on the provider type and mode, retrieval may use file-based indexing, sparse vectors, dense embeddings, or an external API. When a user sends a message, Memoh finds the most relevant memories and includes them in the bot's runtime context.
+Memories are stored and retrieved through the assigned memory provider. Depending on the provider type, retrieval may use the built-in memory graph, pgvector embeddings, or an external API. When a user sends a message, Memoh finds the most relevant memories and includes them in the bot's runtime context.
 
 This page is about **long-term memory**. It is separate from **session context compaction**, which reduces the prompt footprint of a single conversation session. See [Context Compaction](/guides/compaction).
 
@@ -63,7 +63,7 @@ This is different from [Context Compaction](/guides/compaction), which compresse
 
 The **Rebuild** feature re-indexes all memories from scratch. This is useful when:
 
-- You have changed the memory provider's mode (e.g., switching from `off` to `sparse`).
+- You have changed the memory provider's embedding model.
 - The vector index has become inconsistent.
 - You want to re-process all memories with updated settings.
 
@@ -110,5 +110,5 @@ If you are trying to shorten the currently active conversation history, use **Co
 
 - The bot automatically searches and retrieves memories during chat.
 - The assigned **Memory Provider** controls the memory backend used by the bot.
-- Provider-specific settings (such as memory mode, embedding model, or API keys) are configured in the provider itself — see [Memory Providers](/integrations/providers/memory/index.md).
+- Provider-specific settings (such as embedding model or API keys) are configured in the provider itself — see [Memory Providers](/integrations/providers/memory/index.md).
 - Memories provide the long-term knowledge that makes each bot unique to its owner.

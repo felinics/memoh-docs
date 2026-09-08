@@ -129,9 +129,8 @@ v0.13.0 支持两类 action：`command` 和 `tool`。
 工作目录解析顺序：
 
 1. `action.work_dir`
-2. 插件 hook 对应的插件目录
-3. 请求里的 workspace CWD
-4. `/data`
+2. 请求里的 workspace CWD
+3. `/data`
 
 环境变量包括：
 
@@ -140,7 +139,6 @@ v0.13.0 支持两类 action：`command` 和 `tool`。
 - `MEMOH_HOOK_NAME`
 - `MEMOH_BOT_ID`
 - `MEMOH_SESSION_ID`
-- 对插件 hook，还包括 `MEMOH_PLUGIN_ID` 和 `MEMOH_PLUGIN_DIR`
 
 如果 stdout 是 JSON，command 可以返回：
 
@@ -250,31 +248,7 @@ Hooks tab 会从 `/bots/{bot_id}/hooks/events` 加载事件目录。标记为 ru
 3. 点击 **Run Test**。
 4. 查看返回结果，包括命中的 hooks、运行的 actions、decision、action results 和 hook source metadata。
 
-测试路径使用 effective config，所以插件 hooks 也可能运行。测试也会真正执行 action。除非你就是要验证破坏性命令或工具调用，否则不要在测试 payload 里触发它们。
-
----
-
-## 插件 Hooks
-
-插件可以在自己的目录里提供 hooks：
-
-```text
-/data/.memoh/plugins/<plugin-id>/hooks.json
-```
-
-当机器人安装了已启用且状态为 ready 的插件时，Memoh 会加载该插件的 `hooks.json`，并把插件 hooks 追加到 effective config。
-
-插件 hook 行为：
-
-- 已停用的插件会被跳过
-- 仍需要授权的插件会被跳过
-- 无效的插件 hook 配置会被跳过并记录 warning
-- 插件 hook 名称会加前缀：`plugin:<plugin-id>:<hook-name>`
-- 插件 command action 默认以插件根目录作为 `work_dir`
-- 插件 command action 使用插件配置里的 `env`，不会使用用户配置里的 `env`
-- 插件 command action 会收到 `MEMOH_PLUGIN_ID` 和 `MEMOH_PLUGIN_DIR`
-
-用户 hooks 和插件 hooks 会在命中后一起按 priority 排序运行。把 `/data/.memoh/hooks.json` 里的 `enabled` 设为 `false` 只会停用该用户文件里的 hooks；ready 插件 hooks 有自己的配置，仍可能继续生效。
+测试路径使用 effective config，并且会真正执行 action。除非你就是要验证破坏性命令或工具调用，否则不要在测试 payload 里触发它们。
 
 ---
 
@@ -288,12 +262,10 @@ Hooks 很强大。请把它们当成会在机器人 workspace 里运行的代码
 - 不要把长期有效的 secrets 直接写进 `hooks.json`。
 - 对高风险 hooks 使用尽量窄的 `matcher`。
 - 记住 command action 会通过 stdin 收到 hook 请求，其中可能包含消息文本、工具输入、路径和错误信息。
-- 安装或启用插件前审查插件 hook 文件，因为 ready 插件 hooks 会合并进机器人的 effective hook config。
 
 ---
 
 ## 相关页面
 
 - [机器人](/zh/guides/bot.md)
-- [插件](/zh/guides/plugins.md)
 - [技能](/zh/guides/skills.md)

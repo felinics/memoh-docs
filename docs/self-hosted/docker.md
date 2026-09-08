@@ -4,7 +4,7 @@ Server Deploy is the self-hosted Memoh stack for always-on, multi-user or multi-
 
 This page documents the Docker Compose server deployment. For the native local client, see [Desktop Installation](/self-hosted/desktop).
 
-The default Compose stack includes PostgreSQL, the main server with an explicit workspace backend and in-process AI agent, and the web UI. SQLite is also available for single-node server installs; see [SQLite deployment](/self-hosted/sqlite.md).
+The default Compose stack includes PostgreSQL, a pgvector database for memory embeddings, a one-shot migration job, the main server with an explicit workspace backend and in-process AI agent, the channel worker, and the web UI. PostgreSQL is the only supported database.
 
 The official Compose stack uses the `containerd` workspace backend. The server image starts an embedded containerd and mounts the runtime files needed by bot workspaces. For Docker Engine and Apple backends, see [Workspace backends](/self-hosted/workspace-backends.md).
 
@@ -15,54 +15,14 @@ The Docker Compose stack consists of multiple services. Some are always started,
 | Service | Profile | Description |
 |---------|---------|-------------|
 | **server** | *(core)* | Main Memoh server with the configured container runtime backend and in-process AI agent |
+| **channel** | *(core)* | Channel worker (`memoh-channel`) that owns platform connections and webhooks; talks to the server over internal RPC |
 | **web** | *(core)* | Web UI (Vue 3) |
-| **postgres** | *(core)* | PostgreSQL database |
-| **qdrant** | `qdrant` | Qdrant vector database for memory search (sparse and dense modes) |
-| **sparse** | `sparse` | Neural sparse encoding service for memory retrieval (see below) |
+| **postgres** | *(core)* | PostgreSQL database (system of record) |
+| **pgvector** | *(core)* | PostgreSQL with `pgvector` used for optional memory embeddings; see [Built-in Memory](/integrations/providers/memory/builtin.md) |
+| **migrate** | *(core, one-shot)* | Runs `memoh-server migrate up` before the server starts |
+| **webhook-tunnel** | `webhook-tunnel` | Optional `cloudflared` quick tunnel that exposes the channel worker's webhook listener to the internet |
 | **connect-it** | `connectors` | Co-hosted [Connect-It](https://github.com/memohai/connect-it) service backing bot [connectors](/guides/connectors.md) (see below) |
 
-### Sparse Service
-
-The **sparse** container provides neural sparse vector encoding for memory retrieval. It runs a lightweight Python (Flask) service on port 8085 that uses the [`opensearch-neural-sparse-encoding-multilingual-v1`](https://huggingface.co/opensearch-project/opensearch-neural-sparse-encoding-multilingual-v1) model from OpenSearch.
-
-**What it does:**
-
-- Converts document text into sparse vectors (a compact list of token indices + importance weights) using a masked language model
-- Encodes queries using IDF-weighted term lookup for fast, efficient retrieval
-- Works with Qdrant to enable semantic memory search without requiring an external embedding API
-
-**Why use it:**
-
-- **No embedding API costs** — The model runs locally inside the container, so you don't need an OpenAI/Cohere/etc. embedding API key
-- **Multilingual** — The underlying model supports multiple languages out of the box
-- **Good retrieval quality** — Neural sparse encoding provides significantly better results than keyword-only search (BM25), while being lighter than dense embedding models
-
-**When to enable it:**
-
-Enable the sparse profile (`--profile sparse`) if you plan to use the built-in memory provider in **sparse mode**. The model is pre-downloaded during the Docker image build, so the container starts quickly without needing to fetch weights at runtime.
-
-```bash
-docker compose --profile qdrant --profile sparse up -d
-```
-
-For more details on memory modes, see [Built-in Memory Provider](/integrations/providers/memory/builtin.md).
-
-### Connect-It Connectors
-
-The **connect-it** container runs [Connect-It](https://github.com/memohai/connect-it), the service behind bot [connectors](/guides/connectors.md) — third-party service connections (GitHub, Notion, and so on) over OAuth or API keys. It shares the Memoh PostgreSQL instance under a separate `connect_it` schema and manages its own migrations.
-
-The install script manages Connect-It end to end:
-
-- **Fresh installs** enable it by default (`MEMOH_CONNECT_IT_MODE=embedded`, Compose profile `connectors`). Connectors work out of the box — no manual token setup in the Connect-It console.
-- **Upgrades** keep it disabled unless it was already enabled; rerun the installer with `MEMOH_CONNECT_IT_MODE=embedded` to turn it on.
-- The full credential set — admin console password, AES secret key, cookie secret, and the server-to-server API token — is generated once, written to `.env`, and reused across upgrades, so switching modes later keeps existing connections working.
-
-After install, the Connect-It admin console is available at `http://localhost:8421` (login `admin` plus the generated password, both printed at the end of the install and stored in `.env`).
-
-Two things to watch:
-
-- **OAuth callbacks** go through Connect-It's public URL, which defaults to `http://localhost:8421`. If Memoh is used from other machines, set `MEMOH_CONNECT_IT_PUBLIC_BASE_URL` to a URL those machines (and the OAuth providers) can reach.
-- **China mainland mirror**: Connect-It images come from ghcr.io and the memoh.cn mirror does not cover them. If pulling ghcr.io is not possible, set `MEMOH_CONNECT_IT_MODE=disabled`.
 
 ## Prerequisites
 
@@ -87,15 +47,15 @@ The script will:
 
 1. Check for Docker and Docker Compose
 2. Detect whether this is a first-time install, an upgrade, or a reinstall
-3. Prompt for configuration (workspace, data directory, admin credentials, JWT secret, database backend, Postgres password when needed, workspace backend notice, and sparse service toggle)
+3. Prompt for configuration (workspace, data directory, admin credentials, JWT secret, Postgres password, and workspace backend notice)
 4. Reuse the existing `config.toml` automatically during upgrades so database credentials stay aligned with the persisted PostgreSQL volume
 5. Offer a clean reinstall mode that removes Memoh Docker containers, volumes, and network before starting again
 6. Fetch the latest release tag from GitHub and clone the repository
 7. Generate `config.toml` from the Docker template with your settings when needed
-8. Select `docker-compose.yml` for PostgreSQL or `docker-compose.sqlite.yml` for SQLite
+8. Refuse to upgrade legacy SQLite installs (PostgreSQL is the only supported database; choose a clean reinstall instead)
 9. Pin Memoh Docker image versions to the release (for example, `v0.13.0` uses image tag `0.13.0`)
 10. Provision co-hosted Connect-It on fresh installs — generate its credentials once, persist them in `.env`, and add the `connectors` profile (see [Connect-It Connectors](#connect-it-connectors))
-11. Start the selected Compose file with the `qdrant` profile by default, plus `sparse` when enabled
+11. Start `docker-compose.yml` (core services), adding the `connectors` and `webhook-tunnel` profiles when enabled
 12. Print recent database, migration, and server logs automatically if startup fails
 
 **Silent install** (use all defaults, no prompts):
@@ -110,10 +70,9 @@ Defaults when running silently:
 - Data directory: `~/memoh/data`
 - Admin: `admin` / `admin123`
 - JWT secret: auto-generated
-- Database: PostgreSQL
+- Database: PostgreSQL (with the `pgvector` sidecar)
 - Postgres password: `memoh123`
-- Qdrant profile: enabled
-- Sparse memory service: disabled unless `USE_SPARSE=true`
+- Webhook tunnel: disabled unless `MEMOH_WEBHOOK_TUNNEL_MODE=external`
 
 If the script detects an existing Memoh installation in silent mode, it defaults to **upgrade** and reuses the previous `config.toml`. If Docker state exists but no reusable `config.toml` can be found, the script exits and asks you to choose an explicit reinstall.
 
@@ -149,22 +108,10 @@ curl -fsSL https://memoh.sh | USE_CN_MIRROR=true sh
 
 > Environment variables can be combined, e.g. `curl -fsSL https://memoh.sh | MEMOH_VERSION=v0.13.0 USE_CN_MIRROR=true sh`
 
-**Use SQLite instead of PostgreSQL** (single-node installs):
+**Expose channel webhooks through a Cloudflare quick tunnel** (for platforms that need a public callback URL):
 
 ```bash
-curl -fsSL https://memoh.sh | MEMOH_DATABASE_DRIVER=sqlite sh
-```
-
-Or:
-
-```bash
-curl -fsSL https://memoh.sh | sh -s -- --database-driver sqlite
-```
-
-**Enable the sparse memory service**:
-
-```bash
-curl -fsSL https://memoh.sh | USE_SPARSE=true sh
+curl -fsSL https://memoh.sh | MEMOH_WEBHOOK_TUNNEL_MODE=external sh
 ```
 
 ### Installer Options
@@ -176,7 +123,7 @@ The install script accepts these flags after `sh -s --`:
 | `-y`, `--yes` | Run silently with defaults. The script also switches to silent mode automatically when no TTY is available. |
 | `--version <tag>`, `--version=<tag>` | Install a specific Git tag, such as `v0.13.0`. |
 | `--install-mode <mode>`, `--install-mode=<mode>` | Choose `auto`, `fresh`, `upgrade`, or `reinstall`. |
-| `--database-driver <driver>`, `--database-driver=<driver>` | Choose `postgres` or `sqlite` for fresh installs. `postgresql` and `sqlite3` are normalized. |
+| `--database-driver <driver>`, `--database-driver=<driver>` | Accepted for compatibility; `postgres` is the only supported value. |
 | `--container-backend <backend>`, `--workspace-backend <backend>` | Choose the workspace backend value written to config. One-click Docker Compose installs support `containerd` only; use manual deployment for `docker` or `apple`. |
 
 ## Manual Install
@@ -193,19 +140,13 @@ Edit `config.toml` — at minimum change:
 - `auth.jwt_secret` — Generate with `openssl rand -base64 32`
 - `postgres.password` — Database password (also set `POSTGRES_PASSWORD` env var to match)
 
-For SQLite, set `database.driver = "sqlite"` and use `docker-compose.sqlite.yml`. Details are in [SQLite deployment](/self-hosted/sqlite.md).
-
-Then start (recommended — with Qdrant and Sparse):
-
-```bash
-POSTGRES_PASSWORD=your-db-password docker compose --profile qdrant --profile sparse up -d
-```
-
-Or start core services only (no vector DB or sparse memory service):
+Then start the core services:
 
 ```bash
 POSTGRES_PASSWORD=your-db-password docker compose up -d
 ```
+
+Add `--profile connectors` for co-hosted Connect-It and `--profile webhook-tunnel` for the Cloudflare webhook sidecar as needed.
 
 > On macOS or if your user is in the `docker` group, `sudo` is not required.
 
@@ -238,8 +179,7 @@ image_pull_policy = "if_not_present" # if_not_present, always, or never
 And add the China mirror compose overlay:
 
 ```bash
-docker compose -f docker-compose.yml -f docker/docker-compose.cn.yml \
-  --profile qdrant --profile sparse up -d
+docker compose -f docker-compose.yml -f docker/docker-compose.cn.yml up -d
 ```
 
 The install script handles this automatically when you set `USE_CN_MIRROR=true`.
@@ -269,15 +209,15 @@ The `config.toml` file controls all server behavior. Here is a summary of the av
 | `[admin]` | Admin account credentials (username, password, email) |
 | `[auth]` | JWT secret and token expiration |
 | `timezone` | Server timezone (default `UTC`) |
-| `[database]` | Database backend selection (`postgres` or `sqlite`) |
+| `[database]` | Database driver; `postgres` is the only supported value |
 | `[container]` | Workspace backend selection plus common workspace image, pull policy, data path, runtime path, and CNI settings |
 | `[containerd]` | Containerd socket path and namespace |
 | `[docker]` | Docker Engine host override; empty uses Docker environment/default socket |
 | `[apple]` | socktainer socket and binary overrides for the Apple backend |
 | `[postgres]` | PostgreSQL connection (host, port, user, password, database, sslmode) |
-| `[sqlite]` | SQLite file path, WAL mode, and busy timeout |
-| `[qdrant]` | Qdrant vector database connection (base_url, api_key, timeout) |
-| `[sparse]` | Sparse encoding service URL |
+| `[pgvector]` | Optional pgvector database used for memory embeddings (`enabled`, host, port, user, password, database, sslmode) |
+| `[internal_rpc]` | Server/channel-worker RPC targets and shared secret for the split deployment |
+| `[webhook_tunnel]` | Webhook tunnel mode (`disabled` or `external`) and `public_base_url` |
 | `[registry]` | Provider definitions directory |
 | `[connect_it]` | Connect-It endpoint for [connectors](/guides/connectors.md) (`base_url`, `api_token`); both empty disables the feature. The Compose environment overrides these via `MEMOH_CONNECT_IT_BASE_URL` / `MEMOH_CONNECT_IT_API_TOKEN`. |
 | `[web]` | Web frontend host and port |
@@ -330,10 +270,10 @@ docker compose pull && docker compose up -d  # Update to latest images
 | `MEMOH_DATA_DIR`   | `~/memoh/data`     | Installer data directory value written to `.env`; currently reserved for future bind-mount support. |
 | `MEMOH_VERSION`    | *(latest release)* | Git tag to install (e.g. `v0.13.0`). Also pins Memoh Docker image versions without the leading `v` (for example, `0.13.0`). |
 | `MEMOH_INSTALL_MODE` | `auto`           | Install mode: `auto`, `fresh`, `upgrade`, or `reinstall` |
-| `MEMOH_DATABASE_DRIVER` | `postgres`    | Database backend for fresh installs: `postgres` or `sqlite` |
+| `MEMOH_DATABASE_DRIVER` | `postgres`    | Accepted for compatibility; `postgres` is the only supported value |
 | `MEMOH_CONTAINER_BACKEND` | `containerd` | Workspace backend. One-click Docker Compose installs support `containerd`; use manual deployment for `docker` or `apple`. |
 | `MEMOH_ALLOW_ROOT_INSTALL` | `false` | Allow running the installer shell itself as root. Prefer leaving this unset and running the installer as a normal user. |
-| `USE_SPARSE`       | `false`            | Set to `true` to enable the sparse service. The installer always starts the `qdrant` profile and adds `sparse` only when this is true. |
+| `MEMOH_WEBHOOK_TUNNEL_MODE` | `disabled` | `external` adds the `webhook-tunnel` profile (Cloudflare `cloudflared` sidecar) so channel webhooks get a public URL. |
 | `USE_CN_MIRROR`    | `false`            | Set to `true` to use China mainland image mirrors |
 | `MEMOH_CONNECT_IT_MODE` | `embedded` on fresh installs; unchanged on upgrades | `embedded` runs the co-hosted Connect-It (`connectors` profile); `disabled` turns connectors off. |
 | `MEMOH_CONNECT_IT_PUBLIC_BASE_URL` | `http://localhost:8421` | Public URL for connector OAuth callbacks and the admin console. Set it when Memoh is used from other machines. |

@@ -100,16 +100,3 @@ When a schedule fires:
 4. The agent receives the `command` along with the schedule context.
 5. The agent executes the command using its tools (e.g., web search, file read, send message).
 6. Results can be delivered to any connected channel.
-
----
-
-## Schedule vs. Heartbeat
-
-| Feature | Schedule | Heartbeat |
-|---------|----------|-----------|
-| **Trigger** | Cron expression (flexible timing) | Fixed interval (minutes) |
-| **Command** | Custom natural-language instruction | Generic "routine check" prompt |
-| **Max Calls** | Optional execution limit | Unlimited |
-| **Use Case** | Specific recurring tasks | Periodic autonomous thinking |
-
-Both features complement each other: use **Heartbeat** for general-purpose periodic activity and **Schedule** for precise, task-oriented automation.

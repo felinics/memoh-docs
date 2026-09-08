@@ -19,10 +19,6 @@ backend = "containerd" # containerd、docker 或 apple
 
 一键 Docker Compose Server Deploy 固定使用 `containerd`。这是有意的：server 镜像会启动内置 containerd，并挂好机器人 workspace 需要的 runtime 文件。`docker`、`apple` 更适合你能控制宿主机 runtime 路径的手动部署。
 
-::: warning Kata Containers 支持已移除
-旧版本可以通过 `[containerd].runtime_type` 让 workspace 跑在 Kata Containers 里。该支持已经移除——当前版本只用标准 containerd runtime。
-:::
-
 ## Trusted local workspace
 
 Desktop 和本地开发可以在容器后端之外启用 trusted local workspace：

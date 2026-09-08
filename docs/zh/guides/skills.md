@@ -1,6 +1,6 @@
 # 技能
 
-**技能**是可复用的提示模块，用来改机器人的语气、行为方式、工具使用习惯。在机器人的 **Skills** tab 里管；可手写，也可从 [超市](/zh/guides/supermarket.md) 装。
+**技能**是可复用的提示模块，用来改机器人的语气、行为方式、工具使用习惯。在机器人的 **Skills** tab 里管；可手写，也可从 [应用市场](/zh/guides/supermarket.md) 装。
 
 ---
 
@@ -30,7 +30,7 @@ description: Enables advanced coding workflows and tool usage.
 
 分 **托管** 和 **发现**：
 
-- **托管**：你在 Memoh 里建、改、从超市装的，放在 `/data/skills/<name>/SKILL.md`。
+- **托管**：你在 Memoh 里建、改、从应用市场装的，放在 `/data/skills/<name>/SKILL.md`。
 - **发现**：容器里旧目录、导入镜像里带来的兼容路径。
 
 Memoh 按顺序扫这些根：
@@ -115,9 +115,9 @@ Memoh 随 workspace 模板带了几个内置技能（如 `skill-creator`、`hook
 
 ---
 
-## 超市和导入
+## 应用市场和导入
 
-- **超市安装**：下好的技能进托管目录，和手写一样。
+- **应用市场安装**：下好的技能进托管目录，和手写一样。
 - **老环境/导入**：可能只出现在发现路径，需要就 **Adopt**。
 
 ---
@@ -127,4 +127,4 @@ Memoh 随 workspace 模板带了几个内置技能（如 `skill-creator`、`hook
 1. 先少而精，名字和描述写清楚。
 2. 不确定删不删时先 **Disable**。
 3. 要长期留用的发现项用 **Adopt**。
-4. 能复用就从 [超市](/zh/guides/supermarket.md) 装，少复制粘贴多份。
+4. 能复用就从 [应用市场](/zh/guides/supermarket.md) 装，少复制粘贴多份。

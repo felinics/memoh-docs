@@ -26,7 +26,8 @@ Once created, clicking on a bot card takes you to its **Detail Page**, where you
 | **Overview** | Health checks for workspace runtime, database, channels, and memory. |
 | **General** | Core runtime settings: chat/title/image models, memory/search/TTS bindings, timezone, language, reasoning, and danger zone. |
 | **Desktop** | Workspace display runtime, headed browser availability, and active display sessions. |
-| **Container** | Container-backed workspace lifecycle, snapshots, data export/import. |
+| **Computers** | Remote runtimes (your own machines running the Memoh runtime) that the bot can use for files and commands. |
+| **Workspace** | Container-backed workspace lifecycle, snapshots, data export/import. |
 | **Network** | Workspace network and overlay provider status/actions. |
 | **Memory** | Browse, search, create, edit, and compact memories. |
 | **Platforms** | Channel configurations such as Telegram, Discord, Feishu, QQ, Matrix, WeCom, WeChat, Misskey, DingTalk, and Web. |
@@ -34,11 +35,9 @@ Once created, clicking on a bot card takes you to its **Detail Page**, where you
 | **Tool Approval** | Human approval settings for tools that require confirmation. |
 | **Agents** | ACP-compatible coding agents, such as Codex and Claude Code, that can be enabled for chat workspace use. |
 | **Email** | Email bindings and outbox. |
-| **Plugins** | Installed plugin status, authentication needs, exposed resources, and uninstall/purge actions. |
 | **Connectors** | Third-party service connections (OAuth or API key) via Connect-It: status, enable/disable, reauthorize, disconnect. |
 | **Hooks** | Bot-scoped automation rules stored in `/data/.memoh/hooks.json`. |
 | **MCP** | MCP connection management (Stdio, Remote, OAuth). |
-| **Heartbeat** | Heartbeat configuration, model selection, and execution logs. |
 | **Compaction** | Session context compaction settings and logs. |
 | **Schedule** | Cron-based scheduled tasks and execution logs. |
 | **Skills** | Markdown-based skill files that define bot personality and capabilities. |
@@ -53,7 +52,7 @@ After creating a bot, the most important step is configuring its runtime setting
 
 1. Navigate to your bot's **Detail Page**.
 2. Start with the **General** tab for chat/runtime bindings.
-3. Use the **Heartbeat** tab for scheduled autonomous activity.
+3. Use the **Schedule** tab for recurring autonomous tasks.
 4. Use the **Compaction** tab for session context compaction behavior.
 5. Use the **Access** tab to refine ACL rules after the initial ACL preset.
 
@@ -64,7 +63,6 @@ If you have not created these resources yet, set them up first:
 - [Search Providers](/integrations/providers/web-search)
 - [TTS Providers](/integrations/providers/tts/index.md)
 - [Agents / ACP](/guides/acp.md)
-- [Plugins](/guides/plugins.md)
 
 ---
 
@@ -82,28 +80,13 @@ The **General** tab contains the settings that shape everyday conversation behav
 | **TTS Model** | Optional speech model used for text-to-speech output. Speech models come from the TTS Providers flow, not the normal chat provider flow. |
 | **Timezone** | Per-bot timezone. If empty, Memoh inherits the user timezone and then falls back to the system timezone. |
 | **Language** | The bot's primary communication language. |
-| **Reasoning Enabled** | Available when the selected chat model exposes `reasoning` compatibility. |
-| **Reasoning Effort** | Set the level of reasoning effort (`low`, `medium`, `high`). |
+| **Reasoning Effort** | Available when the selected chat model exposes `reasoning` compatibility. Options depend on the model (for example `low`, `medium`, `high`). |
 
 Notes:
 
 - The **Image Generation Model** is intentionally separate from the normal chat model so you can dedicate an image-capable model only to visual generation tasks.
 - The **TTS Model** comes from the [TTS Providers](/integrations/providers/tts/index.md) system and uses `speech` models from the configured speech provider.
 - The selected chat model's `context_window` influences session status reporting and [Context Compaction](/guides/compaction).
-
----
-
-## Heartbeat Tab Reference
-
-Heartbeat is configured from its own tab.
-
-| Field | Description |
-|-------|-------------|
-| **Heartbeat Enabled** | Enable or disable periodic autonomous activity. |
-| **Heartbeat Interval** | How often the heartbeat runs, in minutes. |
-| **Heartbeat Model** | Optional dedicated model for heartbeat tasks. This can differ from the main chat model. |
-
-The Heartbeat tab also includes heartbeat execution logs, so you can review what the bot did during autonomous runs.
 
 ---
 
