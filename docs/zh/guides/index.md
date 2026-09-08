@@ -13,7 +13,7 @@
 
 ## 扩展机器人能力
 
-- **[技能](/zh/guides/skills)** 和 **[超市](/zh/guides/supermarket)**：添加可复用提示模块和模板。
+- **[技能](/zh/guides/skills)** 和 **[应用市场](/zh/guides/supermarket)**：添加可复用提示模块和模板。
 - **[Hooks](/zh/guides/hooks)** 和 **[MCP](/zh/guides/mcp)**：连接工具、自动化规则和外部数据源。
 - **[Browser / Computer Use](/zh/guides/browser-computer-use)**：使用有头浏览器和可见桌面会话。
 - **[斜杠命令](/zh/guides/slash-commands)**：用命令快捷完成日常控制。
