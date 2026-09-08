@@ -4,6 +4,7 @@
 
 ## 开始使用 Memoh
 
+- **[快速开始](/zh/guides/quick-start)**：部署服务端、添加模型、创建第一个机器人并接入渠道。
 - **[用户偏好](/zh/guides/preferences)**：配置界面语言、主题、字体、图表和快捷键。
 - **[机器人](/zh/guides/bot)**：创建机器人并配置核心标签页。
 - **[会话](/zh/guides/sessions)**：理解 chat、discuss、路由和状态区。
@@ -13,7 +14,7 @@
 ## 扩展机器人能力
 
 - **[技能](/zh/guides/skills)** 和 **[超市](/zh/guides/supermarket)**：添加可复用提示模块和模板。
-- **[插件](/zh/guides/plugins)**、**[Hooks](/zh/guides/hooks)** 和 **[MCP](/zh/guides/mcp)**：连接工具、打包能力、自动化规则和外部数据源。
+- **[Hooks](/zh/guides/hooks)** 和 **[MCP](/zh/guides/mcp)**：连接工具、自动化规则和外部数据源。
 - **[Browser / Computer Use](/zh/guides/browser-computer-use)**：使用有头浏览器和可见桌面会话。
 - **[斜杠命令](/zh/guides/slash-commands)**：用命令快捷完成日常控制。
 
@@ -22,7 +23,7 @@
 - **[访问控制](/zh/guides/access)**：配置 ACL 预设、规则顺序和来源限定。
 - **[Workspace](/zh/guides/container)**：从产品界面理解 workspace 行为。
 - **[上下文压缩](/zh/guides/compaction)**：缩小当前会话上下文占用。
-- **[心跳](/zh/guides/heartbeat)** 和 **[计划任务](/zh/guides/schedule)**：让机器人保持活跃并安排任务。
+- **[计划任务](/zh/guides/schedule)**：按 cron 计划运行周期性工作，无需活跃聊天。
 - **[邮件](/zh/guides/email)**：配置邮件相关工作流。
 
 ## 其他文档区域

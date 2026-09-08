@@ -123,12 +123,15 @@ In `/help` output, owner-only actions are marked with `[owner]`.
 | `/search` | View and switch search providers | None |
 | `/usage` | View token usage | `summary` |
 | `/email` | Inspect email providers, bindings, and outbox | None |
-| `/heartbeat` | View recent heartbeat logs | `logs` |
 | `/skill` | View loaded bot skills | `list` |
 | `/fs` | Browse files inside the bot workspace | None |
 | `/status` | Inspect session message/context/cache status | `show` |
 | `/access` | Inspect identity, role, and ACL context | `show` |
 | `/compact` | Trigger immediate session context compaction | `run` |
+| `/context` | Show context window usage for the current session | `show` |
+| `/reasoning` (aliases `/reason`, `/effort`, `/think`) | View or set the reasoning level for this session | `show` |
+| `/language` | View or set the command UI language (`auto`, `en`, `zh`, `ja`) | `show` |
+| `/link <code>` | Link this channel account to your Memoh user with a code from the Web UI | `consume` |
 
 ---
 
@@ -215,15 +218,6 @@ Actions:
 | `summary` | `/usage` or `/usage summary` |
 | `by-model` | `/usage by-model` |
 
-### `/heartbeat`
-
-Shows the most recent heartbeat execution logs.
-
-Actions:
-
-| Action | Usage |
-|--------|-------|
-| `logs` | `/heartbeat` or `/heartbeat logs` |
 
 ### `/email`
 
@@ -258,22 +252,18 @@ Supported `update` options:
 |--------|-------------|
 | `--language` | Bot language, such as `en` or `zh` |
 | `--acl_default_effect` | `allow` or `deny` |
-| `--reasoning_enabled` | `true` or `false` |
 | `--reasoning_effort` | Effort level such as `low`, `medium`, `high`, `xhigh` — usable values depend on the selected model's declared reasoning efforts |
-| `--heartbeat_enabled` | `true` or `false` |
-| `--heartbeat_interval` | Minutes |
 | `--chat_model_id` | Chat model UUID |
-| `--heartbeat_model_id` | Heartbeat model UUID |
 
 Example:
 
 ```text
-/settings update --language en --heartbeat_enabled true --heartbeat_interval 30
+/settings update --language en --reasoning_effort high
 ```
 
 ### `/model`
 
-Shows or switches the bot's chat and heartbeat models.
+Shows or switches the bot's chat model.
 
 Actions:
 
@@ -282,7 +272,6 @@ Actions:
 | `list [provider_name]` | `/model list` | All |
 | `current` | `/model current` | All |
 | `set` | `/model set <model_id>` or `/model set <provider_name> <model_name>` | Owner |
-| `set-heartbeat` | `/model set-heartbeat <model_id>` or `/model set-heartbeat <provider_name> <model_name>` | Owner |
 
 Examples:
 

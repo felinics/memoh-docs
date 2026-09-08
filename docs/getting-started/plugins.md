@@ -7,10 +7,10 @@ title: Redirecting
 import { onMounted } from 'vue'
 
 onMounted(() => {
-  window.location.replace('/guides/plugins')
+  window.location.replace('/guides/supermarket')
 })
 </script>
 
-<meta http-equiv="refresh" content="0; url=/guides/plugins">
+<meta http-equiv="refresh" content="0; url=/guides/supermarket">
 
-Redirecting to [/guides/plugins](/guides/plugins).
+Redirecting to [/guides/supermarket](/guides/supermarket).

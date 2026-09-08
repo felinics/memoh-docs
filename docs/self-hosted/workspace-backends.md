@@ -19,10 +19,6 @@ backend = "containerd" # containerd, docker, or apple
 
 The one-click Docker Compose server deploy uses `containerd`. That is intentional: the server image starts an embedded containerd and mounts the runtime files needed by bot workspaces. Use the other backends for manual deployments where you control the host runtime paths.
 
-::: warning Kata Containers support removed
-Older Memoh versions could run workspaces under Kata Containers via `[containerd].runtime_type`. That support has been removed — current versions use standard containerd runtimes only.
-:::
-
 ## Trusted local workspaces
 
 Desktop and local development can enable trusted local workspaces alongside the configured container backend:

@@ -1,25 +1,24 @@
 # 自托管总览
 
-Memoh 有两种分发方式：面向个人/本地使用的 Desktop 桌面版，以及面向长期在线和多人使用的 Server Deploy。先选对形态，再看具体安装步骤。
+Memoh 以服务端形态运行，Web UI 和 Desktop 桌面版都是它的客户端。先选好服务端方案，再决定怎样访问它。
 
 | 场景 | 选择 | 原因 |
 |------|------|------|
-| 个人电脑、本地记忆、快速试用、单用户工作流 | [Desktop 桌面版](/zh/self-hosted/desktop) | App 会自己启动本地服务、embedded Qdrant、本地存储和 bundled CLI。 |
-| 共享服务器、远程访问、生产长期在线、对接 Telegram/Discord/飞书/微信/邮件等渠道 | [Server Deploy](/zh/self-hosted/docker) | Docker Compose 栈会持续运行后端、网页端、数据库、记忆服务和 workspace runtime。 |
-
-## Desktop 桌面版
-
-Desktop 适合把 Memoh 当成本地应用使用。它会管理 `127.0.0.1:18731` 上的本地 `memoh-server`，准备本地存储，启动 embedded Qdrant，并自动连接界面。
-
-如果机器人需要在你的电脑离线时继续服务外部渠道，请改用 Server Deploy。
+| 什么都不想装，先试试 | [Memoh Cloud](https://memoh.ai) | 托管服务，功能一致，无需运维服务器。 |
+| 共享服务器、远程访问、生产长期在线、对接 Telegram/Discord/飞书/微信/邮件等渠道、多用户或多租户 | [Server Deploy](/zh/self-hosted/docker) | Docker Compose 栈会持续运行后端、网页端、PostgreSQL（含 pgvector 记忆存储）和 workspace runtime。 |
+| 想在自己电脑上用原生 App，或把这台电脑作为 Computer 共享给机器人 | [Desktop 桌面版](/zh/self-hosted/desktop) | 连接 Cloud 或自托管服务端的原生客户端；不会在本地运行服务端。 |
 
 ## Server Deploy
 
 Server Deploy 适合多人、远程、长期在线或多租户场景。机器人需要持续接入 Telegram、Discord、飞书、微信、公众号、邮件等外部渠道时，也应该用这一形态。
 
-一般从 [Server Deploy](/zh/self-hosted/docker) 的 Docker Compose 部署开始。
+最快的路径见 [快速开始](/zh/guides/quick-start)，完整参考见 [Server Deploy](/zh/self-hosted/docker)。
+
+## Desktop 桌面版
+
+Desktop 适合想要托盘图标与快捷键的原生体验，或者想让服务端机器人使用你电脑上的文件、Shell 和浏览器的场景。Desktop 始终连接一个服务端（Cloud 或自托管），详见 [Desktop](/zh/self-hosted/desktop)。
 
 ## 相关页面
 
 - [Workspace backend](/zh/self-hosted/workspace-backends) 解释 Docker、containerd、Apple 和本地 workspace 的差异。
-- [SQLite 部署](/zh/self-hosted/sqlite) 适合更轻量的单节点 server 部署。
+- [Computers](/zh/guides/computers) 介绍如何把自己的机器共享给机器人。

@@ -59,7 +59,7 @@ If you abandon an OAuth authorization halfway, the connection stays in **Waiting
 
 ## How Tools Reach The Bot
 
-At conversation time, Memoh combines all of the bot's enabled, active connections into a single aggregated MCP session and offers it to the agent as a tool source. Connector tools appear alongside workspace, plugin, and MCP tools.
+At conversation time, Memoh combines all of the bot's enabled, active connections into a single aggregated MCP session and offers it to the agent as a tool source. Connector tools appear alongside workspace and MCP tools.
 
 Each connection gets a **tool namespace** derived from the connector type when it is first bound — `github` for a GitHub connection, `github-2` for a second one. The namespace is fixed for the lifetime of the binding: connecting or disconnecting other services never renames an existing connection's tools.
 

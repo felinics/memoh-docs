@@ -111,17 +111,20 @@ Memoh 支持 **斜杠命令**，在进 LLM 之前截获。用来快速看状态�
 | `/schedule` | 计划任务 | 无 |
 | `/mcp` | 看 MCP 连接 | 无 |
 | `/settings` | 机器人设置 | `get` |
-| `/model` | 聊天/心跳模型 | 无 |
+| `/model` | 聊天模型 | 无 |
 | `/memory` | 记忆提供方 | 无 |
 | `/search` | 搜索提供方 | 无 |
 | `/usage` | token 用量 | `summary` |
 | `/email` | 邮服、绑定、发件箱 | 无 |
-| `/heartbeat` | 心跳日志 | `logs` |
 | `/skill` | 技能列表 | `list` |
 | `/fs` | workspace 文件 | 无 |
 | `/status` | 会话消息/上下文/缓存 | `show` |
 | `/access` | 身份与 ACL | `show` |
 | `/compact` | 立刻做**会话**上下文压缩 | `run` |
+| `/context` | 当前会话的上下文窗口占用 | `show` |
+| `/reasoning`（别名 `/reason`、`/effort`、`/think`） | 查看或设置本会话的推理档位 | `show` |
+| `/language` | 查看或设置命令界面语言（`auto`、`en`、`zh`、`ja`） | `show` |
+| `/link <code>` | 用 Web UI 里生成的码，把当前渠道账号绑定到 Memoh 用户 | `consume` |
 
 ---
 
@@ -175,13 +178,6 @@ Memoh 支持 **斜杠命令**，在进 LLM 之前截获。用来快速看状态�
 | `summary` | `/usage` 或 `/usage summary` |
 | `by-model` | `/usage by-model` |
 
-### `/heartbeat`
-
-最近心跳执行记录。
-
-| 动作 | 用法 |
-|------|------|
-| `logs` | `/heartbeat` 或 `/heartbeat logs` |
 
 ### `/email`
 
@@ -210,15 +206,11 @@ Memoh 支持 **斜杠命令**，在进 LLM 之前截获。用来快速看状态�
 |------|------|
 | `--language` | 如 `en`、`zh` |
 | `--acl_default_effect` | `allow` / `deny` |
-| `--reasoning_enabled` | `true` / `false` |
 | `--reasoning_effort` | 档位如 `low` / `medium` / `high` / `xhigh`——实际可用值取决于所选模型声明的 reasoning efforts |
-| `--heartbeat_enabled` | `true` / `false` |
-| `--heartbeat_interval` | 分钟 |
 | `--chat_model_id` | 聊天模型 UUID |
-| `--heartbeat_model_id` | 心跳模型 UUID |
 
 ```text
-/settings update --language en --heartbeat_enabled true --heartbeat_interval 30
+/settings update --language en --reasoning_effort high
 ```
 
 ### `/model`
@@ -228,7 +220,6 @@ Memoh 支持 **斜杠命令**，在进 LLM 之前截获。用来快速看状态�
 | `list [provider_name]` | `/model list` | 全体 |
 | `current` | `/model current` | 全体 |
 | `set` | `/model set <model_id>` 或 `/model set <provider_name> <model_name>` | Owner |
-| `set-heartbeat` | 同理，心跳模型 | Owner |
 
 ```text
 /model list

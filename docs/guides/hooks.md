@@ -129,9 +129,8 @@ A `command` action runs inside the bot workspace container. The hook request is 
 Working directory resolution:
 
 1. `action.work_dir`
-2. the plugin directory for plugin-provided hooks
-3. the request workspace CWD
-4. `/data`
+2. the request workspace CWD
+3. `/data`
 
 Environment variables include:
 
@@ -140,7 +139,6 @@ Environment variables include:
 - `MEMOH_HOOK_NAME`
 - `MEMOH_BOT_ID`
 - `MEMOH_SESSION_ID`
-- for plugin hooks, `MEMOH_PLUGIN_ID` and `MEMOH_PLUGIN_DIR`
 
 If stdout is JSON, the command can return:
 
@@ -250,31 +248,7 @@ Use the **Test** section in the Hooks tab to run a synthetic event:
 3. Click **Run Test**.
 4. Inspect the returned result, including matched hooks, actions run, decision, action results, and hook source metadata.
 
-The test path uses the effective config, so plugin hooks can run too. It also runs real actions. Avoid destructive commands or tool calls in test payloads unless that is what you intend to verify.
-
----
-
-## Plugin Hooks
-
-Plugins can include their own hooks at:
-
-```text
-/data/.memoh/plugins/<plugin-id>/hooks.json
-```
-
-When a bot has an enabled plugin whose installation status is ready, Memoh loads that plugin's `hooks.json` and appends its hooks to the effective config.
-
-Plugin hook behavior:
-
-- disabled plugins are skipped
-- plugins that still need authentication are skipped
-- invalid plugin hook configs are skipped with a warning
-- plugin hook names are prefixed as `plugin:<plugin-id>:<hook-name>`
-- plugin command actions default to the plugin root as `work_dir`
-- plugin command actions use the plugin config's `env`, not the user config's `env`
-- plugin command actions receive `MEMOH_PLUGIN_ID` and `MEMOH_PLUGIN_DIR`
-
-User hooks and plugin hooks run together after matching and priority sorting. Setting `enabled: false` in `/data/.memoh/hooks.json` disables hooks from that user file; ready plugin hooks still have their own config and can remain effective.
+The test path uses the effective config and runs real actions. Avoid destructive commands or tool calls in test payloads unless that is what you intend to verify.
 
 ---
 
@@ -288,12 +262,10 @@ Hooks are powerful. Treat them like code that runs inside the bot workspace.
 - Do not store long-lived secrets directly in `hooks.json`.
 - Prefer narrow `matcher` expressions for risky hooks.
 - Remember that command actions receive the hook request on stdin, which can include message text, tool inputs, paths, and errors.
-- Review plugin hook files before installing or enabling a plugin, because ready plugin hooks are merged into the bot's effective hook config.
 
 ---
 
 ## Related Pages
 
 - [Bot Management](/guides/bot.md)
-- [Plugins](/guides/plugins.md)
 - [Skills](/guides/skills.md)

@@ -7,10 +7,10 @@ title: Redirecting
 import { onMounted } from 'vue'
 
 onMounted(() => {
-  window.location.replace('/self-hosted/kata-containerd')
+  window.location.replace('/self-hosted/workspace-backends')
 })
 </script>
 
-<meta http-equiv="refresh" content="0; url=/self-hosted/kata-containerd">
+<meta http-equiv="refresh" content="0; url=/self-hosted/workspace-backends">
 
-Redirecting to [/self-hosted/kata-containerd](/self-hosted/kata-containerd).
+Redirecting to [/self-hosted/workspace-backends](/self-hosted/workspace-backends).

@@ -2,7 +2,7 @@
 
 Memoh v0.13 is the open-source multi-agent platform. It lets you run multiple AI agents on one machine, with each agent getting its own workspace, browser, network, tools, and long-term memory.
 
-Agents can talk through Telegram, Discord, Lark, WeChat, Web UI, Email, and other channels. They can remember context, operate a browser or desktop, call MCP tools, install plugins and skills, run scheduled tasks, and enforce per-bot access rules.
+Agents can talk through Telegram, Discord, Lark, WeChat, Web UI, Email, and other channels. They can remember context, operate a browser or desktop, call MCP tools, install skills and connectors, run scheduled tasks, and enforce per-bot access rules.
 
 The hosted Memoh SaaS service is coming soon. Join the [SaaS waitlist](https://memoh.ai/waitlist) if you want a managed option instead of operating your own deployment.
 
@@ -10,7 +10,7 @@ The hosted Memoh SaaS service is coming soon. Join the [SaaS waitlist](https://m
 
 ### Desktop
 
-Desktop is the quickest way to try Memoh locally. It starts a local `memoh-server`, manages local SQLite storage, starts embedded Qdrant for memory search, bundles the `memoh` CLI, and owns the system tray lifecycle.
+Desktop is the native client for Memoh Cloud or a self-hosted server. It wraps the Web UI in a native window with a system tray and shortcuts, and can register the computer it runs on as a Computer that bots may use. It does not run a local server.
 
 ### Server Deploy
 
@@ -24,11 +24,11 @@ Each bot can use an isolated container workspace with files, commands, MCP hosti
 
 ### Web Product
 
-The Web UI now covers more of the daily product surface: bot setup, sessions, providers, channels, workspace files, terminal and display panes, Supermarket, plugins, hooks, schedules, access control, and user preferences. v0.13 also includes English, Simplified Chinese, and Japanese UI language support.
+The Web UI now covers more of the daily product surface: bot setup, sessions, providers, channels, workspace files, terminal and display panes, Supermarket, hooks, schedules, access control, and user preferences. v0.13 also includes English, Simplified Chinese, and Japanese UI language support.
 
-### Plugins, Hooks, And Automation
+### Hooks, Schedules, And Automation
 
-Plugins package managed MCP resources, skills, hooks, configuration, authentication, and install steps behind one bot-scoped capability. Hooks let bots run small automation rules around supported events, while Schedule and Heartbeat keep recurring work moving without an active chat.
+Hooks let bots run small automation rules around supported events, while Schedule keeps recurring work moving without an active chat. Skills and connectors from the Supermarket extend what a bot can do without custom code.
 
 ### Access Control
 
@@ -39,6 +39,6 @@ Access control is split between channel-side chat permissions and workspace-side
 - **[Bot Setup](/guides/bot)** - create and configure a bot.
 - **[Providers And Models](/integrations/providers/llm)** - configure model access.
 - **[Channels](/integrations/channels/)** - choose where bots are reachable.
-- **[Plugins](/guides/plugins)** and **[Supermarket](/guides/supermarket)** - install packaged capabilities.
+- **[Skills](/guides/skills)** and **[Supermarket](/guides/supermarket)** - install reusable capabilities.
 - **[Scheduled Tasks](/guides/schedule)** and **[Access Control](/guides/access)** - operate recurring work and permissions.
 - **[Self-hosted](/self-hosted/)** - deploy and maintain your own Memoh instance.

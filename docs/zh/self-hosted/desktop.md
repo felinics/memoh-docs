@@ -1,54 +1,47 @@
-# Desktop 桌面版安装
+# Desktop
 
-Memoh Desktop 是面向个人和本地使用的原生客户端。它和 Server Deploy 是两条分发线：桌面版默认管理自己的本地后端，而不是连接一个托管的 Web/server 部署。
+Memoh Desktop 是面向 Memoh Cloud 或自托管 Memoh 服务端的原生客户端。它把同一套 Web UI 打包进 Electron 外壳，提供原生窗口、托盘、菜单与快捷键，并且可以把所在的这台电脑注册为机器人可用的 **Computer**。
 
-## 什么时候用 Desktop
+Desktop **不会**自己运行本地服务端或数据库。你始终需要把它连到一个 Memoh 服务端：[Memoh Cloud](https://memoh.ai) 或你自己的 [Server Deploy](/zh/self-hosted/docker)。
 
-适合这些场景：
+## 何时使用 Desktop
 
-- 想要一个打开就能用的本地 App
-- 单用户或个人工作流
-- 本地记忆和本地存储
-- 想用 bundled `memoh` CLI 连接同一个本地服务
-- 在自己的电脑上使用 local 或 Docker-backed workspace
+适合以下场景：
 
-如果你需要多人共享、生产可用性、远程访问，或机器人要在桌面离线时继续服务外部渠道，请用 [Server Deploy](/zh/self-hosted/docker)。
+- 想要原生 App 窗口与系统托盘，而不是浏览器标签页
+- 想用原生菜单与快捷键处理日常的 Memoh 工作流
+- 想让服务端的机器人使用这台电脑的文件、Shell 与浏览器，又不想单独跑一个 runtime 进程
+
+如果只是偶尔从浏览器访问，直接用 Web UI 即可。
 
 ## 安装
 
-1. 从 [Memoh Desktop 下载页](https://memoh.ai/desktop) 下载对应平台安装包。
+1. 从 [Memoh Desktop 下载页](https://memoh.ai/desktop) 下载对应平台的安装包（macOS DMG、Windows NSIS、Linux AppImage/deb/rpm）。
 2. 打开 Memoh。
-3. 等 App 启动本地服务并初始化存储。
-4. 可选：在 App 菜单里安装 bundled `memoh` CLI。
+3. 在连接页填写服务端地址（或选择 Memoh Cloud）。
+4. 用你的 Memoh 账号登录。
 
-## Desktop 会管理什么
+## 连接服务端
 
-桌面版负责本地运行时生命周期：
+在连接页输入服务端地址后连接：
 
-- `127.0.0.1:18731` 上的本地 `memoh-server`
-- 系统应用数据目录下的 SQLite 本地数据
-- 用于记忆向量检索的 embedded Qdrant
-- bundled CLI、server binary、provider templates、workspace bridge runtime
-- 系统托盘唤起与退出行为
+- 裸域名（如 `memoh.example.com`）默认按 `https://` 处理（只有 localhost 地址默认 `http://`）。
+- 缺少 `/api` 后缀时会自动补上，只填域名即可。
+- Desktop 会先探测服务端的 `/ping`（5 秒超时），成功后再进入登录页。
 
-从托盘退出会走桌面端的关闭路径，同时停止它管理的本地 server 和 embedded Qdrant。
-
-## 连接远程 server
-
-Desktop 也可以不用自己的本地后端，直接作为 [Server Deploy](/zh/self-hosted/docker) 的客户端。在连接页填 server 地址即可：
-
-- 裸域名（如 `memoh.example.com`）默认按 `https://` 处理（只有 localhost 类地址才默认 `http://`）。
-- 缺 `/api` 路径后缀会自动补——只填域名就够。
-- 连接前会探测 server 的 `/ping`（5 秒超时），通过后进登录页。
-
-换连别的 server 会清掉本地登录态，需要在新 server 上重新登录。
+切换到另一个服务端会清除本地登录状态，需要重新登录。
 
 ## 把这台电脑共享给机器人
 
-Desktop 可以把它所在的这台机器注册成 server 侧机器人可用的**电脑**，不用另跑 runtime 进程：打开**这台电脑**开关、起个名字，Desktop 在后台维持连接。权限模型和按机器人的配置见 [电脑（远程 Runtime）](/zh/guides/computers.md)。
+Desktop 可以把它所在的机器注册成服务端机器人可用的 **Computer**，不用另跑 runtime 进程：打开 **这台电脑** 开关，起个名字，Desktop 会通过内嵌的 Memoh runtime SDK 在后台维持连接。凭据使用操作系统的安全存储保存。
 
-## Workspace 行为
+权限模型、按机器人授权以及机器人在电脑上能做什么，见 [Computers](/zh/guides/computers.md)。
 
-Desktop 可按配置使用 trusted local workspace 或 container-backed workspace。Trusted local workspace 以本地用户权限运行，不提供容器隔离；container-backed workspace 仍保留正常的 bot workspace 模型，可用于文件编辑、命令执行、MCP 托管，以及可选的桌面显示/浏览器会话。
+## Desktop 负责什么
 
-运行时差异见 [Workspace backend](/zh/self-hosted/workspace-backends)。
+- 应用窗口、托盘图标、重新打开与退出行为
+- 与 Web UI 共用命令注册表的原生菜单
+- 到所选服务端的连接及其缓存的登录状态
+- **这台电脑** 对应的可选 Remote Runtime 连接
+
+其它一切（机器人、会话、记忆、工作区、渠道）都在你连接的服务端上。工作区运行时在服务端配置，见 [Workspace Backends](/zh/self-hosted/workspace-backends)。

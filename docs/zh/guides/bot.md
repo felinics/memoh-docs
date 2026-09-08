@@ -24,7 +24,8 @@
 | **Overview** | workspace runtime、库、渠道、记忆等健康检查 |
 | **General** | 主模型/标题/生图、记忆/搜索/浏览器/TTS、时区、语言、推理、危险区 |
 | **Desktop** | Workspace display runtime、有头浏览器、实时 display session |
-| **Container** | 容器型 workspace 起停、快照、导入导出 |
+| **Computers** | 远程运行时（运行 Memoh runtime 的自有机器），机器人可在其上读写文件、执行命令 |
+| **Workspace** | 容器型 workspace 起停、快照、导入导出 |
 | **Network** | Workspace 网络与 overlay provider 状态/动作 |
 | **Memory** | 浏览、搜、建、改、压记忆 |
 | **Platforms** | 各消息渠道（Telegram、Discord、飞书等） |
@@ -32,11 +33,9 @@
 | **Tool Approval** | 需要人类确认的工具审批设置 |
 | **Agents** | 可为聊天 workspace 启用的 ACP 兼容编码智能体，如 Codex、Claude Code |
 | **Email** | 邮服绑定、发件箱 |
-| **Plugins** | 已安装插件状态、授权需求、暴露资源、卸载/清理动作 |
 | **Connectors** | 经 Connect-It 连接的第三方服务（OAuth 或 API Key）：状态、启停、重新授权、断开 |
 | **Hooks** | 保存在 `/data/.memoh/hooks.json` 的机器人自动化规则 |
 | **MCP** | 连接（Stdio/Remote/OAuth） |
-| **Heartbeat** | 心跳间隔、模型、执行日志 |
 | **Compaction** | 会话压缩设置与记录 |
 | **Schedule** | cron 与日志 |
 | **Skills** | 技能 Markdown |
@@ -48,7 +47,7 @@ Files、Terminal、Display、Browser 这些 workspace 工具在聊天 workspace 
 ## 核心先配什么
 
 1. 打开机器人 **General**，先管模型与各类绑定。
-2. **Heartbeat** 管周期自主跑。
+2. **Schedule** 管周期性自主任务。
 3. **Compaction** 管会话写不长时的压缩。
 4. **Access** 在 ACL 预设之后细调。
 
@@ -59,7 +58,6 @@ Files、Terminal、Display、Browser 这些 workspace 工具在聊天 workspace 
 - [搜索提供方](/zh/integrations/providers/web-search)
 - [TTS 提供方](/zh/integrations/providers/tts/index)
 - [Agents / ACP](/zh/guides/acp.md)
-- [插件](/zh/guides/plugins.md)
 
 ---
 
@@ -75,26 +73,13 @@ Files、Terminal、Display、Browser 这些 workspace 工具在聊天 workspace 
 | **TTS Model** | 来自 TTS 流，不是普通 chat 供应商里选 |
 | **Timezone** | 不填则用户时区再落到系统 |
 | **Language** | 机器人主用语 |
-| **Reasoning Enabled** | 当前 chat 模型有 `reasoning` 时可用 |
-| **Reasoning Effort** | `low` / `medium` / `high` |
+| **Reasoning Effort** | 当前 chat 模型有 `reasoning` 时可用；可选值随模型而定（如 `low` / `medium` / `high`） |
 
 注意：
 
 - **生图模型** 故意与主聊天模型分开，好单独换「更擅长出图」的。
 - **TTS** 在 [TTS 提供方](/zh/integrations/providers/tts/index.md) 里用所配置语音提供方的 `speech` 模型。
 - `context_window` 会影响状态栏展示和 [会话压缩](/zh/guides/compaction.md) 的体感。
-
----
-
-## Heartbeat 字段
-
-| 字段 | 说明 |
-|------|------|
-| **Heartbeat Enabled** | 开不开周期自主 |
-| **Interval** | 多少分钟一次 |
-| **Heartbeat Model** | 可与主 chat 不同 |
-
-同 tab 可看各次执行日志。
 
 ---
 

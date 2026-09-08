@@ -4,7 +4,7 @@ Server Deploy 是 Memoh 的自托管服务端部署形态，适合长期在线�
 
 本页说明 Docker Compose 版 Server Deploy。要安装本地原生客户端，请看 [Desktop 桌面版](/zh/self-hosted/desktop)。
 
-默认编排里包含 PostgreSQL、主服务（显式配置 workspace backend，智能体也在同一进程）和网页前端。单机轻量 server 部署也可以用 SQLite，见 [SQLite 部署](/zh/self-hosted/sqlite.md)。
+默认编排里包含 PostgreSQL、用于记忆向量的 pgvector 库、一次性迁移任务、主服务（显式配置 workspace backend，智能体也在同一进程）、渠道 worker 和网页前端。数据库仅支持 PostgreSQL。
 
 官方 Compose 栈使用 `containerd` workspace backend。server 镜像会启动内置 containerd，并挂好机器人 workspace 需要的 runtime 文件。Docker Engine 和 Apple 后端见 [Workspace backend](/zh/self-hosted/workspace-backends.md)。
 
@@ -15,37 +15,14 @@ Compose 里有多组服务。有的默认就起，有的通过 `--profile` 打�
 | 服务 | Profile | 说明 |
 |------|---------|------|
 | **server** | *（核心）* | 主服务，使用配置中的容器运行时后端，智能体同进程 |
+| **channel** | *（核心）* | 渠道 worker（`memoh-channel`），持有各平台连接与 webhook，通过内部 RPC 与主服务通信 |
 | **web** | *（核心）* | 网页端（Vue 3） |
-| **postgres** | *（核心）* | PostgreSQL |
-| **qdrant** | `qdrant` | 向量库，给记忆检索用（稀疏/稠密） |
-| **sparse** | `sparse` | 神经稀疏编码，给记忆检索（见下） |
+| **postgres** | *（核心）* | PostgreSQL（主数据） |
+| **pgvector** | *（核心）* | 带 `pgvector` 的 PostgreSQL，供可选的记忆向量使用；见 [内置记忆](/zh/integrations/providers/memory/builtin.md) |
+| **migrate** | *（核心，一次性）* | 在主服务启动前执行 `memoh-server migrate up` |
+| **webhook-tunnel** | `webhook-tunnel` | 可选的 `cloudflared` 快速隧道，把渠道 worker 的 webhook 监听暴露到公网 |
 | **connect-it** | `connectors` | 同机部署的 [Connect-It](https://github.com/memohai/connect-it)，支撑 Bot [连接器](/zh/guides/connectors.md)（见下） |
 
-### sparse 服务
-
-**sparse** 容器跑神经稀疏向量，给记忆检索用。里面是一个轻量 Python（Flask）服务，端口 8085，模型是 OpenSearch 项目放出来的 [`opensearch-neural-sparse-encoding-multilingual-v1`](https://huggingface.co/opensearch-project/opensearch-neural-sparse-encoding-multilingual-v1)。
-
-**它做什么：**
-
-- 把文档压成稀疏向量（一批 token 下标 + 权重），基于掩码语言模型。
-- 查询端用 IDF 加权词表，检索快。
-- 和 Qdrant 一起用，可以在**不另接外部 embedding API** 的情况下做语义级记忆搜索。
-
-**什么时候值得开：**
-
-- 不想为 embedding 花钱，模型在容器里本地跑。
-- 多语言模型现成的。
-- 比纯关键词（BM25）强一截，又比大稠密向量省资源。
-
-**何时启用：**
-
-打算用内置记忆提供方的 **sparse** 模式时，把 sparse profile 打开。镜像构建时会预下模型，启动不用临时拉权重。
-
-```bash
-docker compose --profile qdrant --profile sparse up -d
-```
-
-模式细节见 [内置记忆提供方](/zh/integrations/providers/memory/builtin.md)。
 
 ### Connect-It 连接器
 
@@ -82,7 +59,7 @@ curl -fsSL https://memoh.sh | sh
 需要提权，脚本会只对 `docker` 命令使用 `sudo`。如果确实要以 root
 运行整个安装脚本，需要显式设置 `MEMOH_ALLOW_ROOT_INSTALL=true`。
 
-脚本会：检查 Docker/Compose；判断首次安装、升级或重装；交互问配置（工作区、数据目录、管理员、JWT、数据库后端、Postgres 密码、workspace backend 提示、是否开 sparse）；升级时自动复用已有 `config.toml`，保持数据库凭据和已有 PostgreSQL volume 一致；可选择清理重装并删除 Memoh 容器、volume 和 network；从 GitHub 取最新发布并克隆；按 Docker 模板生成 `config.toml`；按数据库后端选择 `docker-compose.yml` 或 `docker-compose.sqlite.yml`；把 Memoh 镜像钉到发布版本（例如 `v0.13.0` 对应镜像 tag `0.13.0`）；全新安装时带起同机部署的 Connect-It——凭据只生成一次、写进 `.env`，并加上 `connectors` profile（见[上面](#connect-it-连接器)）；默认带 `qdrant` profile 启动，启用 sparse 时再加 `sparse` profile；启动失败时打印数据库、迁移和 server 的近期日志。
+脚本会：检查 Docker/Compose；判断首次安装、升级或重装；交互问配置（工作区、数据目录、管理员、JWT、Postgres 密码、workspace backend 提示）；升级时自动复用已有 `config.toml`，保持数据库凭据和已有 PostgreSQL volume 一致；可选择清理重装并删除 Memoh 容器、volume 和 network；从 GitHub 取最新发布并克隆；按 Docker 模板生成 `config.toml`；拒绝升级遗留的 SQLite 安装（仅支持 PostgreSQL，需选择重装）；把 Memoh 镜像钉到发布版本（例如 `v0.13.0` 对应镜像 tag `0.13.0`）；全新安装时带起同机部署的 Connect-It——凭据只生成一次、写进 `.env`，并加上 `connectors` profile（见[上面](#connect-it-连接器)）；默认带 `qdrant` profile 启动，启用 sparse 时再加 `sparse` profile；启动失败时打印数据库、迁移和 server 的近期日志。
 
 **静默安装**（全默认、无提问）：
 
@@ -90,7 +67,7 @@ curl -fsSL https://memoh.sh | sh
 curl -fsSL https://memoh.sh | sh -s -- -y
 ```
 
-静默时默认：工作区 `~/memoh`；数据 `~/memoh/data`；管理员 `admin` / `admin123`；JWT 随机；数据库后端 PostgreSQL；Postgres 密码 `memoh123`；默认启用 `qdrant` profile；sparse 服务默认关闭，除非设置 `USE_SPARSE=true`。
+静默时默认：工作区 `~/memoh`；数据 `~/memoh/data`；管理员 `admin` / `admin123`；JWT 随机；数据库 PostgreSQL（含 `pgvector` 边车）；Postgres 密码 `memoh123`；webhook 隧道默认关闭，除非设置 `MEMOH_WEBHOOK_TUNNEL_MODE=external`。
 
 如果静默模式发现已有 Memoh 安装，会默认进入**升级**并复用之前的 `config.toml`。如果只发现 Docker 状态、但找不到可复用的 `config.toml`，脚本会退出并要求显式选择重装。
 
@@ -106,16 +83,10 @@ curl -fsSL https://memoh.sh | MEMOH_INSTALL_MODE=reinstall sh
 curl -fsSL https://memoh.sh | sh -s -- --install-mode reinstall
 ```
 
-**使用 SQLite**（单机轻量部署）：
+**通过 Cloudflare 快速隧道暴露渠道 webhook**（需要公网回调地址的平台）：
 
 ```bash
-curl -fsSL https://memoh.sh | MEMOH_DATABASE_DRIVER=sqlite sh
-```
-
-也可以用参数：
-
-```bash
-curl -fsSL https://memoh.sh | sh -s -- --database-driver sqlite
+curl -fsSL https://memoh.sh | MEMOH_WEBHOOK_TUNNEL_MODE=external sh
 ```
 
 **指定版本：**
@@ -138,12 +109,6 @@ curl -fsSL https://memoh.sh | USE_CN_MIRROR=true sh
 
 > 环境变量可组合，例如 `curl -fsSL https://memoh.sh | MEMOH_VERSION=v0.13.0 USE_CN_MIRROR=true sh`。
 
-**启用 sparse 记忆服务**：
-
-```bash
-curl -fsSL https://memoh.sh | USE_SPARSE=true sh
-```
-
 ### 安装脚本参数
 
 `sh -s --` 后面可以传这些参数：
@@ -153,7 +118,7 @@ curl -fsSL https://memoh.sh | USE_SPARSE=true sh
 | `-y`、`--yes` | 静默安装，使用默认值。没有 TTY 时脚本也会自动切到静默模式。 |
 | `--version <tag>`、`--version=<tag>` | 安装指定 Git tag，例如 `v0.13.0`。 |
 | `--install-mode <mode>`、`--install-mode=<mode>` | 选择 `auto`、`fresh`、`upgrade` 或 `reinstall`。 |
-| `--database-driver <driver>`、`--database-driver=<driver>` | 新安装时选择 `postgres` 或 `sqlite`；`postgresql`、`sqlite3` 会被归一化。 |
+| `--database-driver <driver>`、`--database-driver=<driver>` | 兼容保留；仅支持 `postgres`。 |
 | `--container-backend <backend>`、`--workspace-backend <backend>` | 写入配置的 workspace backend。一键 Docker Compose 安装只支持 `containerd`；`docker` 或 `apple` 请走手动部署。 |
 
 ## 手动安装
@@ -170,19 +135,13 @@ cp conf/app.docker.toml config.toml
 - `auth.jwt_secret`（可 `openssl rand -base64 32`）
 - `postgres.password`（环境变量 `POSTGRES_PASSWORD` 要一致）
 
-如果用 SQLite，把 `database.driver` 改成 `"sqlite"`，并使用 `docker-compose.sqlite.yml`。详细步骤见 [SQLite 部署](/zh/self-hosted/sqlite.md)。
-
-然后（推荐开 Qdrant 和 sparse）：
-
-```bash
-POSTGRES_PASSWORD=你的库密码 docker compose --profile qdrant --profile sparse up -d
-```
-
-只跑核心（无向量、无 sparse）：
+然后启动核心服务：
 
 ```bash
 POSTGRES_PASSWORD=你的库密码 docker compose up -d
 ```
+
+需要同机 Connect-It 时加 `--profile connectors`，需要 Cloudflare webhook 边车时加 `--profile webhook-tunnel`。
 
 > macOS 或用户已在 `docker` 组里，一般不必 `sudo`。
 
@@ -215,8 +174,7 @@ image_pull_policy = "if_not_present" # if_not_present、always 或 never
 并叠加国内 overlay：
 
 ```bash
-docker compose -f docker-compose.yml -f docker/docker-compose.cn.yml \
-  --profile qdrant --profile sparse up -d
+docker compose -f docker-compose.yml -f docker/docker-compose.cn.yml up -d
 ```
 
 一键脚本在 `USE_CN_MIRROR=true` 时会处理这套。
@@ -244,15 +202,15 @@ docker compose -f docker-compose.yml -f docker/docker-compose.cn.yml \
 | `[admin]` | 管理员账号 |
 | `[auth]` | JWT 与过期时间 |
 | `timezone` | 服时区，默认 `UTC` |
-| `[database]` | 数据库后端，`postgres` 或 `sqlite` |
+| `[database]` | 数据库驱动；仅支持 `postgres` |
 | `[container]` | Workspace backend 选择，以及通用 workspace 镜像、拉取策略、数据路径、runtime 路径、CNI 设置 |
 | `[containerd]` | socket 与 namespace |
 | `[docker]` | Docker Engine host 覆盖；留空时用 Docker 环境变量或默认 socket |
 | `[apple]` | Apple backend 的 socktainer socket 和 binary 覆盖 |
 | `[postgres]` | PostgreSQL 连接 |
-| `[sqlite]` | SQLite 文件路径、WAL、锁等待时间 |
-| `[qdrant]` | Qdrant 地址、密钥、超时 |
-| `[sparse]` | 稀疏服务 URL |
+| `[pgvector]` | 可选的 pgvector 库，用于记忆向量（`enabled`、host、port、user、password、database、sslmode） |
+| `[internal_rpc]` | 主服务/渠道 worker 拆分部署的 RPC 地址与共享密钥 |
+| `[webhook_tunnel]` | webhook 隧道模式（`disabled` 或 `external`）与 `public_base_url` |
 | `[registry]` | 供应商定义目录 |
 | `[connect_it]` | [连接器](/zh/guides/connectors.md)用的 Connect-It 地址（`base_url`、`api_token`）；两项都空即关闭该功能。Compose 环境里由 `MEMOH_CONNECT_IT_BASE_URL` / `MEMOH_CONNECT_IT_API_TOKEN` 覆盖 |
 | `[web]` | 前端 host/port |
@@ -305,10 +263,10 @@ docker compose pull && docker compose up -d  # 更新镜像再起
 | `MEMOH_DATA_DIR` | `~/memoh/data` | 安装脚本写入 `.env` 的数据目录值；目前预留给后续 bind mount 支持。 |
 | `MEMOH_VERSION` | 最新发版 | 要装的 git 标签，例如 `v0.13.0`；也会把 Memoh 镜像钉到去掉开头 `v` 的 tag，例如 `0.13.0` |
 | `MEMOH_INSTALL_MODE` | `auto` | 安装模式：`auto`、`fresh`、`upgrade` 或 `reinstall` |
-| `MEMOH_DATABASE_DRIVER` | `postgres` | 新安装时使用的数据库后端：`postgres` 或 `sqlite` |
+| `MEMOH_DATABASE_DRIVER` | `postgres` | 兼容保留；仅支持 `postgres` |
 | `MEMOH_CONTAINER_BACKEND` | `containerd` | Workspace backend。一键 Docker Compose 安装只支持 `containerd`；`docker`、`apple` 请走手动部署。 |
 | `MEMOH_ALLOW_ROOT_INSTALL` | `false` | 允许以 root 运行安装脚本本身。建议保持未设置，用普通用户运行安装脚本。 |
-| `USE_SPARSE` | `false` | 设为 `true` 时启用 sparse 服务。安装脚本始终启动 `qdrant` profile，只有这里为 true 时才额外加 `sparse` profile。 |
+| `MEMOH_WEBHOOK_TUNNEL_MODE` | `disabled` | 设为 `external` 时加上 `webhook-tunnel` profile（Cloudflare `cloudflared` 边车），给渠道 webhook 一个公网地址。 |
 | `USE_CN_MIRROR` | `false` | 是否用大陆镜像 |
 | `MEMOH_CONNECT_IT_MODE` | 全新安装 `embedded`；升级保持原状 | `embedded` 跑同机 Connect-It（`connectors` profile）；`disabled` 关闭连接器 |
 | `MEMOH_CONNECT_IT_PUBLIC_BASE_URL` | `http://localhost:8421` | 连接器 OAuth 回调和管理台的公开地址；Memoh 要从其它机器访问时必须设 |

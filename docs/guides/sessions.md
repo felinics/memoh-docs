@@ -20,7 +20,6 @@ Memoh uses six session types to separate different kinds of bot activity:
 |------|-------------|
 | **Chat** | Standard user-initiated conversations. This is the default session type when chatting with a bot. |
 | **Discuss** | Observation-oriented conversation mode. The bot may stay silent by default and only speaks when it decides to send a real reply into the conversation. |
-| **Heartbeat** | Automatically created when a bot's heartbeat triggers. Contains the bot's periodic autonomous activity. |
 | **Schedule** | Created when a scheduled task fires. Contains the bot's execution of a cron-triggered command. |
 | **Subagent** | Created when the bot delegates a task to a subagent. Contains the subagent's independent work context. |
 | **ACP Agent** | Created when an enabled ACP-compatible coding agent is used from the chat workspace. |
@@ -91,7 +90,7 @@ The Web UI provides a session sidebar where you can:
 - Click the **New Session** button to create a fresh chat session.
 - Switch between existing sessions by clicking on them.
 - Search sessions by content.
-- Filter sessions by type (`chat`, `discuss`, `heartbeat`, `schedule`, `subagent`, `acp_agent`).
+- Filter sessions by type (`chat`, `discuss`, `schedule`, `subagent`, `acp_agent`).
 - Rename or delete sessions.
 
 ---
@@ -137,7 +136,6 @@ The panel also exposes **Compact Now**, which triggers immediate [Context Compac
 ## How Sessions Relate to Other Features
 
 - **Discuss** sessions are optimized for channels where the bot should observe and selectively speak, especially in group conversations.
-- **Heartbeat** sessions are created on each heartbeat trigger. You can view what the bot did during its autonomous activity by opening the corresponding heartbeat session.
 - **Schedule** sessions are created when a scheduled task runs. Check these to see the results of cron-triggered commands.
 - **Subagent** sessions track delegated tasks. They show the independent work context of each subagent invocation. Subagents get nearly the parent bot's full tool set — including workspace, browser, memory, and MCP tools — but they cannot message users directly, ask the user questions, or spawn further subagents. When delegating, the bot can pick a different chat model per subagent and optionally fork its current conversation context into the subagent. The session info panel shows the bot's currently active subagents.
 - **ACP Agent** sessions track coding-agent work started from the chat workspace through the Agents/ACP integration.

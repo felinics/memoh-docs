@@ -7,21 +7,20 @@
 - 手建、手改
 - 记忆压缩、整库重建
 
-三种 **memory mode**，对基础设施和效果要求不同。
-
 ---
 
-## 模式
+## 工作方式
 
-| 模式 | 索引 | 要啥 | 适合 |
-|------|------|------|------|
-| **Off** | 仅文件 | 无额外服务 | 最轻，不做向量 |
-| **Sparse** | 神经稀疏向量 | sparse 服务 + Qdrant（`--profile sparse` 等） | 不想交 embedding API 钱、又要比纯词匹配强 |
-| **Dense** | 稠密向量 | embedding 模型 + Qdrant（`--profile qdrant`） | 要稠密语义检索时 |
+内置提供方运行在 **graph** 模式：记忆节点与边存放在 PostgreSQL 中作为唯一真源，并派生出一份 Markdown 视图（机器人工作区里的 `memory/` bundle 和 `MEMORY.md`）供 Agent 读写。
 
-### Sparse 在干什么
+语义检索是可选的加层：
 
-用 OpenSearch 项目放出来的 [`opensearch-neural-sparse-encoding-multilingual-v1`](https://huggingface.co/opensearch-project/opensearch-neural-sparse-encoding-multilingual-v1) 把文字变成**稀疏向量**（一批 token 下标 + 权重）。不另买 embedding API，在 `sparse` 容器里本地跑。多语言，一般比只关键词强不少。
+| 层 | 存储 | 要啥 | 提供什么 |
+|----|------|------|----------|
+| **Graph**（始终开启） | PostgreSQL 记忆节点/边 | 只要主库 | 结构化召回、记忆间关系、压缩、重建 |
+| **语义索引**（可选） | `pgvector` 数据库 | Compose 栈里的 `[pgvector]` 库 **加上** 在提供方里选好 embedding 模型 | 对记忆节点做向量相似度检索 |
+
+没选 embedding 模型，或没配 `pgvector`，提供方照样以纯 graph 模式工作，只是跳过语义检索。
 
 ---
 
@@ -38,9 +37,7 @@
 
 | 字段 | 说明 |
 |------|------|
-| **Memory Mode** | `off`（默认）/ `sparse` / `dense` |
-| **Embedding Model** | 仅 `dense` 要，指向你的 embedding 模型 |
-| **Qdrant Collection** | 集合名，默认常是 `memory_sparse` 等（以界面为准） |
+| **Embedding Model** | 可选。来自某个 LLM 提供方的 embedding 模型。选了（且 `pgvector` 可用）就会给记忆节点做向量并开启语义检索；留空即纯 graph 模式。 |
 
 **Edit**、**Delete** 如常。
 
@@ -48,42 +45,26 @@
 
 ## 依赖
 
-### Off
+### 纯 graph
 
-只要文件侧索引，无向量服务。
+除主 PostgreSQL 外无额外依赖。
 
-### Sparse
+### 语义索引
 
-要 **sparse 服务** + **Qdrant**：
-
-```bash
-docker compose --profile qdrant --profile sparse up -d
-```
-
-`config.toml` 里至少要有类似：
+默认 Docker Compose 栈已经带了 `pgvector` 服务，`config.toml` 里也有对应段：
 
 ```toml
-[qdrant]
-base_url = "http://qdrant:6334"
-
-[sparse]
-base_url = "http://sparse:8085"
+[pgvector]
+enabled = true
+host = "pgvector"
+port = 5432
+user = "memoh"
+password = "memoh123"
+database = "memoh_vector"
+sslmode = "disable"
 ```
 
-### Dense
-
-要 **embedding 模型**（在提供方里配）+ **Qdrant**：
-
-```bash
-docker compose --profile qdrant up -d
-```
-
-```toml
-[qdrant]
-base_url = "http://qdrant:6334"
-```
-
-（稠密模式细节、embedding 在 UI 里选哪条，以你当前版本为准。）
+然后在提供方里选一个 **Embedding Model**。向量由所选 LLM 提供方（OpenAI、Gemini、Ollama……）生成，因此该提供方需要有 embedding 模型可用。
 
 ---
 
@@ -99,4 +80,11 @@ base_url = "http://qdrant:6334"
 
 ## 配好之后
 
-在 **Memory** tab 可手建、从对话抽、搜、改、压、重建等。日常操作见 [长期记忆](/zh/guides/memory.md)。
+在机器人的 **Memory** tab 里管理具体记忆：
+
+- 手动新建
+- 从对话抽取
+- 搜索、编辑、删除
+- 压缩或重建记忆库
+
+日常操作见 [记忆管理](/zh/guides/memory.md)。

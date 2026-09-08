@@ -20,12 +20,11 @@ Memoh 用六类会话区分不同活动：
 |------|------|
 | **Chat** | 最常见的用户发起对话，默认就它。 |
 | **Discuss** | 偏「旁观」：机器人默认可以不吱声，把模型输出当内心戏，只有用发送类动作时才算对频道真说话。 |
-| **Heartbeat** | 心跳触发生成，记自主行为。 |
 | **Schedule** | cron 触发。 |
 | **Subagent** | 子智能体被委派时。 |
 | **ACP Agent** | 从聊天 workspace 使用已启用 ACP 兼容编码智能体时生成。 |
 
-普通 `/new chat`、`/new discuss` 只直接创建 **Chat** 和 **Discuss**。**ACP Agent** 会话由 Agents/ACP 工作流创建和管理；Heartbeat、Schedule、Subagent 多由系统创建，在列表里像只读记录。
+普通 `/new chat`、`/new discuss` 只直接创建 **Chat** 和 **Discuss**。**ACP Agent** 会话由 Agents/ACP 工作流创建和管理；Schedule、Subagent 多由系统创建，在列表里像只读记录。
 
 ### Chat 和 Discuss 差在哪
 
@@ -62,7 +61,7 @@ ACP Agent 会话不通过 `/new` 创建。要先在机器人详情的 **Agents**
 
 在渠道里发这些命令会：建新会话、后续消息都进这路、旧会话保留但不再当「当前」。
 
-**网页** 里也可用侧栏 **New Session**、切换、搜索、按类型筛（`chat`、`discuss`、`heartbeat`、`schedule`、`subagent`、`acp_agent`）、重命名、删除等。
+**网页** 里也可用侧栏 **New Session**、切换、搜索、按类型筛（`chat`、`discuss`、`schedule`、`subagent`、`acp_agent`）、重命名、删除等。
 
 ---
 
@@ -91,7 +90,6 @@ ACP Agent 会话不通过 `/new` 创建。要先在机器人详情的 **Agents**
 ## 和其它功能的关系
 
 - **Discuss** 给「群里多看少说」用。
-- **Heartbeat** 每触发一次，会有一条对应当次自主行为的会话，可点开看做了啥。
 - **Schedule** 到点也会生成会话，可看 cron 命令跑的结果。
 - **Subagent** 各自会话，跟委派任务对齐。子智能体几乎能用主机器人的全套工具——workspace、浏览器、记忆、MCP 都在——但不能直接给用户发消息、不能向用户提问、不能再套子智能体。委派时机器人可以给每个子智能体单独挑聊天模型，也可以选择把当前会话上下文 fork 给它。会话信息面板能看到当前活跃的子智能体。
 - **ACP Agent** 记录从聊天 workspace 启动的编码智能体工作。
