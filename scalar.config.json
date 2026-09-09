@@ -115,6 +115,10 @@
           "to": "https://github.com/felinics/Memoh",
           "newTab": true,
           "align": "end"
+        },
+        {
+          "type": "version-selector",
+          "align": "end"
         }
       ],
       "routes": {
@@ -443,6 +447,10 @@
           "icon": "phosphor/regular/github-logo",
           "to": "https://github.com/felinics/Memoh",
           "newTab": true,
+          "align": "end"
+        },
+        {
+          "type": "version-selector",
           "align": "end"
         }
       ],

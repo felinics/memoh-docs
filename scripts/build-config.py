@@ -122,6 +122,7 @@ def version(lang, title, tabs, home_title, about_title):
         "tabs": tabs,
         "header": [
             {"type": "link", "title": "GitHub", "icon": "phosphor/regular/github-logo", "to": "https://github.com/felinics/Memoh", "newTab": True, "align": "end"},
+            {"type": "version-selector", "align": "end"},
         ],
         "routes": version_routes(lang, home_title, about_title),
     }
