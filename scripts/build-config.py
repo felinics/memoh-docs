@@ -224,10 +224,11 @@ def version_routes(lang, home_title, about_title):
     children = {"/": {"type": "page", "title": home_title, "filepath": home_fp}}
     ROUTE_TO_FP[full_url(lang, "/")] = home_fp
     ref_kids = build(SIDEBAR, lang, "/references")
-    ref_node = {"type": "group", "title": "References" if lang == "en" else "参考文档", "children": ref_kids}
-    # References landing page
+    ref_node = {"type": "group", "title": "References" if lang == "en" else "参考文档", "children": {}}
+    # References landing page goes FIRST (before Getting Started)
     ref_node["children"][""] = {"type": "page", "title": "Overview" if lang == "en" else "总览",
                                  "filepath": ref_fp}
+    ref_node["children"].update(ref_kids)
     OLD_TO_NEW["guides/index.md"] = "/references"
     ROUTE_TO_FP[full_url(lang, "/references")] = ref_fp
     children["/references"] = ref_node

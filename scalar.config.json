@@ -327,6 +327,11 @@
           "type": "group",
           "title": "References",
           "children": {
+            "": {
+              "type": "page",
+              "title": "Overview",
+              "filepath": "docs/en/guides/index.md"
+            },
             "/getting-started": {
               "type": "group",
               "title": "Getting Started",
@@ -608,11 +613,6 @@
               "type": "page",
               "title": "Use Cases",
               "filepath": "docs/en/guides/use-cases.md"
-            },
-            "": {
-              "type": "page",
-              "title": "Overview",
-              "filepath": "docs/en/guides/index.md"
             }
           }
         },
@@ -656,6 +656,11 @@
           "type": "group",
           "title": "参考文档",
           "children": {
+            "": {
+              "type": "page",
+              "title": "总览",
+              "filepath": "docs/zh/guides/index.md"
+            },
             "/getting-started": {
               "type": "group",
               "title": "快速开始",
@@ -937,11 +942,6 @@
               "type": "page",
               "title": "使用场景",
               "filepath": "docs/zh/guides/use-cases.md"
-            },
-            "": {
-              "type": "page",
-              "title": "总览",
-              "filepath": "docs/zh/guides/index.md"
             }
           }
         },
