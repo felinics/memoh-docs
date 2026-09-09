@@ -1,16 +1,12 @@
 {
   "name": "@memohai/memoh-docs",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vitepress dev docs",
-    "build": "vitepress build docs",
-    "serve": "vitepress serve docs",
-    "preview": "vitepress preview docs"
-  },
-  "devDependencies": {
-    "vitepress": "^1.6.0",
-    "vue": "^3.5.0"
+    "check": "python3 scripts/check-links.py",
+    "config": "python3 scripts/build-config.py",
+    "preview": "npx @scalar/cli project preview",
+    "publish": "npx @scalar/cli project publish --slug memoh --config scalar.config.json"
   }
 }

@@ -47,9 +47,9 @@ Computer Use 依赖容器内 `/opt/memoh/toolkit/display/bin/a11y-cli` 以及 wo
 
 这些是 workspace runtime 能力，不是用来自动化 Electron 桌面 App 本身的。
 
-机器人挂了远程[电脑](/zh/guides/computers.md)时，Browser Use / Computer Use 也仍然在**服务器工作区**里跑，不跟随所选使用位置。
+机器人挂了远程[电脑](./computers.md)时，Browser Use / Computer Use 也仍然在**服务器工作区**里跑，不跟随所选使用位置。
 
 ## 相关页面
 
-- [容器与 Workspace](/zh/guides/container)
-- [Workspace backend](/zh/self-hosted/workspace-backends)
+- [容器与 Workspace](./container.md)
+- [Workspace backend](../self-hosted/workspace-backends.md)

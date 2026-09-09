@@ -1,12 +1,12 @@
-# Server Deploy
+# 服务器部署（Server Deploy）
 
 Server Deploy 是 Memoh 的自托管服务端部署形态，适合长期在线、多人、多租户、远程访问，或需要机器人在桌面离线时继续服务外部渠道的场景。
 
-本页说明 Docker Compose 版 Server Deploy。要安装本地原生客户端，请看 [Desktop 桌面版](/zh/self-hosted/desktop)。
+本页说明 Docker Compose 版 Server Deploy。要安装本地原生客户端，请看 [Desktop 桌面版](./desktop.md)。
 
 默认编排里包含 PostgreSQL、用于记忆向量的 pgvector 库、一次性迁移任务、主服务（显式配置 workspace backend，智能体也在同一进程）、渠道 worker 和网页前端。数据库仅支持 PostgreSQL。
 
-官方 Compose 栈使用 `containerd` workspace backend。server 镜像会启动内置 containerd，并挂好机器人 workspace 需要的 runtime 文件。Docker Engine 和 Apple 后端见 [Workspace backend](/zh/self-hosted/workspace-backends.md)。
+官方 Compose 栈使用 `containerd` workspace backend。server 镜像会启动内置 containerd，并挂好机器人 workspace 需要的 runtime 文件。Docker Engine 和 Apple 后端见 [Workspace backend](./workspace-backends.md)。
 
 ## 服务结构
 
@@ -18,15 +18,15 @@ Compose 里有多组服务。有的默认就起，有的通过 `--profile` 打�
 | **channel** | *（核心）* | 渠道 worker（`memoh-channel`），持有各平台连接与 webhook，通过内部 RPC 与主服务通信 |
 | **web** | *（核心）* | 网页端（Vue 3） |
 | **postgres** | *（核心）* | PostgreSQL（主数据） |
-| **pgvector** | *（核心）* | 带 `pgvector` 的 PostgreSQL，供可选的记忆向量使用；见 [内置记忆](/zh/integrations/providers/memory/builtin.md) |
+| **pgvector** | *（核心）* | 带 `pgvector` 的 PostgreSQL，供可选的记忆向量使用；见 [内置记忆](../integrations/providers/memory/builtin.md) |
 | **migrate** | *（核心，一次性）* | 在主服务启动前执行 `memoh-server migrate up` |
 | **webhook-tunnel** | `webhook-tunnel` | 可选的 `cloudflared` 快速隧道，把渠道 worker 的 webhook 监听暴露到公网 |
-| **connect-it** | `connectors` | 同机部署的 [Connect-It](https://github.com/memohai/connect-it)，支撑 Bot [连接器](/zh/guides/connectors.md)（见下） |
+| **connect-it** | `connectors` | 同机部署的 [Connect-It](https://github.com/memohai/connect-it)，支撑 Bot [连接器](../guides/connectors.md)（见下） |
 
 
 ### Connect-It 连接器
 
-**connect-it** 容器跑的是 [Connect-It](https://github.com/memohai/connect-it)，Bot [连接器](/zh/guides/connectors.md)背后的服务——通过 OAuth 或 API Key 把第三方服务（GitHub、Notion 这类）连给 Bot。它共用 Memoh 的 PostgreSQL，数据隔离在单独的 `connect_it` schema 里，迁移自己管。
+**connect-it** 容器跑的是 [Connect-It](https://github.com/memohai/connect-it)，Bot [连接器](../guides/connectors.md)背后的服务——通过 OAuth 或 API Key 把第三方服务（GitHub、Notion 这类）连给 Bot。它共用 Memoh 的 PostgreSQL，数据隔离在单独的 `connect_it` schema 里，迁移自己管。
 
 安装脚本把 Connect-It 全程管起来：
 
@@ -59,7 +59,7 @@ curl -fsSL https://memoh.sh | sh
 需要提权，脚本会只对 `docker` 命令使用 `sudo`。如果确实要以 root
 运行整个安装脚本，需要显式设置 `MEMOH_ALLOW_ROOT_INSTALL=true`。
 
-脚本会：检查 Docker/Compose；判断首次安装、升级或重装；交互问配置（工作区、数据目录、管理员、JWT、Postgres 密码、workspace backend 提示）；升级时自动复用已有 `config.toml`，保持数据库凭据和已有 PostgreSQL volume 一致；可选择清理重装并删除 Memoh 容器、volume 和 network；从 GitHub 取最新发布并克隆；按 Docker 模板生成 `config.toml`；拒绝升级遗留的 SQLite 安装（仅支持 PostgreSQL，需选择重装）；把 Memoh 镜像钉到发布版本（例如 `v0.13.0` 对应镜像 tag `0.13.0`）；全新安装时带起同机部署的 Connect-It——凭据只生成一次、写进 `.env`，并加上 `connectors` profile（见[上面](#connect-it-连接器)）；默认带 `qdrant` profile 启动，启用 sparse 时再加 `sparse` profile；启动失败时打印数据库、迁移和 server 的近期日志。
+脚本会：检查 Docker/Compose；判断首次安装、升级或重装；交互问配置（工作区、数据目录、管理员、JWT、Postgres 密码、workspace backend 提示）；升级时自动复用已有 `config.toml`，保持数据库凭据和已有 PostgreSQL volume 一致；可选择清理重装并删除 Memoh 容器、volume 和 network；从 GitHub 取最新发布并克隆；按 Docker 模板生成 `config.toml`；拒绝升级遗留的 SQLite 安装（仅支持 PostgreSQL，需选择重装）；把 Memoh 镜像钉到发布版本（例如 `v0.13.0` 对应镜像 tag `0.13.0`）；全新安装时带起同机部署的 Connect-It——凭据只生成一次、写进 `.env`，并加上 `connectors` profile（见[上面](#connect-it-连接器)）；启动失败时打印数据库、迁移和 server 的近期日志。
 
 **静默安装**（全默认、无提问）：
 
@@ -147,7 +147,7 @@ POSTGRES_PASSWORD=你的库密码 docker compose up -d
 
 > **重要**：`docker-compose.yml` 默认挂 `./config.toml`，先建好文件再 `up`，否则起不来。
 
-手动部署要开[连接器](/zh/guides/connectors.md)的话，自己生成 Connect-It 凭据并加 `connectors` profile：
+手动部署要开[连接器](../guides/connectors.md)的话，自己生成 Connect-It 凭据并加 `connectors` profile：
 
 ```bash
 MEMOH_CONNECT_IT_BASE_URL="http://connect-it:8421" \
@@ -211,8 +211,8 @@ docker compose -f docker-compose.yml -f docker/docker-compose.cn.yml up -d
 | `[pgvector]` | 可选的 pgvector 库，用于记忆向量（`enabled`、host、port、user、password、database、sslmode） |
 | `[internal_rpc]` | 主服务/渠道 worker 拆分部署的 RPC 地址与共享密钥 |
 | `[webhook_tunnel]` | webhook 隧道模式（`disabled` 或 `external`）与 `public_base_url` |
-| `[registry]` | 供应商定义目录 |
-| `[connect_it]` | [连接器](/zh/guides/connectors.md)用的 Connect-It 地址（`base_url`、`api_token`）；两项都空即关闭该功能。Compose 环境里由 `MEMOH_CONNECT_IT_BASE_URL` / `MEMOH_CONNECT_IT_API_TOKEN` 覆盖 |
+| `[registry]` | 模型服务商定义目录 |
+| `[connect_it]` | [连接器](../guides/connectors.md)用的 Connect-It 地址（`base_url`、`api_token`）；两项都空即关闭该功能。Compose 环境里由 `MEMOH_CONNECT_IT_BASE_URL` / `MEMOH_CONNECT_IT_API_TOKEN` 覆盖 |
 | `[web]` | 前端 host/port |
 | `[agent]` | 工具输出截断上限：`tool_output_max_bytes`（默认 65536）、`tool_output_max_lines`（默认 2000）、`system_files_max_bytes`（默认 32768）。超限时保留头尾，不是盲切。 |
 | `[session_runtime]` | 多实例部署的会话状态后端，见上面「多实例部署」 |

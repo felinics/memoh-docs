@@ -23,7 +23,7 @@ Memoh 支持把字变成声音。可以分三层想：
 
 | 提供方 | 说明 |
 |--------|------|
-| [Edge TTS](/zh/integrations/providers/tts/edge.md) | 走 Edge 公开朗读接口，无 key，多语音 |
+| [Edge TTS](./edge.md) | 走 Edge 公开朗读接口，无 key，多语音 |
 | OpenAI 兼容语音合成 | 使用 OpenAI 兼容的语音合成 API，需要匹配 provider 模板和凭据。 |
 | OpenRouter Speech | 使用 OpenRouter 可用的语音合成路线，具体取决于账号能力。 |
 | ElevenLabs Speech | 使用 ElevenLabs 语音合成模型和音色。 |
@@ -41,5 +41,5 @@ Memoh 支持把字变成声音。可以分三层想：
 
 ## 接下来
 
-- 配无 key 的 Edge 选项：[Edge TTS](/zh/integrations/providers/tts/edge.md)
-- 了解音频 provider client type 与模型关系：[供应商与模型](/zh/integrations/providers/llm)
+- 配无 key 的 Edge 选项：[Edge TTS](./edge.md)
+- 了解音频 provider client type 与模型关系：[模型服务商与模型](../llm.md)

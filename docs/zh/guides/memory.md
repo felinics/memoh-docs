@@ -4,7 +4,7 @@ Memoh 的结构化长期记忆让机器人在**多路会话**里也能用上以�
 
 ## 先决条件
 
-1. 在 [记忆提供方](/zh/integrations/providers/memory/index.md) 里建一个（内置、Mem0、OpenViking 等）。
+1. 在 [记忆提供方](../integrations/providers/memory/index.md) 里建一个（内置、Mem0、OpenViking 等）。
 2. 打开机器人 **General**。
 3. **Memory Provider** 里选中。
 4. 保存。
@@ -17,7 +17,7 @@ Memoh 的结构化长期记忆让机器人在**多路会话**里也能用上以�
 
 记忆条目的存、取、搜都由当前提供方实现；按提供方类型，可能是内置记忆图、pgvector 向量、或外接 API。用户发消息时，Memoh 会尝试取出相关记忆塞进当次上下文。
 
-本页说 **长期记忆**；**会话写太长** 要压短，是另一件事，见 [会话上下文压缩](/zh/guides/compaction.md)。
+本页说 **长期记忆**；**会话写太长** 要压短，是另一件事，见 [会话上下文压缩](./compaction.md)。
 
 ---
 
@@ -40,7 +40,7 @@ Memoh 的结构化长期记忆让机器人在**多路会话**里也能用上以�
 
 积累多了可以在 **Memory** tab 对**存储侧**做 **Compact**：合并重复、去陈旧、压噪声。有 **Ratio**、**Decay Days** 等参数。
 
-这和 [会话上下文压缩](/zh/guides/compaction.md) 不同：后者是**单路会话**里把 prompt 压短，不改库里长期记忆条目的存法与合并结果。
+这和 [会话上下文压缩](./compaction.md) 不同：后者是**单路会话**里把 prompt 压短，不改库里长期记忆条目的存法与合并结果。
 
 ---
 
@@ -70,12 +70,12 @@ Memoh 的结构化长期记忆让机器人在**多路会话**里也能用上以�
 | **上下文压缩** | 当前这一路会话 | 状态区或 `/compact` | 用摘要把**本会话**历史变短，给后面轮次用 |
 
 要减「跨会话噪声」、整理记忆库 → 用 **记忆压缩**。  
-要减「这一路聊太长了」→ 用 [会话上下文压缩](/zh/guides/compaction.md)。
+要减「这一路聊太长了」→ 用 [会话上下文压缩](./compaction.md)。
 
 ---
 
 ## 和机器人的关系
 
 - 聊的时候会按配置去搜记忆。
-- 具体用哪种后端、embedding 等，在**提供方**上配，见 [记忆提供方](/zh/integrations/providers/memory/index.md)。
+- 具体用哪种后端、embedding 等，在**提供方**上配，见 [记忆提供方](../integrations/providers/memory/index.md)。
 - 长期记忆是机器人「个性与事实」里很大一块来源。

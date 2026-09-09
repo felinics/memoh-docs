@@ -1,0 +1,29 @@
+name: Preview Docs
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Check config and links
+        run: python3 scripts/check-links.py
+
+      # Preview deployments need the Scalar API key; skipped for forks where secrets are unavailable.
+      - name: Log in to Scalar
+        if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+        run: npx @scalar/cli auth login --token ${{ secrets.SCALAR_API_KEY }}
+
+      - name: Publish preview
+        if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+        run: npx @scalar/cli project publish --slug memoh --config scalar.config.json --preview

@@ -18,13 +18,13 @@ api_token = ""  # 服务端之间的可信 token
 
 两项留空即关闭该功能。线上环境建议用对应的环境变量（`MEMOH_CONNECT_IT_BASE_URL`、`MEMOH_CONNECT_IT_API_TOKEN`）。
 
-一键 Server Deploy 会在全新安装时自动带起一个同机部署的 Connect-It，见 [Server Deploy](/zh/self-hosted/docker.md#connect-it-连接器)。没配置 Connect-It 时，应用市场不会显示 **Connectors** tab，连接器相关操作会提示服务器未配置连接器。
+一键 Server Deploy 会在全新安装时自动带起一个同机部署的 Connect-It，见 [Server Deploy](../self-hosted/docker.md#connect-it-连接器)。没配置 Connect-It 时，应用市场不会显示 **Connectors** tab，连接器相关操作会提示服务器未配置连接器。
 
 ---
 
 ## 连接一个服务
 
-1. 在 Web UI 中打开 **Supermarket**。
+1. 在 Web UI 中打开 **应用市场**。
 2. 停在 **Connectors** tab——配置了连接器时它排在第一个，也是默认落地的 tab。
 3. 选一个连接器，点 **Connect**。
 4. 选择目标 Bot。
@@ -67,6 +67,6 @@ OAuth 授权中途放弃的话，这条连接会一直停在 **Waiting for autho
 
 ## 相关页面
 
-- [应用市场](/zh/guides/supermarket.md) —— 发现和连接服务的入口。
-- [MCP](/zh/guides/mcp.md) —— 直接管理 MCP 连接。
-- [Server Deploy](/zh/self-hosted/docker.md#connect-it-连接器) —— 同机部署 Connect-It、凭据管理和 OAuth 回调地址。
+- [应用市场](./supermarket.md) —— 发现和连接服务的入口。
+- [MCP](./mcp.md) —— 直接管理 MCP 连接。
+- [Server Deploy](../self-hosted/docker.md#connect-it-连接器) —— 同机部署 Connect-It、凭据管理和 OAuth 回调地址。

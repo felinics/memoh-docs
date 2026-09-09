@@ -15,9 +15,9 @@
 
 邮服提供方**按用户隔离**：每人配自己的、只看得见自己的，机器人绑定也只能用机器人所属用户自己的提供方。不同用户可以重名，互不冲突。
 
-::: tip Gmail OAuth
+<scalar-callout type="tip" title="Gmail OAuth">
 Gmail 类提供方的 OAuth 应用凭据（client ID / client secret）不再在界面里填——由部署方在 server 的 `conf/oauth-clients.toml` 里配一次。用户只走 Gmail 登录授权流程。
-:::
+</scalar-callout>
 
 ### 新建
 
@@ -52,4 +52,4 @@ Gmail 类提供方的 OAuth 应用凭据（client ID / client secret）不再在
 ## 和机器人
 
 - 有权限时可用邮件发报告、回邮、或按新邮件做事。
-- 和聊天一样，是另一条通道，但仍是结构化、可审的。
+- 和聊天一样，是另一条渠道，但仍是结构化、可审的。

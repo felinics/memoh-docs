@@ -1,4 +1,4 @@
-# Workspace backend
+# 工作区后端（Workspace backend）
 
 每个 Memoh 机器人都在一个 workspace 里工作。workspace 可以是隔离容器，也可以是在 Desktop/local 场景下明确受信任的本机目录。Backend 决定 workspace 跑在哪里，以及隔离、网络、快照和 display 能力是否可用。
 
@@ -90,7 +90,7 @@ Apple backend 用于通过 socktainer 和 Apple Containerization 做 macOS 本�
 
 当网站需要真实图形浏览器时，用这条路径。Headless Playwright 仍然可以作为普通 workspace 命令运行，但 Browser Use 和 Computer Use 面向的是有头 workspace 桌面。
 
-Local workspace 不提供同样的容器桌面隔离。工具层面的区别见 [Browser / Computer Use](/zh/guides/browser-computer-use)。
+Local workspace 不提供同样的容器桌面隔离。工具层面的区别见 [Browser / Computer Use](../guides/browser-computer-use.md)。
 
 ## 网络和 overlay
 

@@ -2,7 +2,7 @@
 
 Memoh v0.13 是开源的多智能体平台。它让你在一台机器上运行多个 AI Agent，并为每个 Agent 提供自己的 workspace、浏览器、网络、工具和长期记忆。
 
-Agent 可以通过 Telegram、Discord、飞书、微信、Web UI、邮件等渠道对话；也可以记住上下文、操作浏览器或桌面、调用 MCP 工具、安装技能和连接器、执行计划任务，并按机器人配置访问权限。
+Agent 可以通过 Telegram、Discord、飞书、微信、Web UI、邮件等渠道对话；也可以记住上下文、操作浏览器或桌面、调用 MCP 工具、安装技能和连接器、执行定时任务，并按机器人配置访问权限。
 
 Memoh 托管版 SaaS 即将开放。如果你更想使用托管服务，而不是自己运维部署，可以加入 [SaaS waitlist](https://memoh.ai/waitlist)。
 
@@ -24,11 +24,11 @@ Server Deploy 适合长期在线和多人共享。只要 Memoh 需要服务多�
 
 ### Web 产品
 
-Web UI 覆盖了更多日常操作：机器人设置、会话、供应商、渠道、workspace 文件、终端和显示面板、Supermarket、Hooks、计划任务、访问控制和用户偏好。v0.13 也包含英文、简体中文和日文界面支持。
+Web UI 覆盖了更多日常操作：机器人设置、会话、模型服务商、渠道、workspace 文件、终端和显示面板、应用市场、Hooks、定时任务、访问控制和用户偏好。v0.13 也包含英文、简体中文和日文界面支持。
 
-### Hooks、计划任务与自动化
+### Hooks、定时任务与自动化
 
-Hooks 可以围绕支持的事件运行小型自动化规则，Schedule 则让周期性工作不依赖正在进行的聊天。来自 Supermarket 的技能与连接器无需写代码即可扩展机器人的能力。
+Hooks 可以围绕支持的事件运行小型自动化规则，Schedule 则让周期性工作不依赖正在进行的聊天。来自应用市场的技能与连接器无需写代码即可扩展机器人的能力。
 
 ### 访问控制
 
@@ -36,9 +36,9 @@ Hooks 可以围绕支持的事件运行小型自动化规则，Schedule 则让�
 
 ## 从哪开始
 
-- **[机器人](/zh/guides/bot)** - 创建并配置机器人。
-- **[供应商与模型](/zh/integrations/providers/llm)** - 配置模型访问。
-- **[渠道](/zh/integrations/channels/)** - 选择机器人出现的位置。
-- **[Skills](/zh/guides/skills)** 和 **[Supermarket](/zh/guides/supermarket)** - 安装可复用能力。
-- **[计划任务](/zh/guides/schedule)** 和 **[访问控制](/zh/guides/access)** - 运维周期性工作和权限。
-- **[自托管](/zh/self-hosted/)** - 部署并维护自己的 Memoh 实例。
+- **[机器人](./guides/bot.md)** - 创建并配置机器人。
+- **[模型服务商与模型](./integrations/providers/llm.md)** - 配置模型访问。
+- **[渠道](./integrations/channels/index.md)** - 选择机器人出现的位置。
+- **[Skills](./guides/skills.md)** 和 **[应用市场](./guides/supermarket.md)** - 安装可复用能力。
+- **[定时任务](./guides/schedule.md)** 和 **[访问控制](./guides/access.md)** - 运维周期性工作和权限。
+- **[自托管](./self-hosted/index.md)** - 部署并维护自己的 Memoh 实例。

@@ -33,4 +33,4 @@
 
 ## 使用
 
-绑上后，抽取、搜索、管理都走 Mem0 API。日常见 [长期记忆](/zh/guides/memory.md)。
+绑上后，抽取、搜索、管理都走 Mem0 API。日常见 [长期记忆](../../../guides/memory.md)。

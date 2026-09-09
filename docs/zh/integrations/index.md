@@ -6,18 +6,18 @@
 
 渠道让机器人可以在网页端之外被访问。
 
-- **[渠道总览](/zh/integrations/channels/)**：支持的平台和通用配置流程。
-- **[Slack](/zh/integrations/channels/slack)**、**[Telegram](/zh/integrations/channels/telegram)**、**[飞书](/zh/integrations/channels/feishu)**、**[Discord](/zh/integrations/channels/discord)**、**[微信](/zh/integrations/channels/weixin)** 等。
+- **[渠道总览](./channels/index.md)**：支持的平台和通用配置流程。
+- **[Slack](./channels/slack.md)**、**[Telegram](./channels/telegram.md)**、**[飞书](./channels/feishu.md)**、**[Discord](./channels/discord.md)**、**[微信](./channels/weixin.md)** 等。
 
 ## 提供方
 
 提供方把 Memoh 接到外部能力后端。
 
-- **[LLM 提供方](/zh/integrations/providers/llm)**：配置上游 API、client type 和模型角色。
-- **[记忆提供方](/zh/integrations/providers/memory/)**：选择内置记忆、Mem0 或 OpenViking。
-- **[TTS 提供方](/zh/integrations/providers/tts/)**：配置语音合成提供方和模型。
-- **[搜索提供方](/zh/integrations/providers/web-search)**：配置搜索提供方接入。
+- **[模型服务商](./providers/llm.md)**：配置上游 API、client type 和模型角色。
+- **[记忆提供方](./providers/memory/index.md)**：选择内置记忆、Mem0 或 OpenViking。
+- **[TTS 提供方](./providers/tts/index.md)**：配置语音合成提供方和模型。
+- **[搜索提供方](./providers/web-search.md)**：配置搜索提供方接入。
 
 ## 产品教程
 
-集成配置完成后，到 **[教程](/zh/guides/)** 查看机器人、会话、记忆操作、工具和日常工作流。
+集成配置完成后，到 **[教程](../guides/index.md)** 查看机器人、会话、记忆操作、工具和日常工作流。
