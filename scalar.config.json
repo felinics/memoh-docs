@@ -135,6 +135,10 @@
           "to": "/references/getting-started/files"
         },
         {
+          "from": "/guides/get-started",
+          "to": "/references/getting-started/get-started"
+        },
+        {
           "from": "/guides/hooks",
           "to": "/references/advanced/hooks"
         },
@@ -336,6 +340,11 @@
               "type": "group",
               "title": "Getting Started",
               "children": {
+                "/get-started": {
+                  "type": "page",
+                  "title": "Get Started",
+                  "filepath": "docs/en/guides/get-started.md"
+                },
                 "/quick-start": {
                   "type": "page",
                   "title": "Quick Start",
@@ -665,6 +674,11 @@
               "type": "group",
               "title": "快速开始",
               "children": {
+                "/get-started": {
+                  "type": "page",
+                  "title": "入门教程",
+                  "filepath": "docs/zh/guides/get-started.md"
+                },
                 "/quick-start": {
                   "type": "page",
                   "title": "快速开始",

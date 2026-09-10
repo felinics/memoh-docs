@@ -13,6 +13,7 @@ CHANNELS = ["dingtalk", "discord", "feishu", "line", "matrix", "misskey", "qq",
 
 SIDEBAR = [
     ("group", "Getting Started", "快速开始", "getting-started", [
+        ("guides/get-started.md", "Get Started", "入门教程"),
         ("guides/quick-start.md", "Quick Start", "快速开始"),
         ("guides/preferences.md", "Preferences", "用户偏好"),
         ("guides/bot.md", "Bot", "机器人"),

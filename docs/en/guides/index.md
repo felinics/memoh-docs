@@ -6,6 +6,7 @@ Welcome to the Memoh references. Everything you need to deploy, configure, and o
 
 Start here if you are new to Memoh. Learn how to deploy, add a model, create your first bot, connect a channel, and handle day-to-day basics.
 
+- **[Get Started](./get-started.md)**: A guided tutorial — sign in, create a bot, give it real work, and connect a channel.
 - **[Quick Start](./quick-start.md)**: Deploy a server, add a model, create your first bot, and connect a channel in ten minutes.
 - **[Preferences](./preferences.md)**: Customize language, theme, typography, diagrams, and keyboard shortcuts.
 - **[Bot](./bot.md)**: Create a bot and configure its core tabs.
