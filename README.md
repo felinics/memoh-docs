@@ -18,109 +18,66 @@
 
 This repository contains the public documentation site for [Memoh](https://github.com/felinics/Memoh), a multi-member, long-memory AI agent platform with isolated workspaces, channel integrations, and desktop/server deployment modes.
 
-The product source code lives in [`felinics/Memoh`](https://github.com/felinics/Memoh). This repository only owns the docs site: VitePress config, Markdown pages, and screenshots.
+The product source code lives in [`felinics/Memoh`](https://github.com/felinics/Memoh). This repository only owns the docs site: the [Scalar Docs](https://scalar.com/products/docs) config, Markdown pages, and screenshots.
 
 ## What Is Here
 
-- **Guides** for SaaS/product usage: bots, workspaces, sessions, memory, MCP, email, scheduled tasks, and slash commands.
-- **Integrations** for channels and providers, including messaging platforms, LLMs, memory providers, TTS, and web search.
-- **Self-hosted** docs for Desktop, Server Deploy, workspace backends, Kata, and SQLite.
-- **English and Chinese docs** under `docs/` and `docs/zh/`.
-- **Static assets** under `docs/public/`, including screenshots and logos.
-- **VitePress config** under `docs/.vitepress/`.
+- **Guides** for bots, sessions, workspaces, skills, connectors, hooks, MCP, memory, scheduled tasks, and slash commands.
+- **Integrations** for channels and providers (LLM, memory, TTS, web search, video).
+- **Self-hosted** docs for Desktop, Server Deploy, and workspace backends.
+- **English and Chinese docs** under `docs/en/` and `docs/zh/`, exposed as two top-level tabs.
+- **Scalar config** in `scalar.config.json`, generated from `scripts/build-config.py`.
 
 ## Documentation Structure
 
-The current VitePress site is organized around three primary navigation roots:
+```
+docs/
+├── en/
+│   ├── index.md          # English home (cards)
+│   ├── about.md
+│   ├── guides/
+│   ├── integrations/
+│   └── self-hosted/
+├── zh/                   # Simplified Chinese mirror, same layout
+└── public/               # logo + screenshots
+```
 
-- `docs/guides/` for product usage guides.
-- `docs/integrations/` for channels, providers, memory providers, TTS, and web search.
-- `docs/self-hosted/` for Desktop, Server Deploy, workspace backends, Kata, and SQLite.
-
-The Simplified Chinese mirror uses the same structure under `docs/zh/`:
-
-- `docs/zh/guides/`
-- `docs/zh/integrations/`
-- `docs/zh/self-hosted/`
-
-Legacy paths still exist for old external links, but they are redirect pages instead of the main content source:
-
-- `docs/getting-started/`
-- `docs/installation/`
-- `docs/channels/`
-- `docs/tts-providers/`
-- `docs/memory-providers/`
-- Matching Chinese redirects under `docs/zh/`
-
-When updating content, edit the primary paths above first. Only touch a legacy redirect page when the redirect target itself changes.
-
-Keep the English and Simplified Chinese docs mirrored. If you add, rename, remove, or move a page in one language, make the matching change in the other language and update both VitePress sidebar files.
-
-Do not edit `docs/.vitepress/dist/` by hand. It is generated build output and should not be treated as source documentation.
+Keep the English and Simplified Chinese docs mirrored. If you add, rename, remove, or move a page in one language, make the matching change in the other language.
 
 ## Local Development
 
-Use Node.js and pnpm. The repository is a standalone VitePress project.
+Preview locally with the Scalar CLI (Node.js 20+):
 
 ```bash
-pnpm install
-pnpm dev
+npx @scalar/cli project preview
 ```
 
-The dev server runs at:
+The preview reads `scalar.config.json` and hot-reloads Markdown changes.
 
-```text
-http://localhost:5173
-```
-
-## Build
+## Checks
 
 ```bash
-pnpm build
+python3 scripts/check-links.py
 ```
 
-Preview the production build:
+Validates that every page in `scalar.config.json` exists, every `.md` file is listed, and all internal links and images resolve. This runs in CI on every pull request.
 
-```bash
-pnpm preview
-```
+## Deploy
 
-## Project Layout
-
-```text
-.
-├── docs/
-│   ├── .vitepress/        # VitePress config, nav, sidebars
-│   ├── guides/            # Product usage guides
-│   ├── integrations/      # Channels and providers
-│   ├── self-hosted/       # Open-source deployment docs
-│   ├── getting-started/   # Legacy redirects to guides
-│   ├── installation/      # Legacy redirects to self-hosted
-│   ├── channels/          # Legacy redirects to integrations/channels
-│   ├── tts-providers/     # Legacy redirects to integrations/providers/tts
-│   ├── memory-providers/  # Legacy redirects to integrations/providers/memory
-│   ├── public/            # Static images and logo
-│   ├── zh/                # Simplified Chinese documentation and redirects
-│   └── *.md               # Landing and compatibility pages
-├── package.json
-└── pnpm-lock.yaml
-```
+Pushing to `main` runs `.github/workflows/deploy.yml`, which publishes to Scalar via `npx @scalar/cli project publish`. Pull requests from this repository get a preview deployment. The workflow needs a `SCALAR_API_KEY` repository secret (create one at https://dashboard.scalar.com/user/api-keys).
 
 ## Contributing
 
-Small fixes are best made directly in the relevant Markdown page. For larger changes:
+1. Edit or add Markdown under `docs/en/` and `docs/zh/`.
+2. If you added, removed, or renamed a page, update `SIDEBAR` in `scripts/build-config.py` and run `python3 scripts/build-config.py` to regenerate `scalar.config.json`. Do not hand-edit the generated file.
+3. Run `python3 scripts/check-links.py`.
+4. Run `npx @scalar/cli project preview` and check both the English and 中文 tabs.
 
-1. Run `pnpm dev`.
-2. Edit the docs under `docs/`.
-3. Run `pnpm build`.
-4. Open a pull request with screenshots when the change affects layout or images.
+Authoring notes:
 
-When adding a new page, update the matching sidebar file in `docs/.vitepress/`:
-
-- `en.ts` for English pages
-- `zh.ts` for Chinese pages
-
-Do not use the legacy redirect folders as the canonical location for new content. New source pages should live under `guides`, `integrations`, or `self-hosted`, with the matching `docs/zh/` page kept in sync.
+- Use relative `.md` links between pages, e.g. `[Bot](../guides/bot.md)`.
+- Callouts use `<scalar-callout type="tip|info|warning|danger">…</scalar-callout>`.
+- Front matter supports `title` and `description`.
 
 ## License
 

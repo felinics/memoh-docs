@@ -2,7 +2,7 @@
 
 **上下文压缩**只针对**当前这一会话**：把早先轮次压成摘要，让后面模型调用时带的**活跃窗口**小一点。
 
-这和**改记忆库里存的长记忆**不是一码事。要动存储条目，看 [长期记忆](/zh/guides/memory.md)。
+这和**改记忆库里存的长记忆**不是一码事。要动存储条目，看 [长期记忆](./memory.md)。
 
 ---
 
@@ -14,7 +14,7 @@
 - 后台没追上、涨过约 **75%**：下一轮发送前**同步**压。
 - 两条路都把原始历史压回窗口约 **40%**。
 
-唯一的真前提：聊天模型必须在模型设置里声明 `context_window`。没有它，自动策略没有预算基准，**永远不会触发**。见 [提供方与模型](/zh/integrations/providers/llm.md)。
+唯一的真前提：聊天模型必须在模型设置里声明 `context_window`。没有它，自动策略没有预算基准，**永远不会触发**。见 [模型服务商与模型](../integrations/providers/llm.md)。
 
 默认值变更之前建的机器人保留原有设置、按原语义跑（见下面的 legacy 模式）。
 
@@ -110,6 +110,6 @@ Memoh 拿当前 chat 模型的 `context_window` 对照本会话，网页状态�
 
 ## 接下来
 
-- 会话、Discuss：[会话](/zh/guides/sessions.md)
-- 斜杠与 `/compact`：[斜杠命令](/zh/guides/slash-commands.md)
-- 长期记忆维护：[长期记忆](/zh/guides/memory.md)
+- 会话、Discuss：[会话](./sessions.md)
+- 斜杠与 `/compact`：[斜杠命令](./slash-commands.md)
+- 长期记忆维护：[长期记忆](./memory.md)

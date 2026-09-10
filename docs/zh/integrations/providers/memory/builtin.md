@@ -37,7 +37,7 @@
 
 | 字段 | 说明 |
 |------|------|
-| **Embedding Model** | 可选。来自某个 LLM 提供方的 embedding 模型。选了（且 `pgvector` 可用）就会给记忆节点做向量并开启语义检索；留空即纯 graph 模式。 |
+| **Embedding Model** | 可选。来自某个模型服务商的 embedding 模型。选了（且 `pgvector` 可用）就会给记忆节点做向量并开启语义检索；留空即纯 graph 模式。 |
 
 **Edit**、**Delete** 如常。
 
@@ -64,7 +64,7 @@ database = "memoh_vector"
 sslmode = "disable"
 ```
 
-然后在提供方里选一个 **Embedding Model**。向量由所选 LLM 提供方（OpenAI、Gemini、Ollama……）生成，因此该提供方需要有 embedding 模型可用。
+然后在提供方里选一个 **Embedding Model**。向量由所选模型服务商（OpenAI、Gemini、Ollama……）生成，因此该提供方需要有 embedding 模型可用。
 
 ---
 
@@ -87,4 +87,4 @@ sslmode = "disable"
 - 搜索、编辑、删除
 - 压缩或重建记忆库
 
-日常操作见 [记忆管理](/zh/guides/memory.md)。
+日常操作见 [记忆管理](../../../guides/memory.md)。

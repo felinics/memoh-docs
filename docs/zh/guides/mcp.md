@@ -4,7 +4,7 @@ Memoh 支持 **Model Context Protocol (MCP)**，让机器人接外部工具与�
 
 ## 在做什么
 
-MCP 把「外部数据、外部工具」用相对统一的方式接进来。你在机器人 **MCP** tab 里手配，或从 [应用市场](/zh/guides/supermarket.md) 装模板再进编辑器改。
+MCP 把「外部数据、外部工具」用相对统一的方式接进来。你在机器人 **MCP** tab 里手配，或从 [应用市场](./supermarket.md) 装模板再进编辑器改。
 
 ---
 

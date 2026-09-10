@@ -31,4 +31,4 @@
 
 ## 使用
 
-绑上后，记忆相关 API 都走 OpenViking。日常见 [长期记忆](/zh/guides/memory.md)。
+绑上后，记忆相关 API 都走 OpenViking。日常见 [长期记忆](../../../guides/memory.md)。

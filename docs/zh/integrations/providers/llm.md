@@ -1,19 +1,19 @@
-# 供应商与模型
+# 模型服务商与模型
 
 日常用 Memoh，多半要配好：
 
-- 一个或多个 **供应商**（怎么连上游 API）
+- 一个或多个 **模型服务商**（怎么连上游 API）
 - 其下的 **模型**
-- 若要朗读，再配 **语音合成**（见 [TTS](/zh/integrations/providers/tts/index.md)）
+- 若要朗读，再配 **语音合成**（见 [TTS](./tts/index.md)）
 - 若要把语音转文字，再配 **语音转写**
 
 聊天与 embedding 在 **Models** 页管理；语音合成模型在 TTS 流程里单走，语音转写模型在 Transcription 设置页管理。
 
 ---
 
-## 供应商基础
+## 模型服务商基础
 
-**供应商**里存的是某一类上游的连法，例如：
+**模型服务商**里存的是某一类上游的连法，例如：
 
 - 协议（`client_type`）
 - 需要时的 base URL
@@ -21,25 +21,25 @@
 
 常见有 OpenAI 兼容站、Anthropic、Google、Codex、GitHub Copilot 等。
 
-### 新建供应商
+### 新建模型服务商
 
-供应商现在从**模板目录**建。模板自带对的 client type、base URL 和一份精选模型清单，通常你只需要填个 API Key。
+模型服务商现在从**模板目录**建。模板自带对的 client type、base URL 和一份精选模型清单，通常你只需要填个 API Key。
 
 1. 侧栏打开 **Models**。
 2. 点 **Add Provider**，从模板列表挑——只显示你还没配过的，可搜索（中文厂商名也能搜到）。
 3. 填模板要的凭据。
-4. 保存。供应商和它的预置模型在保存时一起生成。
+4. 保存。模型服务商和它的预置模型在保存时一起生成。
 
 内置模板包括 OpenAI、Anthropic、Google、OpenRouter、DeepSeek、**智谱 AI（bigmodel.cn）**、Z.AI、Azure OpenAI、Cerebras、Cloudflare、Fireworks、Perplexity、Together 等。注意**智谱 AI**（`open.bigmodel.cn`，国内账号）和 **Z.AI**（`api.z.ai`，国际账号）是两个模板、两套 key 体系——按你的 key 是哪边发的来选。
 
-没有合适模板时，仍可以建全自定义供应商。
+没有合适模板时，仍可以建全自定义模型服务商。
 
 常用字段：
 
 | 字段 | 说明 |
 |------|------|
 | **Name** | 展示名，如 `OpenAI`。 |
-| **Client Type** | 本供应商用的协议。 |
+| **Client Type** | 本模型服务商用的协议。 |
 | **Base URL** | 部分协议必填的根地址。 |
 | **API Key** | 走密钥时填。 |
 
@@ -68,21 +68,21 @@
 | `microsoft-speech` | Microsoft 语音合成 |
 | `google-transcription` | Google 语音转写 |
 
-语音合成与语音转写类型不能当主聊天用。语音合成走 [TTS 提供方](/zh/integrations/providers/tts/index.md)，语音转写走 Transcription 设置页。具体模型、音色和语言取决于 provider 模板与上游账号。
+语音合成与语音转写类型不能当主聊天用。语音合成走 [TTS 提供方](./tts/index.md)，语音转写走 Transcription 设置页。具体模型、音色和语言取决于 provider 模板与上游账号。
 
 ---
 
-## 走 OAuth 的供应商
+## 走 OAuth 的模型服务商
 
 多数类型用普通 API Key。`openai-codex` 和 `github-copilot` 例外——两个都走**设备码授权**，同一套流程，都没有 API Key 输入框：
 
-1. 先建好并**保存**供应商——授权入口只在已保存供应商的详情面板里。
+1. 先建好并**保存**模型服务商——授权入口只在已保存模型服务商的详情面板里。
 2. **Account** 区点 **Connect**，界面给出验证 URL、一次性用户码和过期倒计时。
 3. 点 **Copy & Open**，去验证页输码，Memoh 自动完成收尾。
 
 > 一次性码只在显示的官方验证 URL 上输——设备码可能被用于钓鱼。
 
-连上后供应商上会显示当前账号，**Revoke** 断开。
+连上后模型服务商上会显示当前账号，**Revoke** 断开。
 
 ### OpenAI Codex
 
@@ -98,13 +98,13 @@
 
 你本来就有 Copilot 时，可复用进 Memoh。
 
-::: warning 升级提醒
-Copilot 凭据以前按用户存，现在和 Codex 一样是供应商级的一份。老部署升级后要把 Copilot 供应商**重新授权一次**。
-:::
+<scalar-callout type="warning" title="升级提醒">
+Copilot 凭据以前按用户存，现在和 Codex 一样是模型服务商级的一份。老部署升级后要把 Copilot 模型服务商**重新授权一次**。
+</scalar-callout>
 
 ### 托管模型目录
 
-两个 OAuth 供应商的模型列表都是**托管目录**，从上游实时拉取（Codex 干脆没有静态清单，永远反映你 ChatGPT 账号实际能用什么）：
+两个 OAuth 模型服务商的模型列表都是**托管目录**，从上游实时拉取（Codex 干脆没有静态清单，永远反映你 ChatGPT 账号实际能用什么）：
 
 - 设备授权完成后目录自动同步，之后也可以随时重新导入。
 - 上游目录里消失的模型标记为不可用，不会被删。
@@ -114,11 +114,11 @@ Copilot 凭据以前按用户存，现在和 Codex 一样是供应商级的一�
 
 ## 导入模型
 
-建完供应商后可以导入或手加模型。常见：选中供应商 → **Import Models**（若上游有目录）→ 勾要保存的。已知上游 id 时也可手填。
+建完模型服务商后可以导入或手加模型。常见：选中模型服务商 → **Import Models**（若上游有目录）→ 勾要保存的。已知上游 id 时也可手填。
 
 ### 模型启用开关
 
-供应商详情页里每个模型一行，各带**启用开关**。禁用的模型仍留在这页方便再开，但会从所有模型选择器（机器人设置、聊天、embedding 等）里消失。
+模型服务商详情页里每个模型一行，各带**启用开关**。禁用的模型仍留在这页方便再开，但会从所有模型选择器（机器人设置、聊天、embedding 等）里消失。
 
 默认值看模型怎么来的：
 
@@ -136,7 +136,7 @@ Copilot 凭据以前按用户存，现在和 Codex 一样是供应商级的一�
 | `speech` | 朗读，挂在 TTS |
 | `transcription` | 语音转文字，挂在 Transcription |
 
-**Models** 页主要管 chat / embedding；speech 在 [TTS](/zh/integrations/providers/tts/index.md)，transcription 在 Transcription 设置页。
+**Models** 页主要管 chat / embedding；speech 在 [TTS](./tts/index.md)，transcription 在 Transcription 设置页。
 
 ---
 
@@ -168,7 +168,7 @@ Memoh 用来：
 - 在网页上算当前会话占了多少上下文
 - 驱动 `/status` 等
 - 判断是否逼近上限
-- 决定何时需要 [会话上下文压缩](/zh/guides/compaction)
+- 决定何时需要 [会话上下文压缩](../../guides/compaction.md)
 
 不填也能用，但**百分比**会没法精确给。
 
@@ -186,7 +186,7 @@ Memoh 用来：
 
 ## 语音合成与转写模型
 
-语音合成在 [TTS 提供方](/zh/integrations/providers/tts/index.md) 配，不跟普通 chat 供应商混流。当前语音合成类别包括：
+语音合成在 [TTS 提供方](./tts/index.md) 配，不跟普通 chat 模型服务商混流。当前语音合成类别包括：
 
 - Edge：`edge-speech`
 - OpenAI 兼容：`openai-speech`
@@ -224,6 +224,6 @@ Memoh 用来：
 
 ## 接下来
 
-- 给机器人绑聊天、生图、浏览器、记忆、朗读等：[机器人](/zh/guides/bot.md)
-- 配语音提供方与语音模型：[TTS 提供方](/zh/integrations/providers/tts/index.md)
+- 给机器人绑聊天、生图、浏览器、记忆、朗读等：[机器人](../../guides/bot.md)
+- 配语音提供方与语音模型：[TTS 提供方](./tts/index.md)
 - 配语音转文字：打开 Web UI 的 Transcription 设置页

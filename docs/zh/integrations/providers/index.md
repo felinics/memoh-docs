@@ -4,9 +4,9 @@
 
 ## 提供方类型
 
-- **[LLM 提供方](/zh/integrations/providers/llm)**：聊天、embedding、生图等模型配置。
-- **[记忆提供方](/zh/integrations/providers/memory/)**：长期记忆的存储和检索后端。
-- **[TTS 提供方](/zh/integrations/providers/tts/)**：语音合成提供方和音色。
-- **[搜索提供方](/zh/integrations/providers/web-search)**：网页访问工具使用的搜索提供方。
+- **[模型服务商](./llm.md)**：聊天、embedding、生图等模型配置。
+- **[记忆提供方](./memory/index.md)**：长期记忆的存储和检索后端。
+- **[TTS 提供方](./tts/index.md)**：语音合成提供方和音色。
+- **[搜索提供方](./web-search.md)**：网页访问工具使用的搜索提供方。
 
-配置完成后，产品侧使用方式见 **[机器人](/zh/guides/bot)** 和 **[长期记忆](/zh/guides/memory)**。
+配置完成后，产品侧使用方式见 **[机器人](../../guides/bot.md)** 和 **[长期记忆](../../guides/memory.md)**。

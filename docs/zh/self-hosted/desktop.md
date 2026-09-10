@@ -2,7 +2,7 @@
 
 Memoh Desktop 是面向 Memoh Cloud 或自托管 Memoh 服务端的原生客户端。它把同一套 Web UI 打包进 Electron 外壳，提供原生窗口、托盘、菜单与快捷键，并且可以把所在的这台电脑注册为机器人可用的 **Computer**。
 
-Desktop **不会**自己运行本地服务端或数据库。你始终需要把它连到一个 Memoh 服务端：[Memoh Cloud](https://memoh.ai) 或你自己的 [Server Deploy](/zh/self-hosted/docker)。
+Desktop **不会**自己运行本地服务端或数据库。你始终需要把它连到一个 Memoh 服务端：[Memoh Cloud](https://memoh.ai) 或你自己的 [Server Deploy](./docker.md)。
 
 ## 何时使用 Desktop
 
@@ -35,7 +35,7 @@ Desktop **不会**自己运行本地服务端或数据库。你始终需要把�
 
 Desktop 可以把它所在的机器注册成服务端机器人可用的 **Computer**，不用另跑 runtime 进程：打开 **这台电脑** 开关，起个名字，Desktop 会通过内嵌的 Memoh runtime SDK 在后台维持连接。凭据使用操作系统的安全存储保存。
 
-权限模型、按机器人授权以及机器人在电脑上能做什么，见 [Computers](/zh/guides/computers.md)。
+权限模型、按机器人授权以及机器人在电脑上能做什么，见 [电脑](../guides/computers.md)。
 
 ## Desktop 负责什么
 
@@ -44,4 +44,4 @@ Desktop 可以把它所在的机器注册成服务端机器人可用的 **Comput
 - 到所选服务端的连接及其缓存的登录状态
 - **这台电脑** 对应的可选 Remote Runtime 连接
 
-其它一切（机器人、会话、记忆、工作区、渠道）都在你连接的服务端上。工作区运行时在服务端配置，见 [Workspace Backends](/zh/self-hosted/workspace-backends)。
+其它一切（机器人、会话、记忆、工作区、渠道）都在你连接的服务端上。工作区运行时在服务端配置，见 [Workspace Backends](./workspace-backends.md)。

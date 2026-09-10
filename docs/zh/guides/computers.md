@@ -1,14 +1,14 @@
 # 电脑（远程 Runtime）
 
-可以把你自己的电脑接进 Memoh 部署，让机器人在上面干活：读写文件、跑命令。Web UI 里这叫**电脑**（Computers）；机器人这边以**使用位置**（Work locations）的形式在它们之间选。
+可以把你自己的电脑接进 Memoh 部署，让机器人在上面干活：读写文件、跑命令。Web UI 里这叫**电脑**（电脑）；机器人这边以**使用位置**（Work locations）的形式在它们之间选。
 
 Agent 本体不挪窝。模型调用、聊天、会话、记忆全在 Memoh server 上——接进来的电脑只提供文件系统和命令执行，在 agent 眼里就是又一个 workspace。
 
 连接方向是电脑**主动连 server** 的 WebSocket。电脑不需要公网 IP、不需要开端口，在 NAT 后面也行。
 
-::: danger 想清楚你在共享什么
+<scalar-callout type="danger" title="想清楚你在共享什么">
 接入的电脑暴露的是跑 runtime 的那个系统用户能访问的文件，命令也**以该用户身份**执行。没有目录沙箱：那个用户碰得到的，有权限的机器人就碰得到。只有你明确添加了这台电脑的机器人才能用它，写/执行默认也要审批——但心态上要按"给了个 shell"来对待。
-:::
+</scalar-callout>
 
 ---
 
@@ -16,7 +16,7 @@ Agent 本体不挪窝。模型调用、聊天、会话、记忆全在 Memoh serv
 
 ### 命令行方式
 
-1. 打开 Web UI 设置里的 **Computers** 页。
+1. 打开 Web UI 设置里的 **电脑** 页。
 2. 创建一个 runtime key（形如 `mrk_...`；任何登录用户都能建，电脑归创建 key 的用户所有）。
 3. 在要接入的电脑上跑页面生成的命令（Node.js 20+）：
 
@@ -72,6 +72,6 @@ Memoh Desktop 内置了这个能力：打开**这台电脑**开关、起个名�
 
 ## 相关页面
 
-- [Workspace](/zh/guides/container.md)
-- [Browser / Computer Use](/zh/guides/browser-computer-use.md)
-- [自托管总览](/zh/self-hosted/index.md)
+- [Workspace](./container.md)
+- [Browser / Computer Use](./browser-computer-use.md)
+- [自托管总览](../self-hosted/index.md)
