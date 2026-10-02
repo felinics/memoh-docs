@@ -4,7 +4,7 @@ Server Deploy is the self-hosted Memoh stack for always-on, multi-user or multi-
 
 This page documents the Docker Compose server deployment. For the native local client, see [Desktop Installation](./desktop.md).
 
-The default Compose stack includes PostgreSQL, a pgvector database for memory embeddings, a one-shot migration job, the main server with an explicit workspace backend and in-process AI agent, the channel worker, and the web UI. PostgreSQL is the only supported database.
+The default Compose stack includes PostgreSQL, a pgvector database for memory embeddings, a one-shot migration job, the main server with an explicit workspace backend and in-process AI agent, the channel worker, and the web client. PostgreSQL is the only supported database.
 
 The official Compose stack uses the `containerd` workspace backend. The server image starts an embedded containerd and mounts the runtime files needed by bot workspaces. For Docker Engine and Apple backends, see [Workspace backends](./workspace-backends.md).
 
@@ -16,12 +16,30 @@ The Docker Compose stack consists of multiple services. Some are always started,
 |---------|---------|-------------|
 | **server** | *(core)* | Main Memoh server with the configured container runtime backend and in-process AI agent |
 | **channel** | *(core)* | Channel worker (`memoh-channel`) that owns platform connections and webhooks; talks to the server over internal RPC |
-| **web** | *(core)* | Web UI (Vue 3) |
+| **web** | *(core)* | Web client (Vue 3) |
 | **postgres** | *(core)* | PostgreSQL database (system of record) |
 | **pgvector** | *(core)* | PostgreSQL with `pgvector` used for optional memory embeddings; see [Built-in Memory](../integrations/providers/memory/builtin.md) |
 | **migrate** | *(core, one-shot)* | Runs `memoh-server migrate up` before the server starts |
 | **webhook-tunnel** | `webhook-tunnel` | Optional `cloudflared` quick tunnel that exposes the channel worker's webhook listener to the internet |
 | **connect-it** | `connectors` | Co-hosted [Connect-It](https://github.com/memohai/connect-it) service backing bot [connectors](../guides/connectors.md) (see below) |
+
+
+### Connect-It Connectors
+
+The **connect-it** container runs [Connect-It](https://github.com/memohai/connect-it), the service behind bot [connectors](../guides/connectors.md) — it links third-party services such as GitHub and Notion to bots via OAuth or API keys. It shares Memoh's PostgreSQL instance with its data isolated in a separate `connect_it` schema, and manages its own migrations.
+
+The install script manages Connect-It end to end:
+
+- **Fresh installs** enable it by default (`MEMOH_CONNECT_IT_MODE=embedded`, Compose profile `connectors`); connectors work out of the box without creating a token in the Connect-It admin console by hand.
+- **Upgrades** keep it off unless it was already enabled; to turn it on, rerun the install script with `MEMOH_CONNECT_IT_MODE=embedded`.
+- All credentials — admin password, AES key, cookie secret, and the server-to-server API token — are generated once, written to `.env`, and reused across upgrades. Switching modes later does not lose existing connections.
+
+After install, the Connect-It admin console is at `http://localhost:8421` (user `admin`; the generated password is printed at the end of the install and stored in `.env`).
+
+Two things to watch:
+
+- **OAuth callbacks** go through Connect-It's public address, `http://localhost:8421` by default. If Memoh is accessed from other machines, set `MEMOH_CONNECT_IT_PUBLIC_BASE_URL` to an address those machines (and the OAuth providers) can reach.
+- **Mainland-China mirrors**: the Connect-It image lives on ghcr.io, which the memoh.cn registry mirror does not cover. If ghcr.io is unreachable, set `MEMOH_CONNECT_IT_MODE=disabled` to skip it.
 
 
 ## Prerequisites
@@ -190,7 +208,7 @@ After startup:
 
 | Service         | URL                    |
 |-----------------|------------------------|
-| Web UI          | http://localhost:8082  |
+| Web client      | http://localhost:8082  |
 | API             | http://localhost:8080  |
 | Connect-It admin console *(with the `connectors` profile)* | http://localhost:8421 |
 

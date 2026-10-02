@@ -1,34 +1,61 @@
 # QQ Channel Configuration
 
-Connecting your Memoh Bot to QQ allows it to interact with users through QQ's official Bot platform.
+Connect your Memoh bot to QQ through QQ's official bot platform, for private chats, group chats, and thread (话题) conversations.
 
-## Step 1: Create a QQ Bot
+::: warning Limits
+- Each QQ account can create up to 5 bots.
+- Responses are delivered as complete blocks; output is not streamed token by token.
+:::
+
+## Prerequisites
+
+- A QQ account, used to log in to the [QQ Bot Open Platform](https://q.qq.com/qqbot/openclaw/).
+
+## Steps
+
+### 1. Create a QQ bot
+
+In the QQ Bot Open Platform:
 
 1. Go to the [QQ Bot Open Platform](https://q.qq.com/qqbot/openclaw/) and log in with your QQ account.
-2. Click **Create Bot** (创建机器人) - no approval required. Each account can create up to 5 bots.
-3. Copy the **AppID** and **AppSecret** displayed on the page.
+2. Click **Create Bot** (创建机器人) — no approval is required.
+3. Copy the **AppID** and **AppSecret** displayed on the page. **AppSecret** is shown only once — save it securely.
 
-> **Important**: AppSecret is only shown once. Save it securely - viewing it again will force a reset.
+> Official resources: [QQ Bot Open Platform](https://q.qq.com/) · [QQ Bot Documentation](https://bot.q.qq.com/wiki/)
 
-## Step 2: Configure Memoh
+### 2. Add the channel in Memoh
 
-1. Go to your Bot's **Platforms** tab in the Memoh Web UI.
+In Memoh:
+
+1. Open the bot's **Platforms** tab.
 2. Click **Add Channel** and select **QQ**.
-3. Paste your **AppID** and **AppSecret**.
-4. Configure optional settings:
-   - **Markdown Support**: Enable Markdown formatting (default: enabled).
-   - **Enable Input Hint**: Show typing indicators (default: enabled).
+3. Paste the **AppID** and **AppSecret**.
+4. Adjust the optional settings if needed: **Markdown Support** and **Enable Input Hint** are both enabled by default.
 5. Click **Save and Enable**.
 
-## Features Supported
+## Credentials
 
-- **Message Content**: Full support for text messages.
-- **Markdown**: Rich formatting with bold, italic, code blocks, and links.
-- **Attachments**: Support for images and files.
-- **Typing Indicators**: Visual feedback while generating responses.
-- **Target Types**: C2C (direct message), group, and channel.
+| Field | Required | Description |
+|-------|----------|-------------|
+| **AppID** | Yes | The bot's app ID, shown on the QQ Bot Open Platform when the bot is created. |
+| **AppSecret** | Yes | The bot's app secret, shown only once at creation. |
+| **Markdown Support** | No | Enable Markdown formatting (default: enabled). |
+| **Enable Input Hint** | No | Show typing indicators while the bot generates a response (default: enabled). |
 
-## Official Resources
+## Verify
 
-- [QQ Bot Open Platform](https://q.qq.com/)
-- [QQ Bot Documentation](https://bot.q.qq.com/wiki/)
+Send `/help` to the bot in a direct message, or @mention it in a group chat with `/help`. The bot replies with its command list, which confirms the channel is working.
+
+## Group chats
+
+The bot works in QQ group chats and thread (话题) conversations: @mention it in a group to trigger a reply.
+
+## Disable and rotate credentials
+
+Disable or remove the channel at any time from the bot's **Platforms** tab. To rotate credentials, update **AppID** / **AppSecret** in the same panel and save.
+
+## FAQ {#faq}
+
+### I lost the AppSecret {#appsecret-reset}
+
+**AppSecret** is shown only once, when the bot is created. Viewing it again on the QQ Bot Open Platform forces a reset; after the reset, update **AppSecret** in Memoh and save.

@@ -1,6 +1,6 @@
 # Preferences
 
-Memoh v0.13 includes user-level preferences for the Web UI. These preferences change how the interface looks and how keyboard shortcuts behave for the current browser or desktop app profile. They do not change a bot's personality, model, tools, memory, or access rules.
+Memoh v0.13 includes user-level preferences for the client. These preferences change how the interface looks and how keyboard shortcuts behave for the current device profile. They do not change a bot's personality, model, tools, memory, or access rules.
 
 Open **Settings**, then use **Appearance** for visual preferences and **Keyboard** for shortcuts.
 
@@ -14,7 +14,7 @@ The **Appearance** page is split into interface, typography, code highlighting, 
 
 | Setting | What It Does |
 |---------|--------------|
-| **Language** | Sets the Web UI language. v0.13 includes English, Simplified Chinese, and Japanese. If you have not chosen a language yet, Memoh detects English, Chinese, or Japanese from the browser language and falls back to English. |
+| **Language** | Sets the interface language. v0.13 includes English, Simplified Chinese, and Japanese. If you have not chosen a language yet, Memoh detects English, Chinese, or Japanese from the browser language and falls back to English. |
 | **Theme** | Chooses Light, Dark, or System. System follows the operating system or browser color mode. |
 | **Color Scheme** | Changes the accent palette used by brand elements, status colors, and interface controls. Available schemes are Memoh, Ocean, Forest, Rose, and Amber. |
 

@@ -2,7 +2,7 @@
 
 Supermarket is Memoh's built-in catalog for **connectors** and **skills**. Connectors bind third-party services such as GitHub or Notion to a bot; skills are reusable procedures the agent can load on demand.
 
-The Web UI shows Supermarket under Settings with two tabs:
+The app shows Supermarket under **Settings** with two tabs:
 
 - **Connectors**
 - **Skills**
@@ -19,7 +19,7 @@ The **Connectors** tab lists services a bot can connect through OAuth or an API 
 
 ## Install A Skill
 
-1. Open **Supermarket** in the Web UI.
+1. Open **Supermarket** in the app.
 2. Switch to the **Skills** tab.
 3. Choose a skill and click **Install**, or open the skill detail page and click **Install to Bot**.
 4. Select the target bot.

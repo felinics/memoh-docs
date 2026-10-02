@@ -1,6 +1,6 @@
 # Mem0 记忆
 
-把机器人接到 [Mem0](https://mem0.ai) 云端，由对方管存储、索引、检索，本机不搭那套库。
+把 Bot 接到 [Mem0](https://mem0.ai) 云端，由对方管存储、索引、检索，本机不搭那套库。
 
 ---
 
@@ -23,9 +23,9 @@
 
 ---
 
-## 绑到机器人
+## 绑到 Bot
 
-1. **Bots** → 机器人 → **General**
+1. **Bots** → Bot → **General**
 2. **Memory Provider** 选 Mem0
 3. 保存
 

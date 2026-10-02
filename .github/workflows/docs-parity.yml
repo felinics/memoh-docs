@@ -1,0 +1,17 @@
+name: Docs Parity
+
+on:
+  pull_request:
+
+jobs:
+  locale-parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check en/zh locale parity
+        run: node scripts/check-locale-parity.mjs

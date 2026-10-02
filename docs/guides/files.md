@@ -25,7 +25,7 @@ The **FileManager** component provides a familiar file-browsing experience with 
 
 ## Viewing and Editing
 
-The integrated **FileViewer** allows you to interact with the bot's files without leaving the web UI.
+The integrated **FileViewer** allows you to interact with the bot's files without leaving the app.
 
 ### Text Files
 

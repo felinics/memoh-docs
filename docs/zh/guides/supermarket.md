@@ -2,7 +2,7 @@
 
 应用市场是 Memoh 内置的**连接器**和 **Skills** 目录。连接器把第三方服务（GitHub、Notion 这类）绑到 Bot 上；Skills 是 Agent 可按需加载的可复用流程。
 
-Web UI 会在 Settings 下显示应用市场，提供两个 tab：
+客户端在 **设置** 下提供应用市场，分两个标签页：
 
 - **Connectors**
 - **Skills**
@@ -19,7 +19,7 @@ Web UI 会在 Settings 下显示应用市场，提供两个 tab：
 
 ## 安装 Skill
 
-1. 在 Web UI 中打开 **应用市场**。
+1. 在客户端打开 **应用市场**。
 2. 切到 **Skills** tab。
 3. 选择一个 Skill 并点击 **Install**，或进入 Skill 详情页点击 **Install to Bot**。
 4. 选择目标 Bot。

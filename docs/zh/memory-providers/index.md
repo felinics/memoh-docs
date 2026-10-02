@@ -7,10 +7,10 @@ title: Redirecting
 import { onMounted } from 'vue'
 
 onMounted(() => {
-  window.location.replace('/zh/integrations/providers/memory/')
+  window.location.replace('/zh/integrations/providers/memory/builtin')
 })
 </script>
 
-<meta http-equiv="refresh" content="0; url=/zh/integrations/providers/memory/">
+<meta http-equiv="refresh" content="0; url=/zh/integrations/providers/memory/builtin">
 
-Redirecting to [/zh/integrations/providers/memory/](/zh/integrations/providers/memory/).
+Redirecting to [/zh/integrations/providers/memory/builtin](/zh/integrations/providers/memory/builtin).

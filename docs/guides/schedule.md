@@ -24,7 +24,7 @@ A **Schedule** is a cron-triggered rule bound to a specific bot. When a schedule
 
 ## Cron Pattern Reference
 
-The `pattern` field uses standard cron syntax with five fields. It is evaluated in the server's configured timezone. By default, Memoh uses `UTC`, and you can change it with the top-level `timezone` config value.
+The `pattern` field uses standard cron syntax with five fields. It is evaluated in the bot's timezone — the **Timezone** field on the bot's **General** tab, which falls back to the server's top-level `timezone` config (`UTC` by default) when unset.
 
 ```
 ┌───────────── minute (0–59)
@@ -65,7 +65,7 @@ Schedules are primarily created in two ways:
 
 The bot itself has access to a `schedule` tool. You can ask the bot to create a schedule in natural language:
 
-> "Create a schedule called 'Daily Digest' that runs every day at 8 AM and sends me a summary of my unread emails."
+> "Create a schedule called 'Daily Digest' that runs every day at 8 AM and sends me a summary of yesterday's repository activity."
 
 The bot will translate this into a cron expression and register the schedule automatically.
 
@@ -80,9 +80,9 @@ POST /api/bots/{bot_id}/schedule
 ```json
 {
   "name": "Daily Digest",
-  "description": "Summarize unread emails every morning",
+  "description": "Summarize repository activity every morning",
   "pattern": "0 8 * * *",
-  "command": "Summarize my unread emails and send the result to Telegram.",
+  "command": "Summarize yesterday's repository activity and send the result to Telegram.",
   "enabled": true,
   "max_calls": null
 }

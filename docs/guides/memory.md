@@ -6,7 +6,7 @@ Memoh's structured long-term memory system allows bots to remember information a
 
 Before using the **Memory** tab, make sure your bot already has a **Memory Provider** configured.
 
-1. Create a provider from one of the [Memory Providers](../integrations/providers/memory/index.md) (Built-in, Mem0, or OpenViking).
+1. Create a provider from one of the [Memory Providers](../integrations/providers/memory/builtin.md) (Built-in, Mem0, or OpenViking).
 2. Open your bot's **General** tab.
 3. Select the provider in the **Memory Provider** field.
 4. Click **Save**.
@@ -110,5 +110,5 @@ If you are trying to shorten the currently active conversation history, use **Co
 
 - The bot automatically searches and retrieves memories during chat.
 - The assigned **Memory Provider** controls the memory backend used by the bot.
-- Provider-specific settings (such as embedding model or API keys) are configured in the provider itself — see [Memory Providers](../integrations/providers/memory/index.md).
+- Provider-specific settings (such as embedding model or API keys) are configured in the provider itself — see [Memory Providers](../integrations/providers/memory/builtin.md).
 - Memories provide the long-term knowledge that makes each bot unique to its owner.

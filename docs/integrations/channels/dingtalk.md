@@ -1,43 +1,53 @@
 # DingTalk Channel Configuration
 
-Memoh supports DingTalk bots for private chats and group chats. The adapter uses DingTalk's stream connection for inbound events and the official APIs for outbound replies and media.
+Connect your Memoh bot to DingTalk for private and group chats: inbound events arrive over DingTalk's Stream mode, and replies and media are sent through DingTalk's official APIs.
 
-## Step 1: Create A DingTalk App
+::: warning Limits
+- Responses are delivered as complete messages; DingTalk output is not streamed token by token.
+:::
 
-1. Open the DingTalk developer platform for your organization.
-2. Create or choose the app that will act as your bot.
-3. Enable the bot / messaging capability for that app.
-4. Copy the app credentials:
-   - **App Key**
-   - **App Secret**
+## Prerequisites
 
-Depending on your DingTalk environment, you may also need to grant message permissions and publish the app before it is available to end users.
+- Access to your organization's DingTalk developer platform, with permission to create apps.
+- No public callback URL is required: Memoh receives inbound events over a DingTalk Stream connection that it maintains automatically.
 
-## Step 2: Configure Memoh
+## Steps
 
-1. Open your bot in the Memoh Web UI.
-2. Go to **Platforms**.
-3. Click **Add Channel** and choose **DingTalk**.
-4. Fill in **App Key** and **App Secret**.
-5. Click **Save and Enable**.
+### 1. Create a DingTalk app
 
-Memoh maintains the DingTalk stream connection automatically. For the normal setup, you do not need to manually paste a webhook callback URL.
+In the DingTalk developer platform for your organization:
 
-## Step 3: Verify Messaging
+1. Create or choose the app that will act as the bot.
+2. Enable the bot / messaging capability for that app.
+3. Copy the **App Key** and **App Secret**.
+4. Grant the app message permissions and publish it in your organization so end users can reach it.
 
-After the channel is enabled:
+### 2. Add the channel in Memoh
 
-1. Send a private message to the DingTalk bot, or mention it in a supported group chat.
-2. Confirm the bot receives the message and can reply.
+In Memoh:
 
-## Features Supported
+1. Open the bot's **Platforms** tab.
+2. Click **Add Channel** and choose **DingTalk**.
+3. Fill in **App Key** and **App Secret**.
+4. Click **Save and Enable**.
 
-- **Private chats**
-- **Group chats**
-- **Text and Markdown-style output**
-- **Replies**
-- **Attachments and media**
+Memoh maintains the DingTalk Stream connection automatically — there is no webhook callback URL to paste.
 
-Current behavior note:
+## Credentials
 
-- Outbound responses are non-streaming on DingTalk in Memoh.
+| Field | Required | Description |
+|-------|----------|-------------|
+| **App Key** | Yes | The DingTalk app's key, copied from the app's credentials in the DingTalk developer platform. |
+| **App Secret** | Yes | The DingTalk app's secret, copied from the same place. |
+
+## Verify
+
+Send `/help` to the bot in a private chat, or @mention it in a group chat with `/help`. The bot replies with its command list, which confirms the channel is working.
+
+## Group chats
+
+The bot works in DingTalk group chats: @mention it in a supported group to trigger a reply.
+
+## Disable and rotate credentials
+
+Disable or remove the channel at any time from the bot's **Platforms** tab. To rotate credentials, update **App Key** / **App Secret** in the same panel and save.

@@ -1,10 +1,10 @@
 # 定时任务
 
-用 **cron 表达式** 在固定时间让机器人干一件事：发报告、查外网、维护、或任何能交给智能体＋工具完成的活。
+用 **cron 表达式** 在固定时间让 Bot 干一件事：发报告、查外网、维护、或任何能交给智能体＋工具完成的活。
 
 ## 是什么
 
-**Schedule** 绑在某个机器人上。到点就把一条自然语言 **command** 交给智能体，由它用工具、技能去执行，结果可发到已接好的渠道。
+**Schedule** 绑在某个 Bot 上。到点就把一条自然语言 **command** 交给智能体，由它用工具、技能去执行，结果可发到已接好的渠道。
 
 ---
 
@@ -24,7 +24,7 @@
 
 ## Cron（五段）
 
-在服务器时区下算；Memoh 默认使用 **UTC**，可用顶层 `timezone` 改。五段为：分、时、日、月、周。
+按 Bot 的时区求值——即 Bot **通用** 标签页的 **Timezone** 字段；未设置时回退到服务器顶层 `timezone` 配置（默认 **UTC**）。五段为：分、时、日、月、周。
 
 ```
 ┌ 分 0–59
@@ -47,15 +47,15 @@
 
 ## 看列表
 
-机器人 **Schedule** tab：名、pattern、是否启用、执行次数等；**Refresh** 重载。
+Bot **Schedule** tab：名、pattern、是否启用、执行次数等；**Refresh** 重载。
 
 ---
 
 ## 创建
 
-### 让机器人自己建
+### 让 Bot 自己建
 
-机器人有 `schedule` 工具。你可以说人话，例如让每天 8:00 汇总未读邮件，它会去拼 cron 并登记。
+Bot 有 `schedule` 工具。你可以说人话，例如让每个工作日 8:00 汇总仓库动态，它会去拼 cron 并登记。
 
 ### 调 API
 
@@ -64,9 +64,9 @@
 ```json
 {
   "name": "Daily Digest",
-  "description": "Summarize unread emails every morning",
+  "description": "Summarize repository activity every morning",
   "pattern": "0 8 * * *",
-  "command": "Summarize my unread emails and send the result to Telegram.",
+  "command": "Summarize yesterday's repository activity and send the result to Telegram.",
   "enabled": true,
   "max_calls": null
 }

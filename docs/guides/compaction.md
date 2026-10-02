@@ -108,7 +108,7 @@ Memoh tracks the current session against the selected chat model's `context_wind
 
 You can see this in:
 
-- the Web UI session status panel
+- the app's session status panel
 - the `/status` slash command
 
 Context usage is an estimate (roughly four characters per token), so treat the percentages as guidance rather than exact numbers.

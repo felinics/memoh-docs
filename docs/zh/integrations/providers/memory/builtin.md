@@ -11,7 +11,7 @@
 
 ## 工作方式
 
-内置提供方运行在 **graph** 模式：记忆节点与边存放在 PostgreSQL 中作为唯一真源，并派生出一份 Markdown 视图（机器人工作区里的 `memory/` bundle 和 `MEMORY.md`）供 Agent 读写。
+内置提供方运行在 **graph** 模式：记忆节点与边存放在 PostgreSQL 中作为唯一真源，并派生出一份 Markdown 视图（Bot 工作区里的 `memory/` bundle 和 `MEMORY.md`）供 Agent 读写。
 
 语义检索是可选的加层：
 
@@ -68,9 +68,9 @@ sslmode = "disable"
 
 ---
 
-## 绑到机器人
+## 绑到 Bot
 
-1. **Bots** → 机器人
+1. **Bots** → Bot
 2. **General** → **Memory Provider**
 3. 保存
 
@@ -80,7 +80,7 @@ sslmode = "disable"
 
 ## 配好之后
 
-在机器人的 **Memory** tab 里管理具体记忆：
+在 Bot 的 **Memory** tab 里管理具体记忆：
 
 - 手动新建
 - 从对话抽取

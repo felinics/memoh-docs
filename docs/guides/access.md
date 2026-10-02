@@ -2,8 +2,8 @@
 
 Memoh access control has two layers:
 
-- **Channel Members** control identities coming from IM channels such as Telegram, Discord, Feishu, Matrix, QQ, and similar platforms.
-- **Workspace Members** control registered Memoh users in the web app and workspace.
+- **Channel Members** control identities coming from IM channels such as Telegram, Discord, Feishu, QQ, and similar platforms.
+- **Workspace Members** control registered Memoh users in the app and workspace.
 
 The old ACL rule model still exists, but it is now the advanced engine behind Channel chat access. Most day-to-day changes should start from the bot's **Access** tab, using **Channel Members** and **Workspace Members**.
 
@@ -14,7 +14,7 @@ The old ACL rule model still exists, but it is now the advanced engine behind Ch
 | Layer | Identity | Controls |
 |-------|----------|----------|
 | **Channel Members** | A channel identity observed from an IM platform | Whether that platform identity can chat with the bot, and whether it can manage the bot from IM commands |
-| **Workspace Members** | A registered Memoh user account | Whether that user can use the bot in the web app, read/write files, run workspace commands, or manage bot settings |
+| **Workspace Members** | A registered Memoh user account | Whether that user can use the bot in the app, read/write files, run workspace commands, or manage bot settings |
 
 These layers can be connected by account binding. A workspace user can bind a channel identity from **Profile -> Connected Accounts** by generating a one-time code and sending `/link <code>` to a Memoh bot in IM. After binding, Memoh can tell that the IM identity belongs to that workspace user.
 
@@ -56,7 +56,7 @@ Workspace access is for registered Memoh users. It is separate from IM chat acce
 
 Channel Members is the IM-side access surface.
 
-Each row represents a **channel identity** — one Telegram user, Discord member, or Matrix user — or a **group** (see below). Members are added from the inline picker in the card header; identity and group candidates appear in the same dropdown, grouped by section. A row can have two independent permissions:
+Each row represents a **channel identity** — one Telegram user or Discord member — or a **group** (see below). Members are added from the inline picker in the card header; identity and group candidates appear in the same dropdown, grouped by section. A row can have two independent permissions:
 
 | Permission | Meaning |
 |------------|---------|
@@ -130,7 +130,7 @@ Workspace permissions are:
 
 Workspace Manage also flows into Channel Members for linked channel identities. If a user with Workspace Manage links a Telegram identity, that Telegram identity inherits Manage on the channel side.
 
-Workspace **Can chat** is not the same as Channel **Chat**. Workspace permissions authorize web app and workspace APIs; Channel Chat authorizes IM inbound messages through the ACL engine.
+Workspace **Can chat** is not the same as Channel **Chat**. Workspace permissions authorize app and workspace APIs; Channel Chat authorizes IM inbound messages through the ACL engine.
 
 ---
 
@@ -227,7 +227,7 @@ Grant the user **Can manage** in Workspace Members. Ask them to link their Teleg
 
 When access is surprising, check these in order:
 
-1. **Which layer is involved?** IM messages use Channel Chat ACL. Web app and workspace APIs use Workspace Members.
+1. **Which layer is involved?** IM messages use Channel Chat ACL. App and workspace APIs use Workspace Members.
 2. **Is the identity linked?** Connected Accounts determines whether Workspace Manage can inherit into Channel Members.
 3. **What is the Channel Access Mode?** Blacklist Mode defaults to allow; Whitelist Mode defaults to deny.
 4. **Is Manage inherited or overridden?** The Channel Members info popover shows whether Manage follows Workspace Members or is locally overridden.

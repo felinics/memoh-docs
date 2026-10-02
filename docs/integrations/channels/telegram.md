@@ -1,31 +1,46 @@
 # Telegram Channel Configuration
 
-This guide walks you through connecting your Memoh Bot to Telegram. Telegram is one of the most supported platforms in Memoh, featuring streaming responses, Markdown formatting, and attachment support.
+Connect your Memoh bot to Telegram — one of the most fully supported channels in Memoh, with streaming responses, Markdown formatting, and attachments.
 
-## Step 1: Create a Telegram Bot
+## Prerequisites
 
-You need to create a bot on Telegram to get an API token.
+- A Telegram account; you create the bot by talking to **@BotFather**.
+- A Memoh bot; channels are configured from its **Platforms** tab.
+
+## Steps
+
+### 1. In Telegram, create a bot with @BotFather
 
 1. Open Telegram and search for the official **@BotFather** bot.
 2. Send the `/newbot` command.
 3. Follow the prompts:
-   - **Name**: Choose a display name for your bot (e.g., `My Memoh Bot`).
-   - **Username**: Choose a unique username ending in `bot` (e.g., `my_memoh_bot`).
-4. BotFather will provide you with an **API Token** (e.g., `123456789:ABCdefGHIjklMNOpqrsTUVwxyz`). **Keep this token secret.**
+   - **Name**: a display name for your bot (e.g., `My Memoh Bot`).
+   - **Username**: a unique username ending in `bot` (e.g., `my_memoh_bot`).
+4. BotFather replies with an **API Token** (e.g., `123456789:ABCdefGHIjklMNOpqrsTUVwxyz`). **Keep this token secret.**
 
-> Official Guide: [Telegram Bot Tutorial](https://core.telegram.org/bots/tutorial)
+> Official guide: [Telegram Bot Tutorial](https://core.telegram.org/bots/tutorial)
 
-## Step 2: Configure Memoh
+### 2. In Memoh, add the Telegram channel
 
-1. Go to your Bot's **Detail Page** in the Memoh Web UI.
-2. Select the **Platforms** tab.
-3. Click **Add Channel** and select **Telegram**.
-4. Paste your **API Token** into the credentials field.
-5. Click **Save and Enable**.
+1. Open your bot's detail page and select the **Platforms** tab.
+2. Click **Add Channel** and select **Telegram**.
+3. Paste the **API Token** into the credentials field.
+4. Click **Save and Enable**.
 
-## Features Supported
+## Credentials
 
-- **Streaming**: Responses appear as the bot "thinks."
-- **Markdown**: Support for bold, italic, code blocks, and links.
-- **Attachments**: Send images or files to the bot; the bot can also send files back.
-- **Replies**: The bot understands context from message replies.
+| Field | Description |
+|-------|-------------|
+| **API Token** | The token BotFather issues when you create the bot (e.g., `123456789:ABC...`). Keep it secret. |
+
+## Verify
+
+Open a direct chat with your bot in Telegram and send `/help`. If the bot replies with its command list, the channel is working.
+
+## Group chats
+
+Telegram group chats are supported. Add the bot to a group and @mention it by its username to talk to it there.
+
+## Disable and rotate credentials
+
+You can disable or remove this channel at any time from the bot's **Platforms** tab. To rotate the token, update the **API Token** field and save.

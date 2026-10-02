@@ -76,12 +76,12 @@ Top-level fields:
 
 | Field | Description |
 |-------|-------------|
-| `version` | Required schema version. v0.13.0 supports `1`. |
+| `version` | Required schema version. The current version is `1`. |
 | `enabled` | Enables or disables hooks in this user config. Defaults to `true`. |
 | `defaults.timeout` | Default action timeout. Accepts Go-style durations such as `10s`, or an integer number of seconds. Defaults to `10s`. |
 | `defaults.on_error` | Default error behavior: `ignore`, `fail`, or `block`. Defaults to `fail`. |
 | `defaults.max_output_bytes` | Maximum captured stdout/stderr bytes per command action. Defaults to `65536`. |
-| `defaults.trigger_nested_hooks` | Parsed by the schema and defaults to `false`; the Hooks UI does not expose a separate control for it in v0.13.0. |
+| `defaults.trigger_nested_hooks` | Parsed by the schema and defaults to `false`; the Hooks UI does not expose a separate control for it yet. |
 | `env` | Extra environment variables for command actions from the user config. |
 | `hooks` | Ordered rule list. Matching hooks run by descending `priority`, preserving file order for equal priorities. |
 
@@ -95,7 +95,7 @@ Hook fields:
 | `enabled` | Enables or disables this hook. Defaults to `true`. |
 | `priority` | Higher numbers run first. |
 | `actions` | Actions to run when the hook matches. |
-| `conditions` | Present in the schema for future expansion; v0.13.0 matching uses `event`, `enabled`, and `matcher`. |
+| `conditions` | Present in the schema for future expansion; matching currently uses `event`, `enabled`, and `matcher`. |
 
 The `matcher` target is selected from the hook request in this order:
 
@@ -110,7 +110,7 @@ The `matcher` target is selected from the hook request in this order:
 
 ## Action Types
 
-v0.13.0 supports two action types: `command` and `tool`.
+Two action types are supported: `command` and `tool`.
 
 ### Command Action
 
@@ -171,7 +171,7 @@ If stdout is not JSON, Memoh treats the action as `allow` and stores the raw std
 
 A `tool` action calls an available bot tool by name with the configured `input`. Tool results may return `decision`, `reason`, and `append_context` in an object result.
 
-`mcp_tool` is reserved in the codebase but rejected in v0.13.0.
+`mcp_tool` is reserved in the codebase but currently rejected.
 
 ---
 
@@ -198,7 +198,7 @@ Actions may return one of these decisions:
 
 ## Event Catalog
 
-The Hooks tab loads the event catalog from `/bots/{bot_id}/hooks/events`. Events marked as runtime-supported are wired into v0.13.0 execution paths. Catalog-only events are accepted by config parsing and test runs, but are not currently emitted by a live runtime path in v0.13.0.
+The Hooks tab loads the event catalog from `/bots/{bot_id}/hooks/events`. Events marked as runtime-supported are wired into the current execution paths. Catalog-only events are accepted by config parsing and test runs, but are not yet emitted by a live runtime path.
 
 | Event | Area | Runtime-supported | Notes |
 |-------|------|-------------------|-------|
@@ -232,10 +232,10 @@ The Hooks tab loads the event catalog from `/bots/{bot_id}/hooks/events`. Events
 | `PostCompact` | Compaction | Yes | Runs after session compaction. |
 | `SubagentStart` | Subagents | Yes | Runs before a subagent task starts. |
 | `SubagentStop` | Subagents | Yes | Runs after a subagent task stops. |
-| `InboundMessageNormalized` | Messaging | No | Catalog-only in v0.13.0. |
-| `BeforeOutboundMessage` | Messaging | No | Catalog-only in v0.13.0. |
-| `AfterOutboundMessage` | Messaging | No | Catalog-only in v0.13.0. |
-| `ChannelDeliveryFailed` | Messaging | No | Catalog-only in v0.13.0. |
+| `InboundMessageNormalized` | Messaging | No | Catalog-only for now. |
+| `BeforeOutboundMessage` | Messaging | No | Catalog-only for now. |
+| `AfterOutboundMessage` | Messaging | No | Catalog-only for now. |
+| `ChannelDeliveryFailed` | Messaging | No | Catalog-only for now. |
 
 ---
 
@@ -254,7 +254,7 @@ The test path uses the effective config and runs real actions. Avoid destructive
 
 ## Safety Notes
 
-Hooks are powerful. Treat them like code that runs inside the bot workspace.
+Hooks execute inside the bot workspace. Treat them like any other code that runs there.
 
 - Review every command action before enabling it.
 - Be careful with `PreToolUse`, `BeforeWorkspaceCommand`, and `BeforeFileWrite`; they can block normal bot work.
@@ -267,5 +267,5 @@ Hooks are powerful. Treat them like code that runs inside the bot workspace.
 
 ## Related Pages
 
-- [Bot Management](./bot.md)
+- [Bot Management](./working-with-bots.md)
 - [Skills](./skills.md)

@@ -1,33 +1,20 @@
 # Channels
 
-Channels connect Memoh bots to messaging platforms. Configure them from the bot **Platforms** tab so users can talk to the same bot through Slack, Telegram, Feishu, Discord, WeChat, Email, the web UI, and other surfaces.
+Channels connect Memoh bots to messaging platforms. Configure them from the bot **Platforms** tab so users can talk to the same bot through Slack, Telegram, Feishu, Discord, WeChat, and other platforms, as well as directly in the Memoh app.
 
-## Supported Channels
+## Supported channels
 
-| Platform | Guide | Notes |
-|----------|-------|-------|
-| Slack | [Slack Configuration](./slack.md) | Workspace messaging with threads |
-| Telegram | [Telegram Configuration](./telegram.md) | Strong attachment and streaming support |
-| Feishu (Lark) | [Feishu Configuration](./feishu.md) | Supports webhook-style inbound mode |
-| Discord | [Discord Configuration](./discord.md) | Good fit for communities and servers |
-| QQ | [QQ Configuration](./qq.md) | Personal DM oriented |
-| Matrix | [Matrix Configuration](./matrix.md) | Decentralized homeserver support |
-| Misskey | [Misskey Configuration](./misskey.md) | Replies and reactions, no streaming |
-| DingTalk | [DingTalk Configuration](./dingtalk.md) | Enterprise private/group chat |
-| WeCom (WeWork) | [WeCom Configuration](./wecom.md) | Enterprise workspace integration |
-| WeChat | [WeChat Configuration](./weixin.md) | Personal QR login flow |
-| WeChat Official Account | [WeChat Official Account Configuration](./wechatoa.md) | Official account webhook flow |
-| Email | [Email](../../guides/email.md) | SMTP, Mailgun, Gmail OAuth, and related email provider flows |
-| Web | Built-in | Available from the Memoh web interface |
+- [Telegram](./telegram.md)
+- [Slack](./slack.md)
+- [Discord](./discord.md)
+- [Feishu (Lark)](./feishu.md)
+- [DingTalk](./dingtalk.md)
+- [WeCom](./wecom.md)
+- [WeChat](./weixin.md)
+- [QQ](./qq.md)
+- [LINE](./line.md)
 
-## WeChat Options
-
-Memoh supports two different WeChat-related adapters:
-
-- **WeChat (`weixin`)** is the personal-account style integration that relies on QR login.
-- **WeChat Official Account (`wechatoa`)** is the official-account webhook integration that uses `App ID`, `App Secret`, `Token`, and optional AES settings.
-
-Choose the one that matches your actual WeChat deployment model.
+What each channel supports (Markdown, attachments, streaming, group chats, and so on) is noted in the Limits section of its page.
 
 ## General Setup Flow
 

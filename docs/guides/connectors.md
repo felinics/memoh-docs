@@ -24,7 +24,7 @@ The one-click server deployment provisions a co-hosted Connect-It automatically 
 
 ## Connect A Service
 
-1. Open **Supermarket** in the Web UI.
+1. Open **Supermarket** in the app.
 2. Stay on the **Connectors** tab — it is the first tab and the default landing tab when connectors are configured.
 3. Choose a connector and click **Connect**.
 4. Select the target bot.

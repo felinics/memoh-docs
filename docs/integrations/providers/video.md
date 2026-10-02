@@ -5,7 +5,7 @@ Memoh bots can generate videos through the `generate_video` tool. To enable it y
 1. A **video provider** with at least one video model, configured under **Settings → Integrations → Video**.
 2. A **Video Generation Model** assigned to the bot under **Bot Settings → Multimedia**.
 
-If a bot has no video model assigned, the `generate_video` tool is simply not offered to it.
+If a bot has no video model assigned, the `generate_video` tool is not offered to it.
 
 ---
 

@@ -2,7 +2,7 @@
 
 Memoh bots support **slash commands** that are intercepted before the LLM runs. They are intended for fast inspection and control tasks such as viewing settings, switching providers, checking session status, or creating a fresh session.
 
-Slash commands work in channel adapters and in the built-in Web UI chat. They do not consume model tokens just to parse the command itself.
+Slash commands work in channel adapters and in the app's built-in chat. They do not consume model tokens just to parse the command itself.
 
 ---
 
@@ -44,7 +44,7 @@ Besides fixed commands, the slash system can activate the bot's [Skills](./skill
 /<skill-name> [optional prompt]
 ```
 
-- In the **Web UI composer**, typing `/` opens a panel with **Quick actions** (`/help`, `/skill list`, `/new`, `/compact`, `/model`) and the bot's skills. Selecting a skill attaches it as a removable chip; you can also type the form above directly.
+- In the **app composer**, typing `/` opens a panel with **Quick actions** (`/help`, `/skill list`, `/new`, `/compact`, `/model`) and the bot's skills. Selecting a skill attaches it as a removable chip; you can also type the form above directly.
 - In **IM channels**, the same `/<skill-name>` form works, and `/skill list` renders the available skills as tappable buttons.
 - The activated skill's content is injected into the **current turn only** — it does not persist into history, session titles, or memory.
 
@@ -108,7 +108,7 @@ In `/help` output, owner-only actions are marked with `[owner]`.
 | Command | Description |
 |---------|-------------|
 | `/help` | Show slash command help |
-| `/new [chat|discuss]` | Create a new session for the current route |
+| `/new [chat\|discuss]` | Create a new session for the current route |
 | `/stop` | Stop the current generation |
 
 ### Resource Groups
@@ -131,7 +131,7 @@ In `/help` output, owner-only actions are marked with `[owner]`.
 | `/context` | Show context window usage for the current session | `show` |
 | `/reasoning` (aliases `/reason`, `/effort`, `/think`) | View or set the reasoning level for this session | `show` |
 | `/language` | View or set the command UI language (`auto`, `en`, `zh`, `ja`) | `show` |
-| `/link <code>` | Link this channel account to your Memoh user with a code from the Web UI | `consume` |
+| `/link <code>` | Link this channel account to your Memoh user with a code generated in the app | `consume` |
 
 ---
 
@@ -149,11 +149,11 @@ Supported forms:
 
 Default behavior:
 
-- **Web UI local chat** defaults to `chat`
+- **Built-in app chat** defaults to `chat`
 - **Direct messages** default to `chat`
 - **Group conversations on channel adapters** default to `discuss`
 
-`/new discuss` is not supported in the built-in Web UI local channel. Use a channel adapter such as Telegram or Discord if you want explicit discuss sessions.
+`/new discuss` is not supported in the app's built-in chat channel. Use a channel adapter such as Telegram or Discord if you want explicit discuss sessions.
 
 See [Sessions](./sessions.md) for how `chat` and `discuss` differ.
 

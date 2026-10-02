@@ -4,7 +4,7 @@
 
 - 一个或多个 **模型服务商**（怎么连上游 API）
 - 其下的 **模型**
-- 若要朗读，再配 **语音合成**（见 [TTS](./tts/index.md)）
+- 若要朗读，再配 **语音合成**（见 [TTS 提供方](./tts/edge.md)）
 - 若要把语音转文字，再配 **语音转写**
 
 聊天与 embedding 在 **Models** 页管理；语音合成模型在 TTS 流程里单走，语音转写模型在 Transcription 设置页管理。
@@ -68,7 +68,7 @@
 | `microsoft-speech` | Microsoft 语音合成 |
 | `google-transcription` | Google 语音转写 |
 
-语音合成与语音转写类型不能当主聊天用。语音合成走 [TTS 提供方](./tts/index.md)，语音转写走 Transcription 设置页。具体模型、音色和语言取决于 provider 模板与上游账号。
+语音合成与语音转写类型不能当主聊天用。语音合成走 [TTS 提供方](./tts/edge.md)，语音转写走 Transcription 设置页。具体模型、音色和语言取决于 provider 模板与上游账号。
 
 ---
 
@@ -114,11 +114,19 @@ Copilot 凭据以前按用户存，现在和 Codex 一样是模型服务商级�
 
 ## 导入模型
 
-建完模型服务商后可以导入或手加模型。常见：选中模型服务商 → **Import Models**（若上游有目录）→ 勾要保存的。已知上游 id 时也可手填。
+建完模型服务商后，可以在它下面导入或手动添加模型。
+
+典型流程：
+
+1. 选中模型服务商。
+2. 若它能给出模型目录，点 **Import Models**。
+3. 勾选要存进 Memoh 的模型。
+
+已知上游模型 ID 时，也可以手动添加。
 
 ### 模型启用开关
 
-模型服务商详情页里每个模型一行，各带**启用开关**。禁用的模型仍留在这页方便再开，但会从所有模型选择器（机器人设置、聊天、embedding 等）里消失。
+模型服务商详情页里每个模型一行，各带**启用开关**。禁用的模型仍留在这页方便再开，但会从所有模型选择器（Bot 设置、聊天、embedding 等）里消失。
 
 默认值看模型怎么来的：
 
@@ -136,7 +144,7 @@ Copilot 凭据以前按用户存，现在和 Codex 一样是模型服务商级�
 | `speech` | 朗读，挂在 TTS |
 | `transcription` | 语音转文字，挂在 Transcription |
 
-**Models** 页主要管 chat / embedding；speech 在 [TTS](./tts/index.md)，transcription 在 Transcription 设置页。
+**Models** 页主要管 chat / embedding；speech 在 [TTS 提供方](./tts/edge.md)，transcription 在 Transcription 设置页。
 
 ---
 
@@ -174,19 +182,27 @@ Memoh 用来：
 
 ### 文生图模型
 
-机器人上可单挂 **Image Generation Model**，须是带 `image-output` 的 chat 模型。需要时与默认聊天模型分开。
+Bot 上可单挂 **Image Generation Model**，须是带 `image-output` 的 chat 模型。需要时与默认聊天模型分开。
 
 ---
 
 ## Embedding 模型
 
-给语义索引用。必填如 **Dimensions**（向量维数，如 1536）。和记忆或其它向量检索能力绑在一起用。
+Embedding 模型用于语义索引与检索。
+
+必填字段：
+
+| 字段 | 说明 |
+|------|------|
+| **Dimensions** | embedding 输出的向量维数，如 `1536`。 |
+
+配合记忆提供方，或任何依赖向量检索的能力使用。
 
 ---
 
 ## 语音合成与转写模型
 
-语音合成在 [TTS 提供方](./tts/index.md) 配，不跟普通 chat 模型服务商混流。当前语音合成类别包括：
+语音合成在 [TTS 提供方](./tts/edge.md) 配，不跟普通 chat 模型服务商混流。当前语音合成类别包括：
 
 - Edge：`edge-speech`
 - OpenAI 兼容：`openai-speech`
@@ -212,7 +228,7 @@ Memoh 用来：
 
 ## 怎么记省事
 
-对多数机器人，可以分几条线想：
+对多数 Bot，可以分几条线想：
 
 - **Chat**：日常说人话
 - **Embedding**：记忆
@@ -224,6 +240,6 @@ Memoh 用来：
 
 ## 接下来
 
-- 给机器人绑聊天、生图、记忆、朗读等：[机器人](../../guides/bot.md)
-- 配语音提供方与语音模型：[TTS 提供方](./tts/index.md)
-- 配语音转文字：打开 Web UI 的 Transcription 设置页
+- 给 Bot 绑聊天、生图、记忆、朗读等：[Bot](../../guides/working-with-bots.md)
+- 配语音提供方与语音模型：[TTS 提供方](./tts/edge.md)
+- 配语音转文字：打开客户端的 Transcription 设置页

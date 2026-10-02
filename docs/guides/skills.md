@@ -2,6 +2,10 @@
 
 Skills are reusable prompt modules that extend a bot's behavior, style, and tool-usage guidance. You manage them from the bot's **Skills** tab, and you can either write them yourself or install them from **[Supermarket](./supermarket.md)**.
 
+::: tip Limits
+A conversation can request at most 5 skills at once; each skill injects up to 64 KiB, with a 256 KiB total cap. These caps are fixed.
+:::
+
 ---
 
 ## What A Skill Looks Like

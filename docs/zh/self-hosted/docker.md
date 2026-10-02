@@ -1,12 +1,12 @@
 # 服务器部署（Server Deploy）
 
-Server Deploy 是 Memoh 的自托管服务端部署形态，适合长期在线、多人、多租户、远程访问，或需要机器人在桌面离线时继续服务外部渠道的场景。
+Server Deploy 是 Memoh 的自托管服务端部署形态，适合长期在线、多人、多租户、远程访问，或需要 Bot 在桌面离线时继续服务外部渠道的场景。
 
 本页说明 Docker Compose 版 Server Deploy。要安装本地原生客户端，请看 [Desktop 桌面版](./desktop.md)。
 
 默认编排里包含 PostgreSQL、用于记忆向量的 pgvector 库、一次性迁移任务、主服务（显式配置 workspace backend，智能体也在同一进程）、渠道 worker 和网页前端。数据库仅支持 PostgreSQL。
 
-官方 Compose 栈使用 `containerd` workspace backend。server 镜像会启动内置 containerd，并挂好机器人 workspace 需要的 runtime 文件。Docker Engine 和 Apple 后端见 [Workspace backend](./workspace-backends.md)。
+官方 Compose 栈使用 `containerd` workspace backend。server 镜像会启动内置 containerd，并挂好 Bot workspace 需要的 runtime 文件。Docker Engine 和 Apple 后端见 [Workspace backend](./workspace-backends.md)。
 
 ## 服务结构
 
@@ -16,7 +16,7 @@ Compose 里有多组服务。有的默认就起，有的通过 `--profile` 打�
 |------|---------|------|
 | **server** | *（核心）* | 主服务，使用配置中的容器运行时后端，智能体同进程 |
 | **channel** | *（核心）* | 渠道 worker（`memoh-channel`），持有各平台连接与 webhook，通过内部 RPC 与主服务通信 |
-| **web** | *（核心）* | 网页端（Vue 3） |
+| **web** | *（核心）* | 网页客户端（Vue 3） |
 | **postgres** | *（核心）* | PostgreSQL（主数据） |
 | **pgvector** | *（核心）* | 带 `pgvector` 的 PostgreSQL，供可选的记忆向量使用；见 [内置记忆](../integrations/providers/memory/builtin.md) |
 | **migrate** | *（核心，一次性）* | 在主服务启动前执行 `memoh-server migrate up` |

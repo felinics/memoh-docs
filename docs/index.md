@@ -1,10 +1,10 @@
 ---
 title: Memoh Documentation
-description: Learn Memoh, connect external systems, or run your own deployment.
+description: Learn Memoh, connect external systems, and bring your bots to the platforms you already use.
 ---
 
 # Memoh Documentation
 
-Learn Memoh, connect external systems, or run your own deployment.
+Learn Memoh, connect external systems, and bring your bots to the platforms you already use.
 
 <DocsHome locale="en" />

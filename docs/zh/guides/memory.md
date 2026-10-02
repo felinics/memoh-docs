@@ -1,11 +1,11 @@
 # 长期记忆
 
-Memoh 的结构化长期记忆让机器人在**多路会话**里也能用上以前留下的事实。用 **Memory** tab 前，先给机器人配好 **Memory Provider**。
+Memoh 的结构化长期记忆让 Bot 在**多路会话**里也能用上以前留下的事实。用 **Memory** tab 前，先给 Bot 配好 **Memory Provider**。
 
 ## 先决条件
 
-1. 在 [记忆提供方](../integrations/providers/memory/index.md) 里建一个（内置、Mem0、OpenViking 等）。
-2. 打开机器人 **General**。
+1. 在 [记忆提供方](../integrations/providers/memory/builtin.md) 里建一个（内置、Mem0、OpenViking 等）。
+2. 打开 Bot **General**。
 3. **Memory Provider** 里选中。
 4. 保存。
 
@@ -38,7 +38,12 @@ Memoh 的结构化长期记忆让机器人在**多路会话**里也能用上以�
 
 ## 记忆压缩（注意：不是会话压缩）
 
-积累多了可以在 **Memory** tab 对**存储侧**做 **Compact**：合并重复、去陈旧、压噪声。有 **Ratio**、**Decay Days** 等参数。
+积累多了可以在 **Memory** tab 对**存储侧**做 **Compact**：合并重复、去陈旧、压噪声。
+
+参数：
+
+- **Ratio**：压缩比，如 `0.8`、`0.5`、`0.3`；值越低，压得越激进。
+- **Decay Days**：可选，把压缩范围限定在超过这个天数的旧记忆上，新记忆不动。
 
 这和 [会话上下文压缩](./compaction.md) 不同：后者是**单路会话**里把 prompt 压短，不改库里长期记忆条目的存法与合并结果。
 
@@ -52,7 +57,7 @@ Memoh 的结构化长期记忆让机器人在**多路会话**里也能用上以�
 
 ## 状态
 
-**Memory** tab 会显示当前该机器人的记忆后端的 **Connected / Error**，排障时先看一眼。
+**Memory** tab 会显示当前该 Bot 的记忆后端的 **Connected / Error**，排障时先看一眼。
 
 ---
 
@@ -74,8 +79,8 @@ Memoh 的结构化长期记忆让机器人在**多路会话**里也能用上以�
 
 ---
 
-## 和机器人的关系
+## 和 Bot 的关系
 
 - 聊的时候会按配置去搜记忆。
-- 具体用哪种后端、embedding 等，在**提供方**上配，见 [记忆提供方](../integrations/providers/memory/index.md)。
-- 长期记忆是机器人「个性与事实」里很大一块来源。
+- 具体用哪种后端、embedding 等，在**提供方**上配，见 [记忆提供方](../integrations/providers/memory/builtin.md)。
+- 长期记忆是 Bot「个性与事实」里很大一块来源。

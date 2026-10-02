@@ -14,8 +14,6 @@ The workspace acts as the bot's private computer. Within it, the bot can:
 
 The workspace toolkit ships both **Node.js** and **Python** runtimes (with `pip` and `uv` on the PATH), so bots can run Python scripts and install packages without preparing an interpreter first.
 
-A bot can also work outside its server workspace on connected machines — see [Computers](./computers.md).
-
 The underlying runtime is selected globally with `[container].backend` in `config.toml`, with trusted local workspace support controlled separately. The official Docker Compose server deploy uses `containerd`; Docker Engine, Apple, and local workspace modes are documented in [Workspace Backends](../self-hosted/workspace-backends.md).
 
 ## Workspace tabs
@@ -24,7 +22,7 @@ Bot detail pages expose workspace-related settings across several tabs:
 
 | Tab | Purpose |
 |-----|---------|
-| **Container** | Container lifecycle, snapshots, data export/import, and CDI device settings. |
+| **Workspace** | Container lifecycle, snapshots, data export/import, and CDI device settings. |
 | **Desktop** | Workspace display runtime, headed browser availability, live display sessions, and session cleanup. |
 | **Network** | Workspace network and overlay provider status/actions. |
 | **Tool Approval** | Approval settings for tools that need explicit human permission. |
@@ -35,7 +33,7 @@ Some tabs are hidden or limited for trusted local workspaces when the feature on
 
 ## Container lifecycle
 
-Manage the container-backed workspace from the **Container** tab.
+Manage the container-backed workspace from the **Workspace** tab.
 
 - **Create**: Initialize the workspace container if it does not exist. Progress is shown through SSE during image pull and creation.
 - **Start**: Launch the workspace runtime.
@@ -48,11 +46,11 @@ Many workspace features, such as terminal access and container display, require 
 
 The **Desktop** tab prepares and inspects the graphical workspace runtime. It checks for the desktop toolkit, Xvnc/VNC availability, browser availability, and active display sessions.
 
-When enabled, the workspace can run a headed Chrome/Chromium browser inside the container. The Web UI display pane connects to that desktop session so you and the agent can operate the same visible browser. For the tool model, see [Browser / Computer Use](./browser-computer-use.md).
+When enabled, the workspace can run a headed Chrome/Chromium browser inside the container. The app's **Desktop** pane connects to that desktop session so you and the agent can operate the same visible browser. For the tool model, see [Browser / Computer Use](./browser-computer-use.md).
 
 ## Container information
 
-The **Container** tab displays runtime data such as:
+The **Workspace** tab displays runtime data such as:
 
 - container ID and status
 - image
@@ -64,11 +62,11 @@ The **Container** tab displays runtime data such as:
 
 Memoh can provide host devices to a bot container through CDI (Container Device Interface). This is an advanced capability for users who want to expose host-managed devices, most commonly GPUs, to the container runtime.
 
-In the Web UI, this capability is placed under **Advanced options** in the **Container** tab. It is optional and only needs to be configured when the bot must access CDI-backed devices from the host.
+In the app, this capability is placed under **Advanced options** in the **Workspace** tab. It is optional and only needs to be configured when the bot must access CDI-backed devices from the host.
 
 ### Configure CDI Devices
 
-1. Open the bot's **Container** tab.
+1. Open the bot's **Workspace** tab.
 2. Click **Create** if the container does not exist, or recreate the container if you need to change GPU settings.
 3. Expand **Advanced options**.
 4. Enable **GPU**.
@@ -101,7 +99,7 @@ If Memoh reports an error such as `unresolvable CDI devices`, the configured dev
 - CDI device settings are applied when the container is created. Updating the setting later requires recreating the container.
 - Stopping and starting an existing container does not change its attached CDI devices.
 - The container image still needs the appropriate user-space libraries and tools if you want to run CUDA or ROCm software inside the container.
-- After creation, the **Container** tab shows the effective attached CDI devices for verification.
+- After creation, the **Workspace** tab shows the effective attached CDI devices for verification.
 
 ## Snapshots
 
@@ -109,7 +107,7 @@ Snapshots allow you to capture the current state of the bot's container workspac
 
 ## Data Export and Import
 
-The **Container** tab supports exporting and importing workspace data for backup, migration, or sharing purposes.
+The **Workspace** tab supports exporting and importing workspace data for backup, migration, or sharing purposes.
 
 - **Export Data** packages the workspace filesystem data into a downloadable archive.
 - **Import Data** extracts an uploaded archive into the workspace filesystem.

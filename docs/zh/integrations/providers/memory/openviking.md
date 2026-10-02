@@ -21,9 +21,9 @@
 
 ---
 
-## 绑到机器人
+## 绑到 Bot
 
-1. **Bots** → 机器人 → **General**
+1. **Bots** → Bot → **General**
 2. **Memory Provider** 选 OpenViking
 3. 保存
 

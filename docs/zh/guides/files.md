@@ -1,6 +1,6 @@
 # 文件
 
-每个机器人都有自己的 **workspace 文件系统**。服务端部署里通常在容器型 workspace 内；受信任的桌面/本地模式下也可能是本地 workspace 目录。在 **Files** tab 里可以直接管理。
+每个 Bot 都有自己的 **workspace 文件系统**。服务端部署里通常在容器型 workspace 内；受信任的桌面/本地模式下也可能是本地 workspace 目录。在 **Files** tab 里可以直接管理。
 
 ---
 
@@ -11,7 +11,7 @@
 ### 浏览
 
 - 面包屑上下级
-- **Refresh** 看机器人刚写的文件
+- **Refresh** 看 Bot 刚写的文件
 - **New Folder** 建目录
 
 ### 文件
@@ -31,6 +31,6 @@
 
 ---
 
-## 和机器人
+## 和 Bot
 
-机器人自己也能用技能、MCP 等改这些文件；**Files** 是你**肉眼查看、手改** workspace 的入口。
+Bot 自己也能用技能、MCP 等改这些文件；**Files** 是你**肉眼查看、手改** workspace 的入口。

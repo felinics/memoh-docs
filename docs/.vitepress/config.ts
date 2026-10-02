@@ -1,11 +1,12 @@
 import { defineConfig } from 'vitepress'
+import llmstxt from 'vitepress-plugin-llms'
 import { en } from './en'
 import { zh } from './zh'
 
 // https://vitepress.vuejs.org/config/app-configs
 export default defineConfig({
   title: 'Memoh Documentation',
-  description: 'Multi-member long-memory AI agent platform with desktop and server deploy modes.',
+  description: 'Documentation for Memoh — bots with their own cloud computer, long-term memory, and your chat channels.',
 
   head: [
     ['link', { rel: 'icon', href: '/logo.svg' }]
@@ -21,7 +22,8 @@ export default defineConfig({
         nav: [
           { text: 'Guides', link: '/guides/' },
           { text: 'Integrations', link: '/integrations/' },
-          { text: 'Self-hosted', link: '/self-hosted/' },
+          { text: 'Help Center', link: 'https://memoh.ai/help' },
+          { text: 'About', link: '/about.md' },
         ],
       },
     },
@@ -32,7 +34,8 @@ export default defineConfig({
         nav: [
           { text: '教程', link: '/zh/guides/' },
           { text: '集成', link: '/zh/integrations/' },
-          { text: '自托管', link: '/zh/self-hosted/' },
+          { text: '帮助中心', link: 'https://memoh.ai/help' },
+          { text: '关于', link: '/zh/about.md' },
         ],
       },
     }
@@ -45,10 +48,6 @@ export default defineConfig({
       ...zh,
     },
 
-    nav: [
-      { text: 'References', link: '/guides/' },
-      { text: 'About', link: '/about.md' },
-    ],
 
     logo: {
       src: '/logo.svg',
@@ -82,5 +81,11 @@ export default defineConfig({
     }
   },
 
-  ignoreDeadLinks: true,
+  ignoreDeadLinks: [/^https?:\/\/localhost/],
+
+  lastUpdated: true,
+
+  vite: {
+    plugins: [llmstxt()],
+  },
 })

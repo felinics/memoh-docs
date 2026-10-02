@@ -86,7 +86,7 @@ This backend is for local macOS testing through socktainer and Apple Containeriz
 
 ## Display, Browser Use, and Computer Use
 
-Container workspaces can provide a display runtime: Xvnc/RFB for the workspace desktop, a headed Chrome/Chromium browser with CDP, and WebRTC sessions for the Web UI display pane.
+Container workspaces can provide a display runtime: Xvnc/RFB for the workspace desktop, a headed Chrome/Chromium browser with CDP, and WebRTC sessions for the app's Desktop pane.
 
 Use this path when a site needs a real graphical browser. Headless Playwright remains available as an ordinary workspace command, but Browser Use and Computer Use target the headed workspace desktop.
 
@@ -108,4 +108,4 @@ Runtime capabilities differ by backend:
 | `apple` | Basic local runtime | No | No | Limited |
 | `local` | Host network | No | Host-level only | No container desktop |
 
-Overlay provider settings are configured per bot in the web UI, not in the global TOML file. The global backend still matters because it decides which overlay driver can run.
+Overlay provider settings are configured per bot in the app, not in the global TOML file. The global backend still matters because it decides which overlay driver can run.

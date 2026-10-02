@@ -20,7 +20,7 @@ Semantic retrieval is optional and layered on top:
 | **Graph** (always on) | PostgreSQL memory nodes/edges | None beyond the main database | Structured recall, relations between memories, compaction, rebuild |
 | **Semantic index** (optional) | `pgvector` database | The `[pgvector]` database from the Compose stack **and** an embedding model selected on the provider | Vector similarity search over memory nodes |
 
-If no embedding model is set, or the `pgvector` database is not configured, the provider still works in graph-only mode; semantic search is simply skipped.
+If no embedding model is set, or the `pgvector` database is not configured, the provider still works in graph-only mode; semantic search is skipped.
 
 ---
 

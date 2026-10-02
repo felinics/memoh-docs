@@ -1,6 +1,6 @@
 # Browser Use and Computer Use
 
-Memoh can give a bot a visible workspace desktop and a headed browser inside its workspace container. This is different from running a headless Playwright script: the bot can inspect and operate the same graphical browser that you can see in the Web UI display pane.
+Memoh can give a bot a visible workspace desktop and a headed browser inside its workspace container. This is different from running a headless Playwright script: the bot can inspect and operate the same graphical browser that you can see in the app's **Desktop** pane.
 
 ## Concepts
 
@@ -14,7 +14,7 @@ Prefer Browser Use for web pages. Use Computer Use when the task depends on GUI 
 
 ## Workspace display and VNC
 
-Workspace display is the desktop environment inside the bot's workspace container. VNC/RFB is the display and input transport behind that desktop, while WebRTC is used by the Web UI display session.
+Workspace display is the desktop environment inside the bot's workspace container. VNC/RFB is the display and input transport behind that desktop, while WebRTC is used by the app's desktop session.
 
 The main value is not VNC by itself. The important capability is that the workspace can run a headed Chrome/Chromium browser for sites and login flows that do not work well in headless mode.
 
@@ -43,11 +43,9 @@ Both `browser_observe` and `computer_observe` save screenshots to a workspace pa
 
 ### Accessibility helper
 
-Computer Use depends on the `a11y-cli` binary installed under `/opt/memoh/toolkit/display/bin/a11y-cli` and the workspace `at-spi2-core` package. The display runtime probe reports `a11y_available` so the Web UI can surface whether the accessibility path is healthy. When AT-SPI is unavailable, `computer_action` still works with raw coordinates and `computer_observe screenshot` remains usable.
+Computer Use depends on the `a11y-cli` binary installed under `/opt/memoh/toolkit/display/bin/a11y-cli` and the workspace `at-spi2-core` package. The display runtime probe reports `a11y_available` so the app can surface whether the accessibility path is healthy. When AT-SPI is unavailable, `computer_action` still works with raw coordinates and `computer_observe screenshot` remains usable.
 
 These tools are workspace runtime features. They do not automate the Electron desktop app itself.
-
-When a bot has remote [Computers](./computers.md) attached, Browser Use and Computer Use still run in the **Server Workspace** — they do not follow the selected work location.
 
 ## Related
 

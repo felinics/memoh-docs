@@ -15,7 +15,7 @@ Configure your search engines from the **Search Provider** page in the sidebar.
 | Supported Engines | Notes |
 |-------------------|-------|
 | **Brave** | Highly recommended for privacy and performance. |
-| **Bing** | Powerful global search capability. |
+| **Bing** | Microsoft's index; broad global coverage. |
 | **Google** | Comprehensive web search. |
 | **Tavily** | Designed specifically for AI-powered research. |
 | **SearxNG** | Connect to your own self-hosted search aggregator. |

@@ -1,18 +1,18 @@
 # Bot Hooks
 
-Bot Hooks 可以让机器人在工具调用、对话 turn、记忆、workspace 活动、审批、压缩和 subagent 等流程前后运行小型自动化规则。每个机器人都有自己的配置文件：
+Bot Hooks 可以让 Bot 在工具调用、对话 turn、记忆、workspace 活动、审批、压缩和 subagent 等流程前后运行小型自动化规则。每个 Bot 都有自己的配置文件：
 
 ```text
 /data/.memoh/hooks.json
 ```
 
-打开机器人 **详情页**，进入 **Hooks** tab，就可以从 UI 编辑这个文件。
+打开 Bot **详情页**，进入 **Hooks** tab，就可以从 UI 编辑这个文件。
 
 ---
 
 ## Hooks Tab
 
-Hooks tab 是机器人 hook 配置的 JSON 编辑器。它可以：
+Hooks tab 是 Bot hook 配置的 JSON 编辑器。它可以：
 
 - 显示 `/data/.memoh/hooks.json` 是否存在
 - 显示用户配置是否启用
@@ -76,12 +76,12 @@ Hooks tab 是机器人 hook 配置的 JSON 编辑器。它可以：
 
 | 字段 | 说明 |
 |------|------|
-| `version` | 必填的 schema 版本。v0.13.0 支持 `1`。 |
+| `version` | 必填的 schema 版本。当前版本为 `1`。 |
 | `enabled` | 启用或停用这个用户配置文件里的 hooks。默认 `true`。 |
 | `defaults.timeout` | 默认 action 超时时间。支持 `10s` 这类 Go duration，也支持整数秒。默认 `10s`。 |
 | `defaults.on_error` | 默认错误处理：`ignore`、`fail` 或 `block`。默认 `fail`。 |
 | `defaults.max_output_bytes` | 每个 command action 捕获 stdout/stderr 的最大字节数。默认 `65536`。 |
-| `defaults.trigger_nested_hooks` | schema 会解析这个字段，默认 `false`；v0.13.0 的 Hooks UI 没有单独控件。 |
+| `defaults.trigger_nested_hooks` | schema 会解析这个字段，默认 `false`；Hooks UI 目前没有单独控件。 |
 | `env` | 用户配置里的 command action 会使用的额外环境变量。 |
 | `hooks` | 规则列表。命中后按 `priority` 从高到低运行，同优先级保持文件顺序。 |
 
@@ -95,7 +95,7 @@ Hook 字段：
 | `enabled` | 启用或停用这个 hook。默认 `true`。 |
 | `priority` | 数字越大越先运行。 |
 | `actions` | hook 命中后要运行的 action。 |
-| `conditions` | schema 中保留给未来扩展；v0.13.0 匹配时使用 `event`、`enabled` 和 `matcher`。 |
+| `conditions` | schema 中保留给未来扩展；目前匹配时使用 `event`、`enabled` 和 `matcher`。 |
 
 `matcher` 的目标文本按下面顺序从 hook 请求里选择：
 
@@ -110,7 +110,7 @@ Hook 字段：
 
 ## Action 类型
 
-v0.13.0 支持两类 action：`command` 和 `tool`。
+目前支持两类 action：`command` 和 `tool`。
 
 ### Command Action
 
@@ -124,7 +124,7 @@ v0.13.0 支持两类 action：`command` 和 `tool`。
 }
 ```
 
-`command` action 会在机器人 workspace 容器内运行。hook 请求会作为 JSON 通过 stdin 传入，末尾带换行。
+`command` action 会在 Bot workspace 容器内运行。hook 请求会作为 JSON 通过 stdin 传入，末尾带换行。
 
 工作目录解析顺序：
 
@@ -169,9 +169,9 @@ v0.13.0 支持两类 action：`command` 和 `tool`。
 }
 ```
 
-`tool` action 会按名称调用一个可用的机器人工具，并传入配置里的 `input`。如果工具结果是对象，可以返回 `decision`、`reason` 和 `append_context`。
+`tool` action 会按名称调用一个可用的 Bot 工具，并传入配置里的 `input`。如果工具结果是对象，可以返回 `decision`、`reason` 和 `append_context`。
 
-`mcp_tool` 在代码里是保留类型，但 v0.13.0 会拒绝它。
+`mcp_tool` 在代码里是保留类型，但目前会被拒绝。
 
 ---
 
@@ -198,7 +198,7 @@ action 可以返回这些 decision：
 
 ## 事件目录
 
-Hooks tab 会从 `/bots/{bot_id}/hooks/events` 加载事件目录。标记为 runtime-supported 的事件已经接入 v0.13.0 执行路径。catalog-only 事件可以通过配置解析和测试接口，但 v0.13.0 没有实际的运行时路径会发出这些事件。
+Hooks tab 会从 `/bots/{bot_id}/hooks/events` 加载事件目录。标记为 runtime-supported 的事件已经接入当前执行路径。catalog-only 事件可以通过配置解析和测试接口，但目前没有实际的运行时路径会发出这些事件。
 
 | Event | 区域 | 已接入运行时 | 说明 |
 |-------|------|--------------|------|
@@ -232,10 +232,10 @@ Hooks tab 会从 `/bots/{bot_id}/hooks/events` 加载事件目录。标记为 ru
 | `PostCompact` | 压缩 | 是 | 会话压缩后运行。 |
 | `SubagentStart` | Subagent | 是 | subagent 任务开始前运行。 |
 | `SubagentStop` | Subagent | 是 | subagent 任务结束后运行。 |
-| `InboundMessageNormalized` | 消息 | 否 | v0.13.0 中仅存在于事件目录。 |
-| `BeforeOutboundMessage` | 消息 | 否 | v0.13.0 中仅存在于事件目录。 |
-| `AfterOutboundMessage` | 消息 | 否 | v0.13.0 中仅存在于事件目录。 |
-| `ChannelDeliveryFailed` | 消息 | 否 | v0.13.0 中仅存在于事件目录。 |
+| `InboundMessageNormalized` | 消息 | 否 | 目前仅存在于事件目录。 |
+| `BeforeOutboundMessage` | 消息 | 否 | 目前仅存在于事件目录。 |
+| `AfterOutboundMessage` | 消息 | 否 | 目前仅存在于事件目录。 |
+| `ChannelDeliveryFailed` | 消息 | 否 | 目前仅存在于事件目录。 |
 
 ---
 
@@ -254,10 +254,10 @@ Hooks tab 会从 `/bots/{bot_id}/hooks/events` 加载事件目录。标记为 ru
 
 ## 安全注意事项
 
-Hooks 很强大。请把它们当成会在机器人 workspace 里运行的代码来对待。
+Hooks 会在 Bot workspace 里实际执行。请把它们当成跑在那里的代码来对待。
 
 - 启用前审查每个 command action。
-- 小心使用 `PreToolUse`、`BeforeWorkspaceCommand` 和 `BeforeFileWrite`；它们可能阻断机器人的正常工作。
+- 小心使用 `PreToolUse`、`BeforeWorkspaceCommand` 和 `BeforeFileWrite`；它们可能阻断 Bot 的正常工作。
 - 保持较短 timeout，并明确设置 `on_error`。
 - 不要把长期有效的 secrets 直接写进 `hooks.json`。
 - 对高风险 hooks 使用尽量窄的 `matcher`。
@@ -267,5 +267,5 @@ Hooks 很强大。请把它们当成会在机器人 workspace 里运行的代码
 
 ## 相关页面
 
-- [机器人](./bot.md)
+- [Bot](./working-with-bots.md)
 - [技能](./skills.md)
