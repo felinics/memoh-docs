@@ -1,114 +1,58 @@
-# 工作区（Workspace）与容器
+# 工作区
 
-每个 Bot 都在一个 workspace 里工作。Server Deploy 里通常是隔离容器、Pod 或类似 VM 的 runtime；在受信任的 Desktop/local 场景里，也可以是宿主机上的本地目录。workspace 提供文件系统、命令执行环境、MCP runtime，以及可选的图形桌面。
+每个 Bot 都有自己的**工作区**——一台属于它的电脑：真实的文件系统、能执行命令的终端、预装好的工具链，还可以开一块看得见的桌面。你交给 Bot 的文件、它产出的结果、它装的工具，都住在这里，跨会话保留。
 
-## 是什么
+## 它能干什么
 
-可以把 workspace 想成 Bot 私用的一台小电脑。它能：
+- 存文件、改文件——你随时能在 **文件** 标签页里看
+- 跑脚本、装包：预装 **Node.js** 和 **Python**（`pip`、`uv` 都在 PATH 上），不用先折腾解释器
+- 挂后台任务
+- 跨会话保留状态——昨天没做完的，今天接着做
+- 可选地运行可视化桌面和有头浏览器
 
-- 存文件、改文件
-- 在镜像允许时装包
-- 跑脚本和后台任务
-- 跨会话保留状态
-- 可选地运行桌面显示和有头浏览器
+## 在客户端里的入口
 
-workspace toolkit 自带 **Node.js** 和 **Python** 两套运行时（`pip`、`uv` 都在 PATH 上），Bot 跑 Python 脚本、装包不用先折腾解释器。
+Bot 详情页里这几个标签页都对着工作区：
 
-底层容器 runtime 由 `config.toml` 的 `[container].backend` 决定，trusted local workspace 另行控制。官方 Docker Compose Server Deploy 使用 `containerd`；Docker Engine、Apple 和 local workspace 的差异见 [Workspace backend](../self-hosted/workspace-backends.md)。
+| 标签页 | 内容 |
+|--------|------|
+| **工作区** | 工作区的状态与生命周期：创建、启动、停止；运行信息、快照、导入导出 |
+| **文件** | 浏览和编辑工作区文件系统 |
+| **终端** | 在工作区里打开交互 shell |
+| **桌面** | 可视化桌面：实时画面，接管 / 交还键鼠控制 |
+| **网络** | 工作区网络状态 |
+| **应用** | 装进这个工作区的 App——技能、依赖、连接器（见[应用市场](./supermarket.md)） |
 
-## Workspace 相关 tab
+## 生命周期
 
-Bot 详情页里有几组和 workspace 相关的 tab：
+在 **工作区** 标签页管理：
 
-| Tab | 内容 |
-|-----|------|
-| **工作区** | 容器生命周期、快照、导入导出、CDI 设备。 |
-| **Desktop** | Workspace display runtime、有头浏览器可用性、实时 display session、关闭会话。 |
-| **Network** | Workspace 网络与 overlay provider 状态/动作。 |
-| **Tool Approval** | 需要人类确认的工具审批设置。 |
-| **Files** | 浏览和编辑 Bot workspace 文件系统。 |
-| **Terminal** | 在当前 workspace runtime 里打开交互 shell。 |
+- **创建**：按模板建一个新工作区，过程有进度展示。
+- **启动 / 停止**：不用时停掉省资源，内容不丢。
+- **删除**：删掉这个运行实例。
 
-如果 Bot 使用 trusted local workspace，一些只适用于容器 runtime 的 tab 或按钮可能会隐藏或不可用。
+终端、桌面等大多数能力都需要工作区**正在运行**；装应用、更新应用也一样。标签页里同时会显示运行状态、镜像和后台任务数等运行信息。
 
-## 容器生命周期
+## 可视化桌面
 
-在 **工作区** tab 管容器型 workspace：
+**桌面** 标签页用来启用和查看图形桌面。启用后，Bot 可以在工作区里跑**有头浏览器**，你在桌面面板里看到的和它操作的是同一块屏幕：
 
-- **Create**：没有就按镜像建；拉镜像、建实例时会有 SSE 进度。
-- **Start**：启动 workspace runtime。
-- **Stop**：省资源，优雅停。
-- **Delete**：删除 runtime 实例。
+- 实时观看它的每一步操作
+- 随时**接管**键鼠——输密码、过验证码——再把控制权**交还**
+- 浏览器会话保留在工作区里，下次任务免登录
 
-终端、容器 display 等很多 workspace 能力都需要 runtime 正在运行。
-
-## Workspace display
-
-**Desktop** tab 用来准备和检查图形 workspace runtime。它会检查 desktop toolkit、Xvnc/VNC、浏览器和当前 display session。
-
-启用后，workspace 可以在容器里跑有头 Chrome/Chromium。客户端的 **桌面** 面板会连接到同一个桌面会话，你和 agent 看到、操作的是同一个可见浏览器。工具层面的区别见 [Browser / Computer Use](./browser-computer-use.md)。
-
-## 运行时信息
-
-**工作区** tab 会显示：
-
-- container id 与状态
-- 镜像
-- 宿主机和 workspace 路径
-- 后台任务数
-- 若配置了 CDI 设备，也会列出实际挂载的设备
-
-## 进阶：CDI 设备
-
-要把宿主机通过 **CDI**（常见是 GPU）透进容器，在 **工作区** -> **Advanced** 里配。一般只有确实要在里面跑 CUDA/ROCm 等才要动。
-
-### 配法
-
-1. 打开 **工作区**。
-2. 没有容器先 **Create**；要改 GPU 类设置往往要**重建**容器。
-3. 展开 **Advanced**。
-4. 开 **GPU**，在 **CDI devices** 里写设备名。
-
-可每行一个或逗号分隔，例如：
-
-- `nvidia.com/gpu=0`
-- `nvidia.com/gpu=all`
-- `amd.com/gpu=0`
-- `amd.com/gpu=all`
-
-### 宿主要求
-
-宿主机上驱动、厂商工具、CDI spec 要已就绪。通常意味着：
-
-- 宿主机上 GPU 本来就能用
-- `/etc/cdi` 或 `/var/run/cdi` 里有 spec
-- 你填的名字和运行时看见的一致
-
-查本机名：
-
-- NVIDIA：`nvidia-ctk cdi list`
-- AMD：`amd-ctk cdi list`
-
-若报 `unresolvable CDI devices`，多半是名字对不上。
-
-### 注意
-
-- CDI 在**创建**时生效，改配置后常要**重建**容器；只停再起**不会**换已挂设备。
-- 镜像里仍要装对的用户态库和工具，才能真正跑 CUDA/ROCm 软件。
-- 建好后 **工作区** tab 会显示当前挂上的设备，便于核对。
+工具层面的差别见 [Browser / Computer Use](./browser-computer-use.md)。
 
 ## 快照
 
-**Create Snapshot** 会记录当前容器 workspace 状态，方便回滚、版本化 runtime 或试大改。**Restore** 按某个快照回退，可删不要的快照。
+**创建快照**记录工作区当前状态，适合在大改之前留一个回滚点；**恢复**按某个快照回退，不要的快照可删。
 
 ## 导入导出
 
-**工作区** tab 支持导入导出 workspace 数据：
+- **导出数据**：把工作区文件打包下载。
+- **导入数据**：上传归档并解进工作区。
+- **重置**：把数据目录恢复到干净状态——文件系统乱了、想从头开始时用。
 
-- **Export Data**：把 workspace 文件系统数据打成包下载。
-- **Import Data**：从本地上传归档并解进 workspace 文件系统。
-- **Restore**：把数据目录重置到干净状态，适合文件系统损坏或想从零开始而又不重建 runtime 实例时。
-
-## 版本
-
-Memoh 会跟踪 workspace/container 版本，帮助审计 runtime 环境何时、因何变过。
+::: tip 自部署相关
+工作区跑在哪种运行时（containerd、Docker、Apple container、受信本地目录），以及 GPU 等宿主设备怎么透传给工作区，属于服务端的部署配置，见 [Workspace 后端](../self-hosted/workspace-backends.md)。Memoh Cloud 用户不需要关心这些。
+:::

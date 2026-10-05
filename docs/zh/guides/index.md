@@ -9,7 +9,6 @@
 - **[概览](./overview.md)**：Memoh 是什么，各个部件如何搭在一起。
 - **[快速开始](./quick-start.md)**：安装应用、登录、创建第一个 Bot、交给它真实任务，并接入聊天平台。
 - **[和 Bot 协作](./working-with-bots.md)**：什么任务适合交给 Bot、请求怎么说、什么时候拆多个 Bot——外加逐 tab 的配置参考。
-- **[用户偏好](./preferences.md)**：配置界面语言、主题、字体、图表和快捷键。
 - **[会话](./sessions.md)**：理解 chat、discuss、路由和状态区。
 - **[文件](./files.md)**：浏览和编辑 Bot workspace 文件。
 - **[斜杠命令](./slash-commands.md)**：用命令快捷完成日常控制。
@@ -26,7 +25,7 @@
 - **[Workspace](./container.md)**：从产品界面理解 workspace 行为。
 - **[Browser / Computer Use](./browser-computer-use.md)**：使用有头浏览器和可见桌面会话。
 - **[技能](./skills.md)** 和 **[应用市场](./supermarket.md)**：添加可复用提示模块和模板。
-- **[连接器](./connectors.md)**：接入 GitHub、Notion 等第三方服务。
+- **[连接器](../self-hosted/connectors.md)**：接入 GitHub、Notion 等第三方服务。
 - **[Hooks](./hooks.md)** 和 **[MCP](./mcp.md)**：连接工具、自动化规则和外部数据源。
 - **[长期记忆](./memory.md)**：配置好记忆提供方后管理长期记忆。
 - **[上下文压缩](./compaction.md)**：缩小当前会话上下文占用。
@@ -35,7 +34,7 @@
 
 ## 使用场景
 
-- **[使用场景](./use-cases.md)**：组合多种功能解决实际问题的即用型示例。
+- **[使用场景](../use-cases/index.md)**：组合多种功能解决实际问题的即用型示例。
 
 ## 获取帮助
 

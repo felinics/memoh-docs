@@ -115,11 +115,11 @@ Bot 在你本来就聊天的地方最有用。
 | 逐个标签页配置 Bot | [Bot](./working-with-bots.md) |
 | 理解聊天、讨论与消息路由 | [会话](./sessions.md) |
 | 运行定时或周期任务 | [定时任务](./schedule.md) |
-| 接入外部工具和数据 | [MCP](./mcp.md)、[连接器](./connectors.md) |
+| 接入外部工具和数据 | [MCP](./mcp.md)、[连接器](../self-hosted/connectors.md) |
 | 安装现成的能力 | [应用市场](./supermarket.md) |
 | 在生命周期节点挂自己的逻辑 | [钩子](./hooks.md) |
 | 控制谁能跟 Bot 说话 | [访问控制](./access.md) |
-| 看看别人怎么用 | [使用场景](./use-cases.md) |
+| 看看别人怎么用 | [使用场景](../use-cases/index.md) |
 
 ::: tip 需要帮助？
 订阅、credits 或账号相关的问题，以及本文档没有覆盖的疑问，都可以在 [帮助中心](https://memoh.ai/help) 找到答案，也可以从那里联系 Memoh 团队。

@@ -31,24 +31,25 @@ The product source code lives in [`felinics/Memoh`](https://github.com/felinics/
 
 ## Documentation Structure
 
-The current VitePress site is organized around three primary navigation roots:
+The current VitePress site is organized around four primary navigation roots:
 
 - `docs/guides/` for product usage guides.
 - `docs/integrations/` for channels, providers, memory providers, TTS, and web search.
-- `docs/self-hosted/` for Desktop, Server Deploy, workspace backends, Kata, and SQLite.
+- `docs/self-hosted/` for Desktop, Server Deploy, workspace backends, and connectors (Connect-It).
+- `docs/use-cases/` for ready-to-follow scenarios, one chapter per case.
 
 The Simplified Chinese mirror uses the same structure under `docs/zh/`:
 
 - `docs/zh/guides/`
 - `docs/zh/integrations/`
 - `docs/zh/self-hosted/`
+- `docs/zh/use-cases/`
 
 Legacy paths still exist for old external links, but they are redirect pages instead of the main content source:
 
 - `docs/getting-started/`
 - `docs/installation/`
 - `docs/channels/`
-- `docs/tts-providers/`
 - `docs/memory-providers/`
 - Matching Chinese redirects under `docs/zh/`
 
@@ -94,10 +95,10 @@ pnpm preview
 │   ├── guides/            # Product usage guides
 │   ├── integrations/      # Channels and providers
 │   ├── self-hosted/       # Open-source deployment docs
+│   ├── use-cases/         # Use-case chapters
 │   ├── getting-started/   # Legacy redirects to guides
 │   ├── installation/      # Legacy redirects to self-hosted
 │   ├── channels/          # Legacy redirects to integrations/channels
-│   ├── tts-providers/     # Legacy redirects to integrations/providers/tts
 │   ├── memory-providers/  # Legacy redirects to integrations/providers/memory
 │   ├── public/            # Static images and logo
 │   ├── zh/                # Simplified Chinese documentation and redirects
@@ -107,6 +108,12 @@ pnpm preview
 ```
 
 ## Changelog
+
+### 2026-10
+
+- **Client-first corrections round**: top nav is now Guides / Use Cases / Help Center (Integrations and About removed); Use Cases split into its own directory with one chapter per scenario; the Deployment sidebar group is back (Server Deploy, Workspace Backends, Connectors).
+- **Apps model**: Supermarket and Skills pages rewritten around the unified App concept (an App bundles Skills, dependencies, and connectors); Skills now documents workspace directories instead of a removed management UI; Connectors moved to the Deployment section.
+- **Cloud-baseline Workspace page**: open-source backend configuration and CDI/GPU passthrough moved to Workspace Backends; Preferences page removed; Memory provider entries consolidated into one; TTS: Edge removed.
 
 ### 2026-09
 

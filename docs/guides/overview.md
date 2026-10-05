@@ -24,7 +24,7 @@ Pick something small you already do by hand every week, and state the outcome, s
 
 > Every Friday at 17:00, turn the links and files I sent you this week into a weekly report — grouped by theme, one line each. Save it in the workspace and post the summary to this conversation. Organize only what I sent you; never send anything to anyone else.
 
-The bot registers the schedule itself and delivers weekly. Start with read-only work, review a few outputs, then widen what it may write and execute — see [Use Cases](./use-cases.md) for ready-made setups.
+The bot registers the schedule itself and delivers weekly. Start with read-only work, review a few outputs, then widen what it may write and execute — see [Use Cases](../use-cases/index.md) for ready-made setups.
 
 ## FAQ
 
@@ -51,7 +51,7 @@ The [Help Center](https://memoh.ai/help): plans, credits, account questions, and
 ## Next steps
 
 - [Quick Start](./quick-start.md) — from installing the app to a connected chat platform, in about fifteen minutes.
-- [Use Cases](./use-cases.md) — ready-to-follow scenarios that combine features to solve real problems.
+- [Use Cases](../use-cases/index.md) — ready-to-follow scenarios that combine features to solve real problems.
 - [Bot](./working-with-bots.md) — configure a bot tab by tab.
 - [Channels](../integrations/channels/index.md) — per-platform setup guides.
 - [Help Center](https://memoh.ai/help) — plans, billing, and account questions.

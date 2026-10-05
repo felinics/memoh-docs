@@ -116,11 +116,11 @@ Once a routine is stable, stop retyping it:
 | Configure a bot tab by tab | [Bot](./working-with-bots.md) |
 | Understand chat, discuss, and routing | [Sessions](./sessions.md) |
 | Run scheduled or recurring tasks | [Schedule](./schedule.md) |
-| Connect external tools and data | [MCP](./mcp.md), [Connectors](./connectors.md) |
+| Connect external tools and data | [MCP](./mcp.md), [Connectors](../self-hosted/connectors.md) |
 | Install prebuilt capabilities | [Supermarket](./supermarket.md) |
 | Hook into lifecycle events | [Hooks](./hooks.md) |
 | Control who can talk to the bot | [Access Control](./access.md) |
-| See what others run | [Use Cases](./use-cases.md) |
+| See what others run | [Use Cases](../use-cases/index.md) |
 
 ::: tip Need help?
 Questions about plans, credits, or your account — or anything this site doesn't cover — are answered in the [Help Center](https://memoh.ai/help), where you can also reach the Memoh team.

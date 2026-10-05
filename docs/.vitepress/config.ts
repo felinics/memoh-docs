@@ -21,9 +21,8 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Guides', link: '/guides/' },
-          { text: 'Integrations', link: '/integrations/' },
+          { text: 'Use Cases', link: '/use-cases/' },
           { text: 'Help Center', link: 'https://memoh.ai/help' },
-          { text: 'About', link: '/about.md' },
         ],
       },
     },
@@ -33,9 +32,8 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: '教程', link: '/zh/guides/' },
-          { text: '集成', link: '/zh/integrations/' },
+          { text: '使用场景', link: '/zh/use-cases/' },
           { text: '帮助中心', link: 'https://memoh.ai/help' },
-          { text: '关于', link: '/zh/about.md' },
         ],
       },
     }

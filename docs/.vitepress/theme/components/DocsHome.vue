@@ -30,7 +30,7 @@ const copy = computed(() => {
           icon: 'plug',
           title: '使用场景',
           text: '组合多种功能解决实际问题的即用型示例。',
-          href: '/zh/guides/use-cases',
+          href: '/zh/use-cases/',
         },
         {
           tone: 'hosted',
@@ -64,7 +64,7 @@ const copy = computed(() => {
         icon: 'plug',
         title: 'Use Cases',
         text: 'Ready-to-follow scenarios that combine features to solve real problems.',
-        href: '/guides/use-cases',
+        href: '/use-cases/',
       },
       {
         tone: 'hosted',
