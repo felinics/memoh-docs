@@ -1,50 +1,44 @@
 # Supermarket
 
-Supermarket is Memoh's built-in catalog for **connectors** and **skills**. Connectors bind third-party services such as GitHub or Notion to a bot; skills are reusable procedures the agent can load on demand.
+The Supermarket is Memoh's built-in App catalog. An **App** here is a packaged unit of capability: one App can carry several **Skills** (reusable procedures), **dependencies** (tools installed into the workspace), and **connectors** (bindings to third-party services such as GitHub or Notion). You install the App as a whole — no separate hunting for Skills or connectors.
 
-The app shows Supermarket under **Settings** with two tabs:
-
-- **Connectors**
-- **Skills**
-
-**Connectors** comes first and is the default landing tab when the server has [Connect-It configured](./connectors.md#requirements). Without Connect-It, the tab is hidden and **Skills** is the default instead.
+Open **Supermarket** from the client sidebar: Apps are laid out by category, searchable, and filterable by tag. An App's detail page shows its description, component makeup (how many Skills, dependencies, and connectors), author, version, source registry, and links.
 
 ---
 
-## Connect A Service
+## Install an App
 
-The **Connectors** tab lists services a bot can connect through OAuth or an API key. Pick one, click **Connect**, select the target bot, and complete the authorization. The full flow — authentication methods, connection statuses, and how connector tools reach the bot — is documented in [Connectors](./connectors.md).
+1. Pick an App in the **Supermarket** and open its detail page.
+2. Click **Install to Bot** and choose the target bot.
+3. If the App declares environment variables, fill in the required values first.
+4. Confirm the installation.
 
----
-
-## Install A Skill
-
-1. Open **Supermarket** in the app.
-2. Switch to the **Skills** tab.
-3. Choose a skill and click **Install**, or open the skill detail page and click **Install to Bot**.
-4. Select the target bot.
-5. Confirm the install.
-6. The skill appears in that bot's **Skills** tab.
-
-Skills install into the bot's managed skills directory (`/data/skills/<skill-name>` inside the bot workspace). Skill detail pages show the author, version, registry, and links. See [Skills](./skills.md) for how skills are loaded and used.
+Installing and updating needs the bot's workspace running: Skills are written into the workspace, dependencies are installed into it, and connectors are bound. Installation shows progress; an interrupted install can be **resumed** or **restored**.
 
 ---
 
-## Configure Supermarket
+## After installing: the bot's Apps tab
 
-By default, Memoh reads Supermarket content from:
+The **Apps** tab on the bot detail page lists installed Apps with per-component status:
 
-```toml
-[supermarket]
-base_url = "https://supermarket.memoh.ai"
-```
+| Component | Where it goes |
+|-----------|---------------|
+| **Skills** | Written to the managed workspace directory `/data/skills/<registry>/<app>/`, owned by the App — updated and removed with it, so don't edit them by hand (see [Skills](./skills.md)) |
+| **Dependencies** | Installed into the bot's workspace and shared with other Apps in the same workspace that need them |
+| **Connectors** | Marked **Needs authorization**, **Optional**, or **Shared across workspaces**; click **Authorize** to run OAuth or enter an API key (see [Connectors](../self-hosted/connectors.md)) |
 
-Operators can point `supermarket.base_url` at another trusted catalog. The configured endpoint is used for the connector list, skill lists, skill details, and skill downloads. The **Registry** filter in the Skills tab lets you narrow results to a single upstream registry.
+Common actions: **Check for updates**, **Update**, **Remove**. When some components failed or still need authorization, the App is flagged as needing attention — open its component list to finish setup.
 
 ---
 
-## Contribute
+## Where the catalog comes from
 
-Contribute new skills here:
+Supermarket content is served from an upstream registry, `supermarket.memoh.ai` by default. Self-hosted instances can point `supermarket.base_url` at another trusted catalog; see the configuration reference in [Server Deploy](../self-hosted/docker.md).
+
+---
+
+## Contributing
+
+New Apps can be submitted to:
 
 - [felinics/supermarket](https://github.com/felinics/supermarket)

@@ -15,7 +15,6 @@
 
 - **[LLM 提供方](/zh/integrations/providers/llm)**：配置上游 API、client type 和模型角色。
 - **[记忆提供方](/zh/integrations/providers/memory/builtin)**：选择内置记忆、Mem0 或 OpenViking。
-- **[TTS 提供方](/zh/integrations/providers/tts/edge)**：配置语音合成提供方和模型。
 - **[搜索提供方](/zh/integrations/providers/web-search)**：配置搜索提供方接入。
 
 ## 产品教程

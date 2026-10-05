@@ -21,12 +21,12 @@ The Docker Compose stack consists of multiple services. Some are always started,
 | **pgvector** | *(core)* | PostgreSQL with `pgvector` used for optional memory embeddings; see [Built-in Memory](../integrations/providers/memory/builtin.md) |
 | **migrate** | *(core, one-shot)* | Runs `memoh-server migrate up` before the server starts |
 | **webhook-tunnel** | `webhook-tunnel` | Optional `cloudflared` quick tunnel that exposes the channel worker's webhook listener to the internet |
-| **connect-it** | `connectors` | Co-hosted [Connect-It](https://github.com/memohai/connect-it) service backing bot [connectors](../guides/connectors.md) (see below) |
+| **connect-it** | `connectors` | Co-hosted [Connect-It](https://github.com/memohai/connect-it) service backing bot [connectors](./connectors.md) (see below) |
 
 
 ### Connect-It Connectors
 
-The **connect-it** container runs [Connect-It](https://github.com/memohai/connect-it), the service behind bot [connectors](../guides/connectors.md) — it links third-party services such as GitHub and Notion to bots via OAuth or API keys. It shares Memoh's PostgreSQL instance with its data isolated in a separate `connect_it` schema, and manages its own migrations.
+The **connect-it** container runs [Connect-It](https://github.com/memohai/connect-it), the service behind bot [connectors](./connectors.md) — it links third-party services such as GitHub and Notion to bots via OAuth or API keys. It shares Memoh's PostgreSQL instance with its data isolated in a separate `connect_it` schema, and manages its own migrations.
 
 The install script manages Connect-It end to end:
 
@@ -170,7 +170,7 @@ Add `--profile connectors` for co-hosted Connect-It and `--profile webhook-tunne
 
 > **Important**: `docker-compose.yml` mounts `./config.toml` by default. You must create this file before starting — running without it will fail.
 
-To enable [connectors](../guides/connectors.md) in a manual deployment, generate the Connect-It credentials yourself and add the `connectors` profile:
+To enable [connectors](./connectors.md) in a manual deployment, generate the Connect-It credentials yourself and add the `connectors` profile:
 
 ```bash
 MEMOH_CONNECT_IT_BASE_URL="http://connect-it:8421" \
@@ -237,7 +237,7 @@ The `config.toml` file controls all server behavior. Here is a summary of the av
 | `[internal_rpc]` | Server/channel-worker RPC targets and shared secret for the split deployment |
 | `[webhook_tunnel]` | Webhook tunnel mode (`disabled` or `external`) and `public_base_url` |
 | `[registry]` | Provider definitions directory |
-| `[connect_it]` | Connect-It endpoint for [connectors](../guides/connectors.md) (`base_url`, `api_token`); both empty disables the feature. The Compose environment overrides these via `MEMOH_CONNECT_IT_BASE_URL` / `MEMOH_CONNECT_IT_API_TOKEN`. |
+| `[connect_it]` | Connect-It endpoint for [connectors](./connectors.md) (`base_url`, `api_token`); both empty disables the feature. The Compose environment overrides these via `MEMOH_CONNECT_IT_BASE_URL` / `MEMOH_CONNECT_IT_API_TOKEN`. |
 | `[web]` | Web frontend host and port |
 | `[agent]` | Tool output truncation limits: `tool_output_max_bytes` (default 65536), `tool_output_max_lines` (default 2000), `system_files_max_bytes` (default 32768). Oversized tool output keeps head and tail instead of being cut off blindly. |
 | `[session_runtime]` | Session-state backend for multi-instance deployments; see [Multi-Instance Deployments](#multi-instance-deployments) |

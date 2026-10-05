@@ -2,7 +2,7 @@
 
 Memoh 可以把 Bot 连接到 ACP 兼容的编码智能体。ACP 智能体是外部编码工作流，可以从 Bot 的聊天 workspace 里工作，同时把自己的会话和普通 chat / discuss 分开。
 
-内置两个 agent profile：**Codex**、**Claude Code**。它们是当前支持的配置路径，不代表未来只能接这三种。
+内置两个 agent profile：**Codex**、**Claude Code**。它们是当前支持的配置路径，不代表未来只能接这两种。
 
 ACP 智能体在 Bot 的容器 workspace 里运行，所以 Bot 必须使用容器类 workspace backend。
 

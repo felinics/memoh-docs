@@ -4,7 +4,7 @@
 
 - 一个或多个 **模型服务商**（怎么连上游 API）
 - 其下的 **模型**
-- 若要朗读，再配 **语音合成**（见 [TTS 提供方](./tts/edge.md)）
+- 若要朗读，再配 **语音合成**（见 **语音合成** 设置页）
 - 若要把语音转文字，再配 **语音转写**
 
 聊天与 embedding 在 **Models** 页管理；语音合成模型在 TTS 流程里单走，语音转写模型在 Transcription 设置页管理。
@@ -68,7 +68,7 @@
 | `microsoft-speech` | Microsoft 语音合成 |
 | `google-transcription` | Google 语音转写 |
 
-语音合成与语音转写类型不能当主聊天用。语音合成走 [TTS 提供方](./tts/edge.md)，语音转写走 Transcription 设置页。具体模型、音色和语言取决于 provider 模板与上游账号。
+语音合成与语音转写类型不能当主聊天用。语音合成走 **语音合成** 设置页，语音转写走 Transcription 设置页。具体模型、音色和语言取决于 provider 模板与上游账号。
 
 ---
 
@@ -144,7 +144,7 @@ Copilot 凭据以前按用户存，现在和 Codex 一样是模型服务商级�
 | `speech` | 朗读，挂在 TTS |
 | `transcription` | 语音转文字，挂在 Transcription |
 
-**Models** 页主要管 chat / embedding；speech 在 [TTS 提供方](./tts/edge.md)，transcription 在 Transcription 设置页。
+**Models** 页主要管 chat / embedding；speech 在 **语音合成** 设置页，transcription 在 Transcription 设置页。
 
 ---
 
@@ -202,7 +202,7 @@ Embedding 模型用于语义索引与检索。
 
 ## 语音合成与转写模型
 
-语音合成在 [TTS 提供方](./tts/edge.md) 配，不跟普通 chat 模型服务商混流。当前语音合成类别包括：
+语音合成在 **语音合成** 设置页 配，不跟普通 chat 模型服务商混流。当前语音合成类别包括：
 
 - Edge：`edge-speech`
 - OpenAI 兼容：`openai-speech`
@@ -241,5 +241,5 @@ Embedding 模型用于语义索引与检索。
 ## 接下来
 
 - 给 Bot 绑聊天、生图、记忆、朗读等：[Bot](../../guides/working-with-bots.md)
-- 配语音提供方与语音模型：[TTS 提供方](./tts/edge.md)
+- 配语音提供方与语音模型：**语音合成** 设置页
 - 配语音转文字：打开客户端的 Transcription 设置页

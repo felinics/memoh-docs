@@ -2,6 +2,8 @@ import { defineConfig } from 'vitepress'
 import llmstxt from 'vitepress-plugin-llms'
 import { en } from './en'
 import { zh } from './zh'
+import { ja } from './ja'
+import { ru } from './ru'
 
 // https://vitepress.vuejs.org/config/app-configs
 export default defineConfig({
@@ -21,9 +23,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Guides', link: '/guides/' },
-          { text: 'Integrations', link: '/integrations/' },
           { text: 'Help Center', link: 'https://memoh.ai/help' },
-          { text: 'About', link: '/about.md' },
         ],
       },
     },
@@ -33,9 +33,27 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: '教程', link: '/zh/guides/' },
-          { text: '集成', link: '/zh/integrations/' },
           { text: '帮助中心', link: 'https://memoh.ai/help' },
-          { text: '关于', link: '/zh/about.md' },
+        ],
+      },
+    },
+    ja: {
+      label: '日本語',
+      lang: 'ja',
+      themeConfig: {
+        nav: [
+          { text: 'ガイド', link: '/ja/guides/' },
+          { text: 'ヘルプセンター', link: 'https://memoh.ai/help' },
+        ],
+      },
+    },
+    ru: {
+      label: 'Русский',
+      lang: 'ru',
+      themeConfig: {
+        nav: [
+          { text: 'Руководства', link: '/ru/guides/' },
+          { text: 'Центр помощи', link: 'https://memoh.ai/help' },
         ],
       },
     }
@@ -46,6 +64,8 @@ export default defineConfig({
     sidebar: {
       ...en,
       ...zh,
+      ...ja,
+      ...ru,
     },
 
 

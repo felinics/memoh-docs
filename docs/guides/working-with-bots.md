@@ -10,7 +10,7 @@ A task is a good fit for a bot when three things hold:
 - **Reachable sources.** The files, sites, or conversations involved are ones the bot can actually get to: uploaded into its workspace, connected as a channel or service, or public.
 - **A checkable result.** You can tell at a glance whether the output is right, so reviewing stays cheap.
 
-When all three hold, start read-only anyway: let the bot read and organize first, review a few outputs, then grant more. Every scenario in [Use Cases](./use-cases.md) begins this way.
+When all three hold, start read-only anyway: let the bot read and organize first, review a few outputs, then grant more.
 
 ## State the request
 
@@ -67,7 +67,7 @@ In practice:
 2. Review the first few runs before widening anything.
 3. Keep actions that leave the workspace — messages to other people, anything external — behind approval even after the routine feels safe.
 
-This is the same path the [Use Cases](./use-cases.md#from-example-to-routine) checklist walks: approving a few requests costs far less than undoing a wrong write.
+The arithmetic is simple: approving a few requests costs far less than undoing a wrong write.
 
 ---
 
@@ -128,7 +128,6 @@ If you have not created these resources yet, set them up first:
 - [Providers And Models](../integrations/providers/llm.md)
 - [Built-in Memory Provider](../integrations/providers/memory/builtin.md)
 - [Search Providers](../integrations/providers/web-search.md)
-- [TTS: Edge](../integrations/providers/tts/edge.md)
 - [Agents / ACP](./acp.md)
 
 ---
@@ -152,7 +151,7 @@ The **General** tab contains the settings that shape everyday conversation behav
 Notes:
 
 - The **Image Generation Model** is intentionally separate from the normal chat model so you can dedicate an image-capable model only to visual generation tasks.
-- The **TTS Model** comes from the [TTS provider](../integrations/providers/tts/edge.md) flow and uses `speech` models from the configured speech provider.
+- The **TTS Model** comes from the **Speech** settings page and uses `speech` models from the configured speech provider.
 - The selected chat model's `context_window` influences session status reporting and [Context Compaction](./compaction.md).
 
 ---

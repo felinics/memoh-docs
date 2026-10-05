@@ -21,12 +21,12 @@ Compose 里有多组服务。有的默认就起，有的通过 `--profile` 打�
 | **pgvector** | *（核心）* | 带 `pgvector` 的 PostgreSQL，供可选的记忆向量使用；见 [内置记忆](../integrations/providers/memory/builtin.md) |
 | **migrate** | *（核心，一次性）* | 在主服务启动前执行 `memoh-server migrate up` |
 | **webhook-tunnel** | `webhook-tunnel` | 可选的 `cloudflared` 快速隧道，把渠道 worker 的 webhook 监听暴露到公网 |
-| **connect-it** | `connectors` | 同机部署的 [Connect-It](https://github.com/memohai/connect-it)，支撑 Bot [连接器](../guides/connectors.md)（见下） |
+| **connect-it** | `connectors` | 同机部署的 [Connect-It](https://github.com/memohai/connect-it)，支撑 Bot [连接器](./connectors.md)（见下） |
 
 
 ### Connect-It 连接器
 
-**connect-it** 容器跑的是 [Connect-It](https://github.com/memohai/connect-it)，Bot [连接器](../guides/connectors.md)背后的服务——通过 OAuth 或 API Key 把第三方服务（GitHub、Notion 这类）连给 Bot。它共用 Memoh 的 PostgreSQL，数据隔离在单独的 `connect_it` schema 里，迁移自己管。
+**connect-it** 容器跑的是 [Connect-It](https://github.com/memohai/connect-it)，Bot [连接器](./connectors.md)背后的服务——通过 OAuth 或 API Key 把第三方服务（GitHub、Notion 这类）连给 Bot。它共用 Memoh 的 PostgreSQL，数据隔离在单独的 `connect_it` schema 里，迁移自己管。
 
 安装脚本把 Connect-It 全程管起来：
 
@@ -147,7 +147,7 @@ POSTGRES_PASSWORD=你的库密码 docker compose up -d
 
 > **重要**：`docker-compose.yml` 默认挂 `./config.toml`，先建好文件再 `up`，否则起不来。
 
-手动部署要开[连接器](../guides/connectors.md)的话，自己生成 Connect-It 凭据并加 `connectors` profile：
+手动部署要开[连接器](./connectors.md)的话，自己生成 Connect-It 凭据并加 `connectors` profile：
 
 ```bash
 MEMOH_CONNECT_IT_BASE_URL="http://connect-it:8421" \
@@ -212,7 +212,7 @@ docker compose -f docker-compose.yml -f docker/docker-compose.cn.yml up -d
 | `[internal_rpc]` | 主服务/渠道 worker 拆分部署的 RPC 地址与共享密钥 |
 | `[webhook_tunnel]` | webhook 隧道模式（`disabled` 或 `external`）与 `public_base_url` |
 | `[registry]` | 模型服务商定义目录 |
-| `[connect_it]` | [连接器](../guides/connectors.md)用的 Connect-It 地址（`base_url`、`api_token`）；两项都空即关闭该功能。Compose 环境里由 `MEMOH_CONNECT_IT_BASE_URL` / `MEMOH_CONNECT_IT_API_TOKEN` 覆盖 |
+| `[connect_it]` | [连接器](./connectors.md)用的 Connect-It 地址（`base_url`、`api_token`）；两项都空即关闭该功能。Compose 环境里由 `MEMOH_CONNECT_IT_BASE_URL` / `MEMOH_CONNECT_IT_API_TOKEN` 覆盖 |
 | `[web]` | 前端 host/port |
 | `[agent]` | 工具输出截断上限：`tool_output_max_bytes`（默认 65536）、`tool_output_max_lines`（默认 2000）、`system_files_max_bytes`（默认 32768）。超限时保留头尾，不是盲切。 |
 | `[session_runtime]` | 多实例部署的会话状态后端，见下方[多实例部署](#多实例部署) |
