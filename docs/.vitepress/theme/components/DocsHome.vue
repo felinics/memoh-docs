@@ -2,12 +2,84 @@
 import { computed } from 'vue'
 
 const props = defineProps<{
-  locale?: 'en' | 'zh'
+  locale?: 'en' | 'zh' | 'ja' | 'ru'
 }>()
 
 const isZh = computed(() => props.locale === 'zh')
+const isJa = computed(() => props.locale === 'ja')
+const isRu = computed(() => props.locale === 'ru')
 
 const copy = computed(() => {
+  if (isRu.value) {
+    return {
+      sections: [
+        {
+          tone: 'guide',
+          icon: 'rocket',
+          title: 'Быстрый старт',
+          text: 'Установите приложение, войдите, создайте первого Bot, дайте ему настоящую задачу и подключите чат-платформу.',
+          href: '/ru/guides/quick-start',
+        },
+        {
+          tone: 'guide',
+          icon: 'book',
+          title: 'Продвинутые возможности',
+          text: 'Продвинутые возможности, автоматизация и внешние провайдеры — агенты, Hooks, долговременная память и не только.',
+          href: '/ru/guides/',
+        },
+        {
+          tone: 'integration',
+          icon: 'plug',
+          title: 'Развёртывание',
+          text: 'Запустите Memoh на своём сервере: Server Deploy, бэкенды рабочих пространств, коннекторы.',
+          href: '/ru/self-hosted/',
+        },
+        {
+          tone: 'hosted',
+          icon: 'server',
+          title: 'Центр помощи',
+          text: 'Вопросы о планах, оплате и аккаунте, а также прямая связь с командой Memoh.',
+          href: 'https://memoh.ai/help',
+        },
+      ],
+    }
+  }
+
+  if (isJa.value) {
+    return {
+      sections: [
+        {
+          tone: 'guide',
+          icon: 'rocket',
+          title: 'クイックスタート',
+          text: 'アプリをインストールしてサインインし、最初の Bot を作成。実際のタスクを任せ、チャットプラットフォームにつなぎます。',
+          href: '/ja/guides/quick-start',
+        },
+        {
+          tone: 'guide',
+          icon: 'book',
+          title: '高度な機能',
+          text: '高度な機能・自動化・外部プロバイダー——エージェント、Hooks、長期メモリなど。',
+          href: '/ja/guides/',
+        },
+        {
+          tone: 'integration',
+          icon: 'plug',
+          title: 'セルフホスト',
+          text: '自分のサーバーで Memoh を動かす：Server Deploy、Workspace バックエンド、コネクター。',
+          href: '/ja/self-hosted/',
+        },
+        {
+          tone: 'hosted',
+          icon: 'server',
+          title: 'ヘルプセンター',
+          text: 'プラン・請求・アカウントの質問、そして Memoh チームへの連絡窓口。',
+          href: 'https://memoh.ai/help',
+        },
+      ],
+    }
+  }
+
   if (isZh.value) {
     return {
       sections: [
@@ -28,9 +100,9 @@ const copy = computed(() => {
         {
           tone: 'integration',
           icon: 'plug',
-          title: '使用场景',
-          text: '组合多种功能解决实际问题的即用型示例。',
-          href: '/zh/use-cases/',
+          title: '自部署',
+          text: '在自己的服务器上运行 Memoh：Server Deploy、Workspace 后端与连接器。',
+          href: '/zh/self-hosted/',
         },
         {
           tone: 'hosted',
@@ -62,9 +134,9 @@ const copy = computed(() => {
       {
         tone: 'integration',
         icon: 'plug',
-        title: 'Use Cases',
-        text: 'Ready-to-follow scenarios that combine features to solve real problems.',
-        href: '/use-cases/',
+        title: 'Deployment',
+        text: 'Run Memoh on your own server: Server Deploy, workspace backends, and connectors.',
+        href: '/self-hosted/',
       },
       {
         tone: 'hosted',
@@ -79,7 +151,7 @@ const copy = computed(() => {
 </script>
 
 <template>
-  <section class="docs-home" :lang="isZh ? 'zh' : 'en'">
+  <section class="docs-home" :lang="props.locale ?? 'en'">
     <div class="docs-home__cards" aria-label="Documentation sections">
       <a
         v-for="section in copy.sections"

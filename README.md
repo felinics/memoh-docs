@@ -25,25 +25,23 @@ The product source code lives in [`felinics/Memoh`](https://github.com/felinics/
 - **Guides** for SaaS/product usage: bots, workspaces, sessions, memory, MCP, email, scheduled tasks, and slash commands.
 - **Integrations** for channels and providers, including messaging platforms, LLMs, memory providers, TTS, and web search.
 - **Self-hosted** docs for Desktop, Server Deploy, workspace backends, Kata, and SQLite.
-- **English and Chinese docs** under `docs/` and `docs/zh/`.
+- **English, Chinese, Japanese, and Russian docs** under `docs/`, `docs/zh/`, `docs/ja/`, and `docs/ru/`.
 - **Static assets** under `docs/public/`, including screenshots and logos.
 - **VitePress config** under `docs/.vitepress/`.
 
 ## Documentation Structure
 
-The current VitePress site is organized around four primary navigation roots:
+The current VitePress site is organized around three primary navigation roots:
 
 - `docs/guides/` for product usage guides.
 - `docs/integrations/` for channels, providers, memory providers, TTS, and web search.
 - `docs/self-hosted/` for Desktop, Server Deploy, workspace backends, and connectors (Connect-It).
-- `docs/use-cases/` for ready-to-follow scenarios, one chapter per case.
 
-The Simplified Chinese mirror uses the same structure under `docs/zh/`:
+The Simplified Chinese, Japanese, and Russian mirrors use the same structure under `docs/zh/`, `docs/ja/`, and `docs/ru/`:
 
-- `docs/zh/guides/`
-- `docs/zh/integrations/`
-- `docs/zh/self-hosted/`
-- `docs/zh/use-cases/`
+- `docs/zh/guides/`, `docs/ja/guides/`, `docs/ru/guides/`
+- `docs/zh/integrations/`, `docs/ja/integrations/`, `docs/ru/integrations/`
+- `docs/zh/self-hosted/`, `docs/ja/self-hosted/`, `docs/ru/self-hosted/`
 
 Legacy paths still exist for old external links, but they are redirect pages instead of the main content source:
 
@@ -55,7 +53,7 @@ Legacy paths still exist for old external links, but they are redirect pages ins
 
 When updating content, edit the primary paths above first. Only touch a legacy redirect page when the redirect target itself changes.
 
-Keep the English and Simplified Chinese docs mirrored. If you add, rename, remove, or move a page in one language, make the matching change in the other language and update both VitePress sidebar files.
+Keep the English, Simplified Chinese, Japanese, and Russian docs mirrored. If you add, rename, remove, or move a page in one language, make the matching change in the other languages and update every VitePress sidebar file.
 
 Do not edit `docs/.vitepress/dist/` by hand. It is generated build output and should not be treated as source documentation.
 
@@ -95,13 +93,14 @@ pnpm preview
 │   ├── guides/            # Product usage guides
 │   ├── integrations/      # Channels and providers
 │   ├── self-hosted/       # Open-source deployment docs
-│   ├── use-cases/         # Use-case chapters
 │   ├── getting-started/   # Legacy redirects to guides
 │   ├── installation/      # Legacy redirects to self-hosted
 │   ├── channels/          # Legacy redirects to integrations/channels
 │   ├── memory-providers/  # Legacy redirects to integrations/providers/memory
 │   ├── public/            # Static images and logo
 │   ├── zh/                # Simplified Chinese documentation and redirects
+│   ├── ja/                # Japanese documentation and redirects
+│   ├── ru/                # Russian documentation and redirects
 │   └── *.md               # Landing and compatibility pages
 ├── package.json
 └── pnpm-lock.yaml
@@ -111,9 +110,11 @@ pnpm preview
 
 ### 2026-10
 
-- **Client-first corrections round**: top nav is now Guides / Use Cases / Help Center (Integrations and About removed); Use Cases split into its own directory with one chapter per scenario; the Deployment sidebar group is back (Server Deploy, Workspace Backends, Connectors).
+- **Client-first corrections round**: top nav is now Guides / Help Center (Integrations and About removed); the Deployment sidebar group is back (Server Deploy, Workspace Backends, Connectors).
 - **Apps model**: Supermarket and Skills pages rewritten around the unified App concept (an App bundles Skills, dependencies, and connectors); Skills now documents workspace directories instead of a removed management UI; Connectors moved to the Deployment section.
 - **Cloud-baseline Workspace page**: open-source backend configuration and CDI/GPU passthrough moved to Workspace Backends; Preferences page removed; Memory provider entries consolidated into one; TTS: Edge removed.
+- **Use Cases removed**: the AI-drafted Use Cases section is gone from nav, sidebar, and pages; it will return as human-written chapters with real screenshots and recordings.
+- **Japanese and Russian locales**: full ja and ru translations under `docs/ja/` and `docs/ru/` with their own navs and sidebars. Japanese terminology is aligned with the product's Japanese UI strings; Russian keeps UI labels in English because the product has no Russian UI. The parity script now checks en/zh/ja/ru.
 
 ### 2026-09
 

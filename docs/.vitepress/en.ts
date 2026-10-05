@@ -56,19 +56,6 @@ const references = [
     ],
   },
   {
-    text: 'Use Cases',
-    items: [
-      { text: 'Overview', link: '/use-cases/' },
-      { text: 'Morning Digest', link: '/use-cases/morning-briefing.md' },
-      { text: 'Release Watch', link: '/use-cases/release-watch.md' },
-      { text: 'Group On-Call Assistant', link: '/use-cases/group-duty-assistant.md' },
-      { text: 'A Living Spreadsheet', link: '/use-cases/data-upkeep.md' },
-      { text: 'Screen Work Behind Logins', link: '/use-cases/gated-web-tasks.md' },
-      { text: 'Build and Preview in the Cloud', link: '/use-cases/code-and-preview.md' },
-      { text: 'An Assistant That Remembers', link: '/use-cases/personal-assistant.md' },
-    ],
-  },
-  {
     text: 'Deployment',
     items: [
       { text: 'Overview', link: '/self-hosted/' },
@@ -83,5 +70,4 @@ export const en = {
   '/guides/': references,
   '/integrations/': references,
   '/self-hosted/': references,
-  '/use-cases/': references,
 }

@@ -10,7 +10,7 @@ A task is a good fit for a bot when three things hold:
 - **Reachable sources.** The files, sites, or conversations involved are ones the bot can actually get to: uploaded into its workspace, connected as a channel or service, or public.
 - **A checkable result.** You can tell at a glance whether the output is right, so reviewing stays cheap.
 
-When all three hold, start read-only anyway: let the bot read and organize first, review a few outputs, then grant more. Every scenario in [Use Cases](../use-cases/index.md) begins this way.
+When all three hold, start read-only anyway: let the bot read and organize first, review a few outputs, then grant more.
 
 ## State the request
 
@@ -67,7 +67,7 @@ In practice:
 2. Review the first few runs before widening anything.
 3. Keep actions that leave the workspace — messages to other people, anything external — behind approval even after the routine feels safe.
 
-This is the same path the [Use Cases](../use-cases/index.md#from-example-to-routine) checklist walks: approving a few requests costs far less than undoing a wrong write.
+The arithmetic is simple: approving a few requests costs far less than undoing a wrong write.
 
 ---
 

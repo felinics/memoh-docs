@@ -120,7 +120,6 @@ Once a routine is stable, stop retyping it:
 | Install prebuilt capabilities | [Supermarket](./supermarket.md) |
 | Hook into lifecycle events | [Hooks](./hooks.md) |
 | Control who can talk to the bot | [Access Control](./access.md) |
-| See what others run | [Use Cases](../use-cases/index.md) |
 
 ::: tip Need help?
 Questions about plans, credits, or your account — or anything this site doesn't cover — are answered in the [Help Center](https://memoh.ai/help), where you can also reach the Memoh team.

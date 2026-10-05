@@ -56,19 +56,6 @@ const references = [
     ],
   },
   {
-    text: '使用场景',
-    items: [
-      { text: '总览', link: '/zh/use-cases/' },
-      { text: '晨间简报', link: '/zh/use-cases/morning-briefing.md' },
-      { text: '发版盯守', link: '/zh/use-cases/release-watch.md' },
-      { text: '群聊值班助理', link: '/zh/use-cases/group-duty-assistant.md' },
-      { text: '数据表格的日常维护', link: '/zh/use-cases/data-upkeep.md' },
-      { text: '带登录墙的网页任务', link: '/zh/use-cases/gated-web-tasks.md' },
-      { text: '云端写码与预览', link: '/zh/use-cases/code-and-preview.md' },
-      { text: '记得住事的个人助理', link: '/zh/use-cases/personal-assistant.md' },
-    ],
-  },
-  {
     text: '自部署',
     items: [
       { text: '总览', link: '/zh/self-hosted/' },
@@ -83,5 +70,4 @@ export const zh = {
   '/zh/guides/': references,
   '/zh/integrations/': references,
   '/zh/self-hosted/': references,
-  '/zh/use-cases/': references,
 }

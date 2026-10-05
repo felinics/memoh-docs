@@ -34,7 +34,6 @@ Deepen your usage once the basics are in place. These pages cover capabilities, 
 
 ## Use Cases
 
-- **[Use Cases](../use-cases/index.md)**: Ready-to-follow scenarios that combine features to solve real problems.
 
 ## Getting Help
 

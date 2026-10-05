@@ -25,25 +25,23 @@
 - **教程**：面向 SaaS/产品使用，覆盖机器人、workspace、会话、记忆、MCP、邮件、计划任务和斜杠命令。
 - **集成**：渠道和提供方，包括消息平台、LLM、记忆提供方、TTS 和网页搜索。
 - **自托管**：Desktop、Server Deploy、workspace backend、Kata 和 SQLite 等开源部署文档。
-- 英文和中文文档，分别位于 `docs/` 和 `docs/zh/`。
+- 英文、中文、日文和俄文文档，分别位于 `docs/`、`docs/zh/`、`docs/ja/` 和 `docs/ru/`。
 - 截图、logo 等静态资源，位于 `docs/public/`。
 - VitePress 配置，位于 `docs/.vitepress/`。
 
 ## 文档站结构
 
-当前 VitePress 文档站围绕四个主导航路径组织：
+当前 VitePress 文档站围绕三个主导航路径组织：
 
 - `docs/guides/`：产品使用教程。
 - `docs/integrations/`：渠道、提供方、记忆提供方、TTS 和网页搜索。
 - `docs/self-hosted/`：Desktop、Server Deploy、workspace backend 和连接器（Connect-It）。
-- `docs/use-cases/`：使用场景，每个场景独立成章。
 
-简体中文文档使用相同结构，位于 `docs/zh/` 下：
+简体中文、日文与俄文文档使用相同结构，分别位于 `docs/zh/`、`docs/ja/` 与 `docs/ru/` 下：
 
-- `docs/zh/guides/`
-- `docs/zh/integrations/`
-- `docs/zh/self-hosted/`
-- `docs/zh/use-cases/`
+- `docs/zh/guides/`、`docs/ja/guides/`、`docs/ru/guides/`
+- `docs/zh/integrations/`、`docs/ja/integrations/`、`docs/ru/integrations/`
+- `docs/zh/self-hosted/`、`docs/ja/self-hosted/`、`docs/ru/self-hosted/`
 
 旧路径仍然保留，用于兼容外部旧链接，但它们是重定向页面，不是主要内容源：
 
@@ -95,13 +93,14 @@ pnpm preview
 │   ├── guides/            # 产品使用教程
 │   ├── integrations/      # 渠道和提供方
 │   ├── self-hosted/       # 开源自托管部署文档
-│   ├── use-cases/         # 使用场景章节
 │   ├── getting-started/   # 到 guides 的旧路径重定向
 │   ├── installation/      # 到 self-hosted 的旧路径重定向
 │   ├── channels/          # 到 integrations/channels 的旧路径重定向
 │   ├── memory-providers/  # 到 integrations/providers/memory 的旧路径重定向
 │   ├── public/            # 静态图片和 logo
 │   ├── zh/                # 中文文档和重定向页面
+│   ├── ja/                # 日文文档和重定向页面
+│   ├── ru/                # 俄文文档和重定向页面
 │   └── *.md               # 入口和兼容页面
 ├── package.json
 └── pnpm-lock.yaml
@@ -111,9 +110,11 @@ pnpm preview
 
 ### 2026-10
 
-- **客户端优先修正**：顶栏改为 教程 / 使用场景 / 帮助中心（移除 集成 与 关于）；使用场景拆分为独立目录、每个场景一章；侧边栏恢复自部署分组（Server Deploy、Workspace 后端、连接器）。
+- **客户端优先修正**：顶栏改为 教程 / 帮助中心（移除 集成 与 关于）；侧边栏恢复自部署分组（Server Deploy、Workspace 后端、连接器）。
 - **应用（App）模型**：应用市场与技能页面按统一的 App 概念重写（一个 App 打包 Skills、依赖和连接器）；技能页改为说明工作区目录，不再描述已移除的管理界面；连接器移入自部署章节。
 - **工作区页面以 Cloud 为基准**：开源后端配置与 CDI/GPU 透传移至 Workspace 后端；移除用户偏好页；记忆提供方条目合并为一个；移除 TTS: Edge。
+- **移除使用场景**：AI 起草的使用场景章节已从导航、侧边栏和页面中移除；将来以人工撰写、配真实截图与录屏的形式回归。
+- **日语版与俄语版**：`docs/ja/`、`docs/ru/` 下完整翻译，各自独立导航与侧边栏。日文术语对齐产品日文 UI 文案；俄文因产品无俄语界面，UI 名词保留英文。对齐脚本现在检查 en/zh/ja/ru 四语。
 
 ### 2026-09
 
