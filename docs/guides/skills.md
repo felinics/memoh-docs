@@ -1,16 +1,14 @@
-# Bot Skills
+# Skills
 
-Skills are reusable prompt modules that extend a bot's behavior, style, and tool-usage guidance. You manage them from the bot's **Skills** tab, and you can either write them yourself or install them from **[Supermarket](./supermarket.md)**.
+A **Skill** is a reusable prompt module that teaches a bot a fixed way of working: tone, procedure, tool habits. Skills have no dedicated management screen — a skill is a file in the workspace, and putting it in the right directory is all it takes to load.
 
 ::: tip Limits
-A conversation can request at most 5 skills at once; each skill injects up to 64 KiB, with a 256 KiB total cap. These caps are fixed.
+A session can request at most 5 skills at once; a single skill injects up to 64 KiB, 256 KiB total. These caps are not configurable.
 :::
 
----
+## What one looks like
 
-## What A Skill Looks Like
-
-A skill is a Markdown file named `SKILL.md` with YAML frontmatter. At minimum, give it a stable `name` and a short `description`.
+A skill is a directory containing a `SKILL.md` with a YAML header — at minimum a stable `name` and a short `description`. The body is the instruction text actually injected for the agent:
 
 ```yaml
 ---
@@ -20,142 +18,36 @@ description: Enables advanced coding workflows and tool usage.
 
 # Coder Skill
 
-You write clear code, explain trade-offs, and use file or command tools when they help complete the task.
+Write clear code, explain trade-offs, and use the file/command tools when the task calls for them.
 ```
 
-Practical rules:
+Use plain ASCII names (`coder-skill`, `research`) without spaces — the name doubles as the directory name.
 
-- Use a simple ASCII skill name such as `coder-skill`, `research`, or `docs-helper`.
-- Avoid spaces in the `name`; Memoh uses it as the skill directory name.
-- The Markdown body is the actual instruction content injected into the bot runtime.
+## Which directory to use
 
----
+Put skills you write yourself in this directory of the bot's workspace:
 
-## Where Skills Come From
+```text
+/data/skills/user/personal/<skill-name>/SKILL.md
+```
 
-Memoh distinguishes between **managed** skills and **discovered** skills:
+Any way of getting the file there works: create it on the bot's **Files** tab, use the **Terminal**, or simply ask the bot — the workspace ships with a `skill-creator` skill, so describe the procedure you want and it writes the files to the right place.
 
-- **Managed** skills are the ones you create, edit, or install through Memoh. They live under `/data/skills/<name>/SKILL.md`.
-- **Discovered** skills are found from compatibility locations inside the bot environment, such as legacy skill directories from imported images or older setups.
+You will see other directories, but **don't put files there by hand**:
 
-Memoh scans these container-internal roots in order:
+| Directory | Owned by |
+|-----------|----------|
+| `/data/skills/user/personal/` | **You.** All hand-written skills go here |
+| `/data/skills/<registry>/<app>/` | [Apps](./supermarket.md). Installed, updated, and removed with the App — don't edit |
+| `/data/.memoh/skills/` | Built-in skills from the workspace template (such as `skill-creator`). Refreshed to the template version on every workspace init, so edits get overwritten; to customize, copy it under a new name into your own directory |
+| `/data/.skills/`, `/data/.agents/skills/` | Legacy compatibility paths, discovery only — don't add new files |
 
-| Type | Root |
-|------|------|
-| Managed | `/data/skills/` |
-| Legacy discovered | `/data/.skills/` |
-| Compatibility discovered | `/data/.agents/skills/` |
-| Compatibility discovered | `/root/.agents/skills/` |
+## Same name, multiple copies
 
-Within each root, Memoh looks for `SKILL.md` either directly under the root or inside a named subdirectory such as `/data/skills/coder-skill/SKILL.md`.
+**The skill name is its identity**: however many directories a name appears in, only one copy is effective at a time. A skill in your own directory takes precedence over one in a legacy path. To change how an App's skill behaves, don't edit its files — write your own version under a new name.
 
-This matters because the same skill name can appear from multiple sources. Memoh resolves those duplicates into states.
+## Recommendations
 
----
-
-## Skill States
-
-Each listed skill source has one of these states:
-
-| State | Meaning |
-|-------|---------|
-| `effective` | This is the version currently active for that skill name |
-| `shadowed` | Another source with the same skill name takes precedence |
-| `disabled` | This specific source has been disabled and will not be used |
-
-The important mental model is: **the skill name is the identity**. If Memoh finds multiple `coder-skill` sources, only one can be `effective`.
-
-### Typical Examples
-
-- A skill you just created in Memoh is usually `managed` + `effective`.
-- A legacy skill can show up as `effective` until you create or adopt a managed skill with the same name.
-- After you adopt a discovered skill into the managed directory, the managed copy becomes `effective` and the old source usually becomes `shadowed`.
-- If you disable the effective source, another source with the same name may become `effective` automatically.
-
----
-
-## Managing Skills In The UI
-
-Open a bot, then go to **Skills**.
-
-### Add Skill
-
-1. Click **Add Skill**.
-2. Fill in the raw Markdown in the editor.
-3. Save it.
-
-Memoh writes the file into its managed skills directory.
-
-### Edit Skill
-
-- Use **Edit** on a card to update the raw `SKILL.md` content.
-- Editing is most useful for managed skills you own directly in Memoh.
-
-### Delete Skill
-
-- **Delete** removes the managed skill directory for that skill name.
-- Deleting a managed skill can expose a discovered fallback source with the same name, making that fallback become `effective`.
-
-### Disable / Enable
-
-- **Disable** turns off one specific skill source without deleting it.
-- **Enable** re-enables a previously disabled source.
-
-Use this when you want to test a fallback or temporarily remove a skill from the prompt without losing its content.
-
-### Adopt
-
-**Adopt** copies a discovered skill into Memoh's managed skills directory so you can own and edit it from the UI.
-
-Use adopt when:
-
-- a skill came from a legacy or compatibility source
-- you want that skill to become part of your Memoh-managed configuration
-- you want to edit it safely in the UI later
-
-Adopt is not available once a managed skill with the same name already exists.
-
----
-
-## Effective Skills At Runtime
-
-Only **effective** skills are loaded into the bot runtime.
-
-That means:
-
-- `shadowed` skills are visible for inspection, but not used
-- `disabled` skills are ignored
-- the active prompt only sees the current effective set
-
-In active sessions, the **Session Status Panel** can also show which skills were used during that session.
-
----
-
-## Built-in Skills From The Workspace Template
-
-Memoh ships a couple of built-in skills (such as `skill-creator` and `hooks-setup`) as part of the workspace template. These are **kept in sync automatically**: every time the workspace is bootstrapped or reconciled, the built-in copies are refreshed to the current template version.
-
-Practical consequences:
-
-- **Do not edit a built-in skill in place** — your edits will be overwritten on the next refresh. To customize one, copy it into a skill under a different name (or adopt it into a managed skill) instead.
-- Your own skills placed alongside them are never removed by the sync.
-- Template-provided workspace files like `AGENTS.md` are different: they are created only when missing, so your edits to those are preserved.
-
-## Supermarket And Imported Skills
-
-Two common ways skills appear without being typed manually:
-
-- **Supermarket install**: Memoh downloads the selected skill into the managed skills directory, so it behaves like a normal managed skill.
-- **Imported / legacy environment**: Memoh discovers existing skills from compatibility paths and shows them as discovered sources.
-
-If a discovered skill is useful but you want to fully manage it in Memoh, adopt it.
-
----
-
-## Recommended Workflow
-
-1. Start with a small number of focused skills.
-2. Prefer clear names and short descriptions.
-3. Use **Disable** before **Delete** if you are unsure.
-4. Use **Adopt** for legacy skills you plan to keep.
-5. Install reusable skills from **[Supermarket](./supermarket.md)** instead of copy-pasting them repeatedly.
+1. Keep them few and sharp, with a clear `name` and `description` — the agent decides whether to load a skill from its description.
+2. Only recurring procedures are worth turning into skills; one-off requirements can just be said in chat.
+3. Prefer installing from the [Supermarket](./supermarket.md) over copy-pasting duplicates.

@@ -109,3 +109,31 @@ Runtime capabilities differ by backend:
 | `local` | Host network | No | Host-level only | No container desktop |
 
 Overlay provider settings are configured per bot in the app, not in the global TOML file. The global backend still matters because it decides which overlay driver can run.
+
+## CDI devices (GPU passthrough)
+
+To pass host devices into a containerized workspace through **CDI** (GPUs being the common case), configure it under the bot's **Workspace** → **Advanced**. Only bother when you actually need CUDA/ROCm workloads inside the workspace.
+
+### Setup
+
+1. Open the **Workspace** tab; **Create** the container first if there is none.
+2. Expand **Advanced**, enable **GPU**, and list device names under **CDI devices**, one per line or comma-separated:
+   - `nvidia.com/gpu=0`, `nvidia.com/gpu=all`
+   - `amd.com/gpu=0`, `amd.com/gpu=all`
+
+### Host requirements
+
+Drivers, vendor tooling, and CDI specs must already be in place on the host. That usually means:
+
+- The GPU already works on the host itself
+- Specs exist under `/etc/cdi` or `/var/run/cdi`
+- The names you enter match what the runtime sees (check with `nvidia-ctk cdi list` for NVIDIA, `amd-ctk cdi list` for AMD)
+
+An `unresolvable CDI devices` error almost always means a name mismatch.
+
+### Notes
+
+- CDI takes effect at **creation** time: after changing the configuration you usually need to **recreate** the container — stop/start does **not** swap attached devices.
+- The image still needs the right userspace libraries and tools to actually run CUDA/ROCm software.
+- Once created, the **Workspace** tab lists the attached devices for verification.
+- Backend support is in the table above — only `containerd` supports CDI.

@@ -2,15 +2,17 @@
 
 This guide covers how documentation is structured, translated, and checked in this repository. A complete Chinese version follows at the bottom (中文对照).
 
-## Keep the Two Locales in Lockstep
+## Keep the Locales in Lockstep
 
 - English pages live under `docs/`.
-- Chinese pages live under `docs/zh/` with **identical paths**: `docs/guides/memory.md` mirrors to `docs/zh/guides/memory.md`.
-- **Every content PR updates both locales.** English is the source of truth; the Chinese mirror lands **in the same PR**, never in a follow-up.
+- Chinese, Japanese, and Russian pages live under `docs/zh/`, `docs/ja/`, and `docs/ru/` with **identical paths**: `docs/guides/memory.md` mirrors to `docs/zh/guides/memory.md`, `docs/ja/guides/memory.md`, and `docs/ru/guides/memory.md`.
+- **Every content PR updates all locales.** English is the source of truth; the Chinese, Japanese, and Russian mirrors land **in the same PR**, never in a follow-up.
 
 ## Use the Terminology Glossary
 
 Translate product terms exactly as listed. Where a term has a product UI key, the **bold UI label** in the docs must use the product's own locale string for that key — never a re-translation of the English value.
+
+The table below lists English/Chinese; for Japanese, use the product's `ja.json` string for the same UI key (e.g. workspace tab = **Workspace**, Platforms tab = **プラットフォーム**, Supermarket = **マーケットプレイス**, Apps tab = **アプリ**, skill = スキル, connector = コネクター, dependencies = 依存関係). The product has **no Russian UI locale**: in Russian pages every bold UI label stays as the English UI string, with an optional Russian gloss in parentheses on first mention.
 
 | English | 中文 | Product UI key |
 |---------|------|----------------|
@@ -73,7 +75,7 @@ This keeps links stable across locales and rewordings.
 node scripts/check-locale-parity.mjs
 ```
 
-It must pass. It verifies that every page under `docs/` has its mirror under `docs/zh/` (and vice versa), and that the sidebars in `docs/.vitepress/en.ts` and `docs/.vitepress/zh.ts` link the same set of pages. CI runs the same script on every pull request.
+It must pass. It verifies that every page under `docs/` has its mirror under `docs/zh/`, `docs/ja/`, and `docs/ru/` (and vice versa), and that the sidebars in `docs/.vitepress/en.ts`, `zh.ts`, `ja.ts`, and `ru.ts` link the same set of pages. CI runs the same script on every pull request.
 
 ---
 
@@ -81,11 +83,11 @@ It must pass. It verifies that every page under `docs/` has its mirror under `do
 
 本指南说明这个仓库里文档怎么组织、怎么翻译、怎么检查。
 
-## 两种语言同步走
+## 多语言同步走
 
 - 英文页面在 `docs/` 下。
-- 中文页面在 `docs/zh/` 下，**路径完全一致**：`docs/guides/memory.md` 对应 `docs/zh/guides/memory.md`。
-- **每个内容 PR 同时更新两种语言。** 英文是唯一事实来源；中文镜像**在同一个 PR 里**落地，不留到后续 PR。
+- 中文、日文、俄文页面分别在 `docs/zh/`、`docs/ja/`、`docs/ru/` 下，**路径完全一致**：`docs/guides/memory.md` 对应 `docs/zh/guides/memory.md`、`docs/ja/guides/memory.md` 与 `docs/ru/guides/memory.md`。
+- **每个内容 PR 同时更新所有语言。** 英文是唯一事实来源；中文、日文、俄文镜像**在同一个 PR 里**落地，不留到后续 PR。
 
 ## 按术语表翻译
 
@@ -127,7 +129,7 @@ It must pass. It verifies that every page under `docs/` has its mirror under `do
 
 ## 给可深链的标题加显式锚点
 
-FAQ 条目和所有要被深链的标题带显式 ASCII `{#id}`，**两种语言完全相同**：
+FAQ 条目和所有要被深链的标题带显式 ASCII `{#id}`，**所有语言完全相同**：
 
 ```md
 <!-- docs/guides/sessions.md -->
@@ -152,4 +154,4 @@ FAQ 条目和所有要被深链的标题带显式 ASCII `{#id}`，**两种语言
 node scripts/check-locale-parity.mjs
 ```
 
-必须通过。它检查 `docs/` 下每个页面在 `docs/zh/` 下都有镜像（反之亦然），并且 `docs/.vitepress/en.ts` 与 `docs/.vitepress/zh.ts` 两份侧栏链接同一组页面。CI 会在每个 pull request 上跑同一个脚本。
+必须通过。它检查 `docs/` 下每个页面在 `docs/zh/`、`docs/ja/`、`docs/ru/` 下都有镜像（反之亦然），并且 `docs/.vitepress/en.ts`、`zh.ts`、`ja.ts`、`ru.ts` 各份侧栏链接同一组页面。CI 会在每个 pull request 上跑同一个脚本。

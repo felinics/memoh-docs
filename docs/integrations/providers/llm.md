@@ -7,7 +7,7 @@ To use Memoh effectively, you usually configure:
 - optional **speech providers** if you want text-to-speech
 - optional **transcription providers** if you want speech-to-text
 
-Chat and embedding providers/models are managed from the **Models** page in the app. Speech models are managed from [TTS Providers](./tts/edge.md), and transcription models are managed from the Transcription settings page.
+Chat and embedding providers/models are managed from the **Models** page in the app. Speech models are managed from the **Speech** settings page, and transcription models are managed from the Transcription settings page.
 
 ---
 
@@ -70,7 +70,7 @@ Memoh currently supports these client types:
 | `microsoft-speech` | Microsoft speech providers |
 | `google-transcription` | Google transcription providers |
 
-Speech and transcription client types are for audio workflows, not for chat. Configure speech through [TTS Providers](./tts/edge.md) and transcription through the Transcription settings page. Exact model and voice availability depends on the configured provider template and upstream account.
+Speech and transcription client types are for audio workflows, not for chat. Configure speech through the **Speech** settings page and transcription through the Transcription settings page. Exact model and voice availability depends on the configured provider template and upstream account.
 
 ---
 
@@ -151,7 +151,7 @@ Memoh distinguishes four model types:
 Important distinction:
 
 - The **Models** page is primarily where you manage `chat` and `embedding` models.
-- `speech` models are exposed through [TTS Providers](./tts/edge.md).
+- `speech` models are exposed through the **Speech** settings page.
 - `transcription` models are exposed through the Transcription settings page.
 
 ---
@@ -216,7 +216,7 @@ Use embedding models with memory providers or any feature that relies on vector 
 
 ## Speech And Transcription Models
 
-Speech models are managed from [TTS Providers](./tts/edge.md), not from the standard chat provider flow.
+Speech models are managed from the **Speech** settings page, not from the standard chat provider flow.
 
 Current speech provider categories include:
 
@@ -257,5 +257,5 @@ You do not need to force one model to do everything.
 ## Next Steps
 
 - To assign chat, image, memory, and TTS settings to a bot, see [Bot Management](../../guides/working-with-bots.md).
-- To configure speech providers and speech models, see [TTS Providers](./tts/edge.md).
+- To configure speech providers and speech models, see the **Speech** settings page.
 - To configure speech-to-text, open the Transcription settings page in the app.

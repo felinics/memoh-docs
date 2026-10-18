@@ -1,118 +1,58 @@
-# Bot Workspace Management
+# Workspace
 
-Every bot in Memoh works inside a workspace. In server deployments this is normally an isolated container, Pod, or VM-like runtime. In trusted desktop/local scenarios it may also be a local host directory. The workspace gives the bot a filesystem, command execution environment, MCP runtime, and optional graphical desktop.
+Every bot has its own **workspace** — a computer that belongs to it: a real filesystem, a terminal that executes commands, a preinstalled toolchain, and optionally a visible desktop. The files you hand the bot, the results it produces, and the tools it installs all live here, preserved across sessions.
 
-## Concept: The Bot Workspace
+## What it can do
 
-The workspace acts as the bot's private computer. Within it, the bot can:
+- Store and edit files — browse them any time on the **Files** tab
+- Run scripts and install packages: **Node.js** and **Python** come preinstalled (`pip` and `uv` on PATH), no interpreter setup needed
+- Keep background tasks running
+- Preserve state across sessions — yesterday's unfinished work continues today
+- Optionally run a visible desktop with a headed browser
 
-- store and modify files
-- install software through package managers when the image allows it
-- execute scripts and background tasks
-- keep state across sessions
-- optionally run a desktop display and headed browser
+## Where it lives in the client
 
-The workspace toolkit ships both **Node.js** and **Python** runtimes (with `pip` and `uv` on the PATH), so bots can run Python scripts and install packages without preparing an interpreter first.
+Several tabs on the bot detail page face the workspace:
 
-The underlying runtime is selected globally with `[container].backend` in `config.toml`, with trusted local workspace support controlled separately. The official Docker Compose server deploy uses `containerd`; Docker Engine, Apple, and local workspace modes are documented in [Workspace Backends](../self-hosted/workspace-backends.md).
-
-## Workspace tabs
-
-Bot detail pages expose workspace-related settings across several tabs:
-
-| Tab | Purpose |
+| Tab | Content |
 |-----|---------|
-| **Workspace** | Container lifecycle, snapshots, data export/import, and CDI device settings. |
-| **Desktop** | Workspace display runtime, headed browser availability, live display sessions, and session cleanup. |
-| **Network** | Workspace network and overlay provider status/actions. |
-| **Tool Approval** | Approval settings for tools that need explicit human permission. |
-| **Files** | Browse and edit the bot workspace filesystem. |
-| **Terminal** | Open interactive shells inside the active workspace runtime. |
+| **Workspace** | Workspace state and lifecycle: create, start, stop; runtime info, snapshots, import/export |
+| **Files** | Browse and edit the workspace filesystem |
+| **Terminal** | Open an interactive shell inside the workspace |
+| **Desktop** | The visible desktop: live view, take over / hand back keyboard and mouse |
+| **Network** | Workspace network status |
+| **Apps** | Apps installed into this workspace — skills, dependencies, connectors (see [Supermarket](./supermarket.md)) |
 
-Some tabs are hidden or limited for trusted local workspaces when the feature only applies to container-backed runtimes.
+## Lifecycle
 
-## Container lifecycle
+Managed from the **Workspace** tab:
 
-Manage the container-backed workspace from the **Workspace** tab.
+- **Create**: builds a new workspace from the template, with progress shown.
+- **Start / Stop**: stop it to save resources when idle — nothing is lost.
+- **Delete**: removes the running instance.
 
-- **Create**: Initialize the workspace container if it does not exist. Progress is shown through SSE during image pull and creation.
-- **Start**: Launch the workspace runtime.
-- **Stop**: Gracefully shut down the runtime to save resources.
-- **Delete**: Remove the runtime instance.
+Most capabilities — terminal, desktop, installing and updating Apps — need the workspace **running**. The tab also shows runtime info such as state, image, and background task count.
 
-Many workspace features, such as terminal access and container display, require the runtime to be running.
+## The visible desktop
 
-## Workspace display
+The **Desktop** tab enables and inspects the graphical desktop. Once on, the bot can drive a **headed browser** inside the workspace, and the desktop pane shows the same screen it operates:
 
-The **Desktop** tab prepares and inspects the graphical workspace runtime. It checks for the desktop toolkit, Xvnc/VNC availability, browser availability, and active display sessions.
+- Watch every step live
+- **Take over** the keyboard and mouse any time — type a password, pass a CAPTCHA — then **hand control back**
+- Browser sessions persist in the workspace, so the next task is already signed in
 
-When enabled, the workspace can run a headed Chrome/Chromium browser inside the container. The app's **Desktop** pane connects to that desktop session so you and the agent can operate the same visible browser. For the tool model, see [Browser / Computer Use](./browser-computer-use.md).
-
-## Container information
-
-The **Workspace** tab displays runtime data such as:
-
-- container ID and status
-- image
-- host and workspace paths
-- active background tasks
-- effective CDI devices, if configured
-
-## Advanced: Provide CDI Devices
-
-Memoh can provide host devices to a bot container through CDI (Container Device Interface). This is an advanced capability for users who want to expose host-managed devices, most commonly GPUs, to the container runtime.
-
-In the app, this capability is placed under **Advanced options** in the **Workspace** tab. It is optional and only needs to be configured when the bot must access CDI-backed devices from the host.
-
-### Configure CDI Devices
-
-1. Open the bot's **Workspace** tab.
-2. Click **Create** if the container does not exist, or recreate the container if you need to change GPU settings.
-3. Expand **Advanced options**.
-4. Enable **GPU**.
-5. Enter one or more CDI device names in **CDI devices**.
-
-You can enter CDI device names one per line or separated with commas. Common GPU-related examples:
-
-- `nvidia.com/gpu=0`
-- `nvidia.com/gpu=all`
-- `amd.com/gpu=0`
-- `amd.com/gpu=all`
-
-### Host Requirements
-
-Before configuring CDI devices in Memoh, the host machine must already provide working device drivers, vendor toolkit support where required, and valid CDI specs. In practice, this usually means:
-
-- the host GPU works normally outside the container
-- CDI spec files exist under `/etc/cdi` or `/var/run/cdi`
-- the device name you enter in Memoh matches a real CDI device on the host
-
-To discover the exact CDI device names exposed by the host, use the vendor tool on the host machine:
-
-- NVIDIA: `nvidia-ctk cdi list`
-- AMD: `amd-ctk cdi list`
-
-If Memoh reports an error such as `unresolvable CDI devices`, the configured device name does not match any CDI device visible to the container runtime.
-
-### Important Behavior
-
-- CDI device settings are applied when the container is created. Updating the setting later requires recreating the container.
-- Stopping and starting an existing container does not change its attached CDI devices.
-- The container image still needs the appropriate user-space libraries and tools if you want to run CUDA or ROCm software inside the container.
-- After creation, the **Workspace** tab shows the effective attached CDI devices for verification.
+For the tool-level distinction, see [Browser / Computer Use](./browser-computer-use.md).
 
 ## Snapshots
 
-Snapshots allow you to capture the current state of the bot's container workspace and restore it later. This is useful for saving a known good configuration, versioning the runtime, or testing complex changes safely.
+**Create Snapshot** records the current workspace state — a rollback point before a big change; **Restore** reverts to a chosen snapshot, and unwanted snapshots can be deleted.
 
-## Data Export and Import
+## Import and export
 
-The **Workspace** tab supports exporting and importing workspace data for backup, migration, or sharing purposes.
+- **Export Data**: package the workspace files for download.
+- **Import Data**: upload an archive and unpack it into the workspace.
+- **Reset**: return the data directory to a clean state — for when the filesystem is wrecked or you want a fresh start.
 
-- **Export Data** packages the workspace filesystem data into a downloadable archive.
-- **Import Data** extracts an uploaded archive into the workspace filesystem.
-- **Restore** resets the data directory to a clean state when the filesystem has become corrupted or you want to start fresh without recreating the runtime.
-
-## Versioning
-
-Memoh tracks workspace/container versions to manage the lifecycle of the bot runtime environment. Version information helps with auditing and understanding when runtime configuration changed.
+::: tip Self-hosting
+Which runtime the workspace runs on (containerd, Docker, Apple container, a trusted local directory) and how host devices such as GPUs are passed through are server-side deployment concerns — see [Workspace Backends](../self-hosted/workspace-backends.md). Memoh Cloud users never need to touch these.
+:::

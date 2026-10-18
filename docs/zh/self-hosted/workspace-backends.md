@@ -109,3 +109,31 @@ Bot 网络有两层：
 | `local` | 宿主机网络 | 不支持 | 宿主机级别 | 无容器桌面 |
 
 Overlay provider 在 Bot 界面里配置，不在全局 TOML 里配。全局 backend 仍然重要，因为它决定能跑哪类 overlay driver。
+
+## CDI 设备（GPU 透传）
+
+要把宿主机设备通过 **CDI**（最常见是 GPU）透进容器型 workspace，在该 Bot 的 **工作区** → **Advanced** 里配置。一般只有确实要在工作区里跑 CUDA/ROCm 等才要动。
+
+### 配法
+
+1. 打开 **工作区** 标签页；没有容器先 **创建**。
+2. 展开 **Advanced**，开 **GPU**，在 **CDI devices** 里写设备名，每行一个或逗号分隔：
+   - `nvidia.com/gpu=0`、`nvidia.com/gpu=all`
+   - `amd.com/gpu=0`、`amd.com/gpu=all`
+
+### 宿主要求
+
+宿主机上驱动、厂商工具、CDI spec 要已就绪，通常意味着：
+
+- 宿主机上 GPU 本来就能用
+- `/etc/cdi` 或 `/var/run/cdi` 里有 spec
+- 你填的名字和运行时看见的一致（NVIDIA 用 `nvidia-ctk cdi list` 查，AMD 用 `amd-ctk cdi list`）
+
+若报 `unresolvable CDI devices`，多半是名字对不上。
+
+### 注意
+
+- CDI 在**创建**时生效：改配置后通常要**重建**容器，只停再起**不会**换已挂设备。
+- 镜像里仍要装对的用户态库和工具，才能真正跑 CUDA/ROCm 软件。
+- 建好后 **工作区** 标签页会显示当前挂上的设备，便于核对。
+- 后端支持情况见上表——只有 `containerd` 支持 CDI。

@@ -13,5 +13,5 @@ jobs:
         with:
           node-version: 22
 
-      - name: Check en/zh locale parity
+      - name: Check locale parity (en/zh/ja/ru)
         run: node scripts/check-locale-parity.mjs

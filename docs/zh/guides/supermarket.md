@@ -1,50 +1,44 @@
 # 应用市场（Supermarket）
 
-应用市场是 Memoh 内置的**连接器**和 **Skills** 目录。连接器把第三方服务（GitHub、Notion 这类）绑到 Bot 上；Skills 是 Agent 可按需加载的可复用流程。
+应用市场是 Memoh 内置的应用目录。这里的**应用（App）**是一个打包好的能力单元：一个 App 里可以带若干 **Skill**（可复用的流程说明）、若干**依赖**（要装进工作区的工具），以及若干**连接器**（GitHub、Notion 这类第三方服务的绑定）。装的是整个 App，不用再分别找 Skill 或连接器。
 
-客户端在 **设置** 下提供应用市场，分两个标签页：
-
-- **Connectors**
-- **Skills**
-
-服务器[配置了 Connect-It](./connectors.md#前提) 时，**Connectors** 排在第一个，也是默认落地的 tab；没配置时这个 tab 不显示，默认落在 **Skills**。
+在客户端侧边栏打开 **应用市场**：应用按分类陈列，可搜索、按标签筛选。点进详情页能看到应用的说明、组件构成（多少个 Skill、依赖、连接器）、作者、版本、来源 Registry 和链接。
 
 ---
 
-## 连接一个服务
+## 安装一个应用
 
-**Connectors** tab 列出可以通过 OAuth 或 API Key 连给 Bot 的服务。挑一个点 **Connect**，选目标 Bot，完成授权即可。完整流程——认证方式、连接状态、工具怎么到 Bot 手上——见[连接器](./connectors.md)。
+1. 在 **应用市场** 挑一个应用，进入详情页。
+2. 点 **安装到 Bot**，选择目标 Bot。
+3. 应用声明了环境变量的，先把需要的值填好。
+4. 确认安装。
 
----
-
-## 安装 Skill
-
-1. 在客户端打开 **应用市场**。
-2. 切到 **Skills** tab。
-3. 选择一个 Skill 并点击 **Install**，或进入 Skill 详情页点击 **Install to Bot**。
-4. 选择目标 Bot。
-5. 确认安装。
-6. Skill 会出现在该 Bot 的 **Skills** tab 中。
-
-Skill 会安装到 Bot 工作区内的 managed skills 目录（`/data/skills/<skill-name>`）。Skill 详情页展示作者、版本、来源 registry 和链接。加载与使用方式见 [Skills](./skills.md)。
+安装和更新需要该 Bot 的工作区处于运行状态：Skill 会写进工作区，依赖装进工作区，连接器建立绑定。安装过程有进度展示，中断了可以**继续安装**或**恢复安装**。
 
 ---
 
-## 配置应用市场
+## 装好之后：Bot 的「应用」标签
 
-默认情况下，Memoh 会从这里读取应用市场内容：
+Bot 详情页的 **应用** 标签列出已安装的 App，按组件展示状态：
 
-```toml
-[supermarket]
-base_url = "https://supermarket.memoh.ai"
-```
+| 组件 | 去向 |
+|------|------|
+| **Skill** | 写进工作区的受管目录 `/data/skills/<registry>/<app>/`，由应用管理——更新、卸载时一起处理，别手动改（见[技能](./skills.md)） |
+| **依赖** | 装进该 Bot 的工作区，并与同工作区里需要它们的其他应用共享 |
+| **连接器** | 标注**需要授权**、**可选**或**所有工作区共享**；点**去授权**完成 OAuth 或填入 API Key（见[连接器](../self-hosted/connectors.md)） |
 
-运维方可以把 `supermarket.base_url` 指向其它可信目录。该 endpoint 会用于连接器列表、Skill 列表、Skill 详情和 Skill 下载。Skills tab 中的 **Registry** 筛选可以只看某一个上游 registry 的结果。
+常用操作：**检查更新**、**更新**、**卸载**。部分组件失败或还没授权时，应用会标成"需要处理"，点开组件列表补齐即可。
+
+---
+
+## 市场内容从哪来
+
+应用市场的内容来自上游 Registry，默认是 `supermarket.memoh.ai`。自部署实例可以把 `supermarket.base_url` 指向其它可信目录，见 [Server Deploy](../self-hosted/docker.md) 的配置参考。
 
 ---
 
 ## 贡献
 
-新的 Skills 可提交到：
+新的应用可提交到：
 
 - [felinics/supermarket](https://github.com/felinics/supermarket)

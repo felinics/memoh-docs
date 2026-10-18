@@ -10,7 +10,7 @@
 - **来源够得着。** 涉及的文件、网站或对话是它真能访问到的：已上传进工作区、已接入的渠道或服务、或者是公开内容。
 - **产出好检查。** 你一眼能看出结果对不对，复查的成本才低。
 
-三条都满足，也还是从只读开始：先让它读和整理，检查几次产出，再逐步放权。[使用场景](./use-cases.md) 里的每个示例都是这么起步的。
+三条都满足，也还是从只读开始：先让它读和整理，检查几次产出，再逐步放权。
 
 ## 把请求说清楚
 
@@ -67,7 +67,7 @@
 2. 检查过前几次运行，再考虑放宽。
 3. 会离开工作区的动作——给别人发消息、任何对外操作——即使流程已经很熟，也继续留在审批后面。
 
-这和 [使用场景](./use-cases.md#从示例到日常使用) 的检查清单是同一条路：多批几次请求，远比撤销一次写错便宜。
+账很好算：多批几次请求，远比撤销一次写错便宜。
 
 ---
 
@@ -123,7 +123,6 @@ Files、Terminal 以及桌面 / 浏览器面板在聊天的 workspace 区域里�
 - [模型服务商与模型](../integrations/providers/llm.md)
 - [内置记忆提供方](../integrations/providers/memory/builtin.md)（如用）
 - [搜索提供方](../integrations/providers/web-search.md)
-- [TTS：Edge](../integrations/providers/tts/edge.md)
 - [Agents / ACP](./acp.md)
 
 ---
@@ -145,7 +144,7 @@ Files、Terminal 以及桌面 / 浏览器面板在聊天的 workspace 区域里�
 注意：
 
 - **生图模型** 故意与主聊天模型分开，好单独换「更擅长出图」的。
-- **TTS** 用 [TTS 提供方](../integrations/providers/tts/edge.md) 所配置语音提供方的 `speech` 模型。
+- **TTS** 用 **语音合成** 设置页 所配置语音提供方的 `speech` 模型。
 - 所选聊天模型的 `context_window` 会影响会话状态展示和 [会话压缩](./compaction.md)。
 
 ---
