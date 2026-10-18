@@ -13,7 +13,6 @@
 - [Memoh Overview](/guides/overview.md)
 - [Quick Start](/guides/quick-start.md)
 - [Working with Bots](/guides/working-with-bots.md)
-- [Preferences](/guides/preferences.md)
 - [Sessions](/guides/sessions.md)
 - [Bot Files Management](/guides/files.md)
 - [Slash Commands](/guides/slash-commands.md)
@@ -38,11 +37,10 @@
 - [Agents / ACP](/guides/acp.md)
 - [Approvals and Trust](/guides/approvals.md)
 - [Bot Access Control](/guides/access.md)
-- [Bot Workspace Management](/guides/container.md)
+- [Workspace](/guides/container.md)
 - [Browser Use and Computer Use](/guides/browser-computer-use.md)
-- [Bot Skills](/guides/skills.md)
+- [Skills](/guides/skills.md)
 - [Supermarket](/guides/supermarket.md)
-- [Connectors](/guides/connectors.md)
 - [Bot Hooks](/guides/hooks.md)
 - [MCP Connections](/guides/mcp.md)
 - [Bot Memory Management](/guides/memory.md)
@@ -52,13 +50,13 @@
 - [Search Providers](/integrations/providers/web-search.md)
 - [Video Generation Providers](/integrations/providers/video.md)
 - [Built-in Memory Provider](/integrations/providers/memory/builtin.md)
-- [Mem0 Memory Provider](/integrations/providers/memory/mem0.md)
-- [OpenViking Memory Provider](/integrations/providers/memory/openviking.md)
-- [Edge TTS](/integrations/providers/tts/edge.md)
 
-### Use Cases
+### Deployment
 
-- [Use Cases](/guides/use-cases.md)
+- [Self-hosted Overview](/self-hosted.md)
+- [Server Deploy](/self-hosted/docker.md)
+- [Workspace Backends](/self-hosted/workspace-backends.md)
+- [Connectors (Connect-It)](/self-hosted/connectors.md)
 
 ### References
 
@@ -69,7 +67,6 @@
 - [Memoh Overview](/guides/overview.md)
 - [Quick Start](/guides/quick-start.md)
 - [Working with Bots](/guides/working-with-bots.md)
-- [Preferences](/guides/preferences.md)
 - [Sessions](/guides/sessions.md)
 - [Bot Files Management](/guides/files.md)
 - [Slash Commands](/guides/slash-commands.md)
@@ -94,11 +91,10 @@
 - [Agents / ACP](/guides/acp.md)
 - [Approvals and Trust](/guides/approvals.md)
 - [Bot Access Control](/guides/access.md)
-- [Bot Workspace Management](/guides/container.md)
+- [Workspace](/guides/container.md)
 - [Browser Use and Computer Use](/guides/browser-computer-use.md)
-- [Bot Skills](/guides/skills.md)
+- [Skills](/guides/skills.md)
 - [Supermarket](/guides/supermarket.md)
-- [Connectors](/guides/connectors.md)
 - [Bot Hooks](/guides/hooks.md)
 - [MCP Connections](/guides/mcp.md)
 - [Bot Memory Management](/guides/memory.md)
@@ -108,13 +104,13 @@
 - [Search Providers](/integrations/providers/web-search.md)
 - [Video Generation Providers](/integrations/providers/video.md)
 - [Built-in Memory Provider](/integrations/providers/memory/builtin.md)
-- [Mem0 Memory Provider](/integrations/providers/memory/mem0.md)
-- [OpenViking Memory Provider](/integrations/providers/memory/openviking.md)
-- [Edge TTS](/integrations/providers/tts/edge.md)
 
-### Use Cases
+### Deployment
 
-- [Use Cases](/guides/use-cases.md)
+- [Self-hosted Overview](/self-hosted.md)
+- [Server Deploy](/self-hosted/docker.md)
+- [Workspace Backends](/self-hosted/workspace-backends.md)
+- [Connectors (Connect-It)](/self-hosted/connectors.md)
 
 ### References
 
@@ -125,7 +121,6 @@
 - [Memoh Overview](/guides/overview.md)
 - [Quick Start](/guides/quick-start.md)
 - [Working with Bots](/guides/working-with-bots.md)
-- [Preferences](/guides/preferences.md)
 - [Sessions](/guides/sessions.md)
 - [Bot Files Management](/guides/files.md)
 - [Slash Commands](/guides/slash-commands.md)
@@ -150,11 +145,10 @@
 - [Agents / ACP](/guides/acp.md)
 - [Approvals and Trust](/guides/approvals.md)
 - [Bot Access Control](/guides/access.md)
-- [Bot Workspace Management](/guides/container.md)
+- [Workspace](/guides/container.md)
 - [Browser Use and Computer Use](/guides/browser-computer-use.md)
-- [Bot Skills](/guides/skills.md)
+- [Skills](/guides/skills.md)
 - [Supermarket](/guides/supermarket.md)
-- [Connectors](/guides/connectors.md)
 - [Bot Hooks](/guides/hooks.md)
 - [MCP Connections](/guides/mcp.md)
 - [Bot Memory Management](/guides/memory.md)
@@ -164,13 +158,13 @@
 - [Search Providers](/integrations/providers/web-search.md)
 - [Video Generation Providers](/integrations/providers/video.md)
 - [Built-in Memory Provider](/integrations/providers/memory/builtin.md)
-- [Mem0 Memory Provider](/integrations/providers/memory/mem0.md)
-- [OpenViking Memory Provider](/integrations/providers/memory/openviking.md)
-- [Edge TTS](/integrations/providers/tts/edge.md)
 
-### Use Cases
+### Deployment
 
-- [Use Cases](/guides/use-cases.md)
+- [Self-hosted Overview](/self-hosted.md)
+- [Server Deploy](/self-hosted/docker.md)
+- [Workspace Backends](/self-hosted/workspace-backends.md)
+- [Connectors (Connect-It)](/self-hosted/connectors.md)
 
 ### 参考文档
 
@@ -181,7 +175,6 @@
 - [Memoh 概览](/zh/guides/overview.md)
 - [快速开始](/zh/guides/quick-start.md)
 - [和 Bot 协作](/zh/guides/working-with-bots.md)
-- [偏好设置](/zh/guides/preferences.md)
 - [会话](/zh/guides/sessions.md)
 - [文件](/zh/guides/files.md)
 - [斜杠命令](/zh/guides/slash-commands.md)
@@ -206,11 +199,10 @@
 - [Agents / ACP](/zh/guides/acp.md)
 - [审批与信任](/zh/guides/approvals.md)
 - [访问控制](/zh/guides/access.md)
-- [工作区（Workspace）与容器](/zh/guides/container.md)
+- [工作区](/zh/guides/container.md)
 - [Browser Use 与 Computer Use](/zh/guides/browser-computer-use.md)
 - [技能](/zh/guides/skills.md)
 - [应用市场（Supermarket）](/zh/guides/supermarket.md)
-- [连接器](/zh/guides/connectors.md)
 - [Bot Hooks](/zh/guides/hooks.md)
 - [MCP 连接](/zh/guides/mcp.md)
 - [长期记忆](/zh/guides/memory.md)
@@ -220,13 +212,13 @@
 - [搜索提供方](/zh/integrations/providers/web-search.md)
 - [视频生成提供方](/zh/integrations/providers/video.md)
 - [内置记忆](/zh/integrations/providers/memory/builtin.md)
-- [Mem0 记忆](/zh/integrations/providers/memory/mem0.md)
-- [OpenViking 记忆](/zh/integrations/providers/memory/openviking.md)
-- [Edge TTS](/zh/integrations/providers/tts/edge.md)
 
-### 使用场景
+### 自部署
 
-- [使用场景](/zh/guides/use-cases.md)
+- [自托管总览](/zh/self-hosted.md)
+- [服务器部署（Server Deploy）](/zh/self-hosted/docker.md)
+- [工作区后端（Workspace backend）](/zh/self-hosted/workspace-backends.md)
+- [连接器（Connect-It）](/zh/self-hosted/connectors.md)
 
 ### 参考文档
 
@@ -237,7 +229,6 @@
 - [Memoh 概览](/zh/guides/overview.md)
 - [快速开始](/zh/guides/quick-start.md)
 - [和 Bot 协作](/zh/guides/working-with-bots.md)
-- [偏好设置](/zh/guides/preferences.md)
 - [会话](/zh/guides/sessions.md)
 - [文件](/zh/guides/files.md)
 - [斜杠命令](/zh/guides/slash-commands.md)
@@ -262,11 +253,10 @@
 - [Agents / ACP](/zh/guides/acp.md)
 - [审批与信任](/zh/guides/approvals.md)
 - [访问控制](/zh/guides/access.md)
-- [工作区（Workspace）与容器](/zh/guides/container.md)
+- [工作区](/zh/guides/container.md)
 - [Browser Use 与 Computer Use](/zh/guides/browser-computer-use.md)
 - [技能](/zh/guides/skills.md)
 - [应用市场（Supermarket）](/zh/guides/supermarket.md)
-- [连接器](/zh/guides/connectors.md)
 - [Bot Hooks](/zh/guides/hooks.md)
 - [MCP 连接](/zh/guides/mcp.md)
 - [长期记忆](/zh/guides/memory.md)
@@ -276,13 +266,13 @@
 - [搜索提供方](/zh/integrations/providers/web-search.md)
 - [视频生成提供方](/zh/integrations/providers/video.md)
 - [内置记忆](/zh/integrations/providers/memory/builtin.md)
-- [Mem0 记忆](/zh/integrations/providers/memory/mem0.md)
-- [OpenViking 记忆](/zh/integrations/providers/memory/openviking.md)
-- [Edge TTS](/zh/integrations/providers/tts/edge.md)
 
-### 使用场景
+### 自部署
 
-- [使用场景](/zh/guides/use-cases.md)
+- [自托管总览](/zh/self-hosted.md)
+- [服务器部署（Server Deploy）](/zh/self-hosted/docker.md)
+- [工作区后端（Workspace backend）](/zh/self-hosted/workspace-backends.md)
+- [连接器（Connect-It）](/zh/self-hosted/connectors.md)
 
 ### 参考文档
 
@@ -293,7 +283,6 @@
 - [Memoh 概览](/zh/guides/overview.md)
 - [快速开始](/zh/guides/quick-start.md)
 - [和 Bot 协作](/zh/guides/working-with-bots.md)
-- [偏好设置](/zh/guides/preferences.md)
 - [会话](/zh/guides/sessions.md)
 - [文件](/zh/guides/files.md)
 - [斜杠命令](/zh/guides/slash-commands.md)
@@ -318,11 +307,10 @@
 - [Agents / ACP](/zh/guides/acp.md)
 - [审批与信任](/zh/guides/approvals.md)
 - [访问控制](/zh/guides/access.md)
-- [工作区（Workspace）与容器](/zh/guides/container.md)
+- [工作区](/zh/guides/container.md)
 - [Browser Use 与 Computer Use](/zh/guides/browser-computer-use.md)
 - [技能](/zh/guides/skills.md)
 - [应用市场（Supermarket）](/zh/guides/supermarket.md)
-- [连接器](/zh/guides/connectors.md)
 - [Bot Hooks](/zh/guides/hooks.md)
 - [MCP 连接](/zh/guides/mcp.md)
 - [长期记忆](/zh/guides/memory.md)
@@ -332,108 +320,500 @@
 - [搜索提供方](/zh/integrations/providers/web-search.md)
 - [视频生成提供方](/zh/integrations/providers/video.md)
 - [内置记忆](/zh/integrations/providers/memory/builtin.md)
-- [Mem0 记忆](/zh/integrations/providers/memory/mem0.md)
-- [OpenViking 记忆](/zh/integrations/providers/memory/openviking.md)
-- [Edge TTS](/zh/integrations/providers/tts/edge.md)
 
-### 使用场景
+### 自部署
 
-- [使用场景](/zh/guides/use-cases.md)
+- [自托管总览](/zh/self-hosted.md)
+- [服务器部署（Server Deploy）](/zh/self-hosted/docker.md)
+- [工作区后端（Workspace backend）](/zh/self-hosted/workspace-backends.md)
+- [连接器（Connect-It）](/zh/self-hosted/connectors.md)
+
+### リファレンス
+
+- [リファレンス](/ja/guides.md)
+
+### はじめに
+
+- [Memoh の概要](/ja/guides/overview.md)
+- [クイックスタート](/ja/guides/quick-start.md)
+- [Bot との協働](/ja/guides/working-with-bots.md)
+- [セッション](/ja/guides/sessions.md)
+- [ファイル](/ja/guides/files.md)
+- [スラッシュコマンド](/ja/guides/slash-commands.md)
+- [Desktop](/ja/self-hosted/desktop.md)
+
+#### チャネル
+
+- [チャネル](/ja/integrations/channels.md)
+- [Slack](/ja/integrations/channels/slack.md)
+- [Telegram](/ja/integrations/channels/telegram.md)
+- [Feishu (Lark)](/ja/integrations/channels/feishu.md)
+- [Discord](/ja/integrations/channels/discord.md)
+- [QQ](/ja/integrations/channels/qq.md)
+- [LINE](/ja/integrations/channels/line.md)
+- [DingTalk](/ja/integrations/channels/dingtalk.md)
+- [WeCom（WeWork）](/ja/integrations/channels/wecom.md)
+- [WeChat（個人アカウント）](/ja/integrations/channels/weixin.md)
+
+### 高度な機能
+
+- [拡張機能の選び方](/ja/guides/extensions.md)
+- [Agents / ACP](/ja/guides/acp.md)
+- [承認と信頼](/ja/guides/approvals.md)
+- [アクセス制御](/ja/guides/access.md)
+- [ワークスペース](/ja/guides/container.md)
+- [Browser Use と Computer Use](/ja/guides/browser-computer-use.md)
+- [スキル](/ja/guides/skills.md)
+- [マーケットプレイス（Supermarket）](/ja/guides/supermarket.md)
+- [Bot Hooks](/ja/guides/hooks.md)
+- [MCP 接続](/ja/guides/mcp.md)
+- [長期メモリ](/ja/guides/memory.md)
+- [セッションのコンテキスト圧縮](/ja/guides/compaction.md)
+- [スケジュールタスク](/ja/guides/schedule.md)
+- [モデルプロバイダーとモデル](/ja/integrations/providers/llm.md)
+- [ウェブ検索プロバイダー](/ja/integrations/providers/web-search.md)
+- [動画生成プロバイダー](/ja/integrations/providers/video.md)
+- [内蔵メモリ](/ja/integrations/providers/memory/builtin.md)
+
+### セルフホスト
+
+- [セルフホスト概要](/ja/self-hosted.md)
+- [サーバーデプロイ（Server Deploy）](/ja/self-hosted/docker.md)
+- [Workspace バックエンド](/ja/self-hosted/workspace-backends.md)
+- [コネクター（Connect-It）](/ja/self-hosted/connectors.md)
+
+### リファレンス
+
+- [リファレンス](/ja/guides.md)
+
+### はじめに
+
+- [Memoh の概要](/ja/guides/overview.md)
+- [クイックスタート](/ja/guides/quick-start.md)
+- [Bot との協働](/ja/guides/working-with-bots.md)
+- [セッション](/ja/guides/sessions.md)
+- [ファイル](/ja/guides/files.md)
+- [スラッシュコマンド](/ja/guides/slash-commands.md)
+- [Desktop](/ja/self-hosted/desktop.md)
+
+#### チャネル
+
+- [チャネル](/ja/integrations/channels.md)
+- [Slack](/ja/integrations/channels/slack.md)
+- [Telegram](/ja/integrations/channels/telegram.md)
+- [Feishu (Lark)](/ja/integrations/channels/feishu.md)
+- [Discord](/ja/integrations/channels/discord.md)
+- [QQ](/ja/integrations/channels/qq.md)
+- [LINE](/ja/integrations/channels/line.md)
+- [DingTalk](/ja/integrations/channels/dingtalk.md)
+- [WeCom（WeWork）](/ja/integrations/channels/wecom.md)
+- [WeChat（個人アカウント）](/ja/integrations/channels/weixin.md)
+
+### 高度な機能
+
+- [拡張機能の選び方](/ja/guides/extensions.md)
+- [Agents / ACP](/ja/guides/acp.md)
+- [承認と信頼](/ja/guides/approvals.md)
+- [アクセス制御](/ja/guides/access.md)
+- [ワークスペース](/ja/guides/container.md)
+- [Browser Use と Computer Use](/ja/guides/browser-computer-use.md)
+- [スキル](/ja/guides/skills.md)
+- [マーケットプレイス（Supermarket）](/ja/guides/supermarket.md)
+- [Bot Hooks](/ja/guides/hooks.md)
+- [MCP 接続](/ja/guides/mcp.md)
+- [長期メモリ](/ja/guides/memory.md)
+- [セッションのコンテキスト圧縮](/ja/guides/compaction.md)
+- [スケジュールタスク](/ja/guides/schedule.md)
+- [モデルプロバイダーとモデル](/ja/integrations/providers/llm.md)
+- [ウェブ検索プロバイダー](/ja/integrations/providers/web-search.md)
+- [動画生成プロバイダー](/ja/integrations/providers/video.md)
+- [内蔵メモリ](/ja/integrations/providers/memory/builtin.md)
+
+### セルフホスト
+
+- [セルフホスト概要](/ja/self-hosted.md)
+- [サーバーデプロイ（Server Deploy）](/ja/self-hosted/docker.md)
+- [Workspace バックエンド](/ja/self-hosted/workspace-backends.md)
+- [コネクター（Connect-It）](/ja/self-hosted/connectors.md)
+
+### リファレンス
+
+- [リファレンス](/ja/guides.md)
+
+### はじめに
+
+- [Memoh の概要](/ja/guides/overview.md)
+- [クイックスタート](/ja/guides/quick-start.md)
+- [Bot との協働](/ja/guides/working-with-bots.md)
+- [セッション](/ja/guides/sessions.md)
+- [ファイル](/ja/guides/files.md)
+- [スラッシュコマンド](/ja/guides/slash-commands.md)
+- [Desktop](/ja/self-hosted/desktop.md)
+
+#### チャネル
+
+- [チャネル](/ja/integrations/channels.md)
+- [Slack](/ja/integrations/channels/slack.md)
+- [Telegram](/ja/integrations/channels/telegram.md)
+- [Feishu (Lark)](/ja/integrations/channels/feishu.md)
+- [Discord](/ja/integrations/channels/discord.md)
+- [QQ](/ja/integrations/channels/qq.md)
+- [LINE](/ja/integrations/channels/line.md)
+- [DingTalk](/ja/integrations/channels/dingtalk.md)
+- [WeCom（WeWork）](/ja/integrations/channels/wecom.md)
+- [WeChat（個人アカウント）](/ja/integrations/channels/weixin.md)
+
+### 高度な機能
+
+- [拡張機能の選び方](/ja/guides/extensions.md)
+- [Agents / ACP](/ja/guides/acp.md)
+- [承認と信頼](/ja/guides/approvals.md)
+- [アクセス制御](/ja/guides/access.md)
+- [ワークスペース](/ja/guides/container.md)
+- [Browser Use と Computer Use](/ja/guides/browser-computer-use.md)
+- [スキル](/ja/guides/skills.md)
+- [マーケットプレイス（Supermarket）](/ja/guides/supermarket.md)
+- [Bot Hooks](/ja/guides/hooks.md)
+- [MCP 接続](/ja/guides/mcp.md)
+- [長期メモリ](/ja/guides/memory.md)
+- [セッションのコンテキスト圧縮](/ja/guides/compaction.md)
+- [スケジュールタスク](/ja/guides/schedule.md)
+- [モデルプロバイダーとモデル](/ja/integrations/providers/llm.md)
+- [ウェブ検索プロバイダー](/ja/integrations/providers/web-search.md)
+- [動画生成プロバイダー](/ja/integrations/providers/video.md)
+- [内蔵メモリ](/ja/integrations/providers/memory/builtin.md)
+
+### セルフホスト
+
+- [セルフホスト概要](/ja/self-hosted.md)
+- [サーバーデプロイ（Server Deploy）](/ja/self-hosted/docker.md)
+- [Workspace バックエンド](/ja/self-hosted/workspace-backends.md)
+- [コネクター（Connect-It）](/ja/self-hosted/connectors.md)
+
+### Справочник
+
+- [Справочник](/ru/guides.md)
+
+### Начало работы
+
+- [Обзор Memoh](/ru/guides/overview.md)
+- [Быстрый старт](/ru/guides/quick-start.md)
+- [Работа с Bot](/ru/guides/working-with-bots.md)
+- [Сессии](/ru/guides/sessions.md)
+- [Управление файлами Bot](/ru/guides/files.md)
+- [Слэш-команды](/ru/guides/slash-commands.md)
+- [Desktop](/ru/self-hosted/desktop.md)
+
+#### Каналы
+
+- [Каналы](/ru/integrations/channels.md)
+- [Настройка канала Slack](/ru/integrations/channels/slack.md)
+- [Настройка канала Telegram](/ru/integrations/channels/telegram.md)
+- [Настройка канала Feishu (Lark)](/ru/integrations/channels/feishu.md)
+- [Настройка канала Discord](/ru/integrations/channels/discord.md)
+- [Настройка канала QQ](/ru/integrations/channels/qq.md)
+- [Настройка канала LINE](/ru/integrations/channels/line.md)
+- [Настройка канала DingTalk](/ru/integrations/channels/dingtalk.md)
+- [Настройка канала WeCom (WeWork)](/ru/integrations/channels/wecom.md)
+- [Настройка канала WeChat](/ru/integrations/channels/weixin.md)
+
+### Продвинутые возможности
+
+- [Выбор расширения](/ru/guides/extensions.md)
+- [Agents / ACP](/ru/guides/acp.md)
+- [Подтверждения и доверие](/ru/guides/approvals.md)
+- [Контроль доступа Bot](/ru/guides/access.md)
+- [Рабочее пространство](/ru/guides/container.md)
+- [Browser Use и Computer Use](/ru/guides/browser-computer-use.md)
+- [Навыки](/ru/guides/skills.md)
+- [Supermarket](/ru/guides/supermarket.md)
+- [Хуки Bot](/ru/guides/hooks.md)
+- [MCP-подключения](/ru/guides/mcp.md)
+- [Управление памятью Bot](/ru/guides/memory.md)
+- [Сжатие контекста](/ru/guides/compaction.md)
+- [Задачи по расписанию](/ru/guides/schedule.md)
+- [Провайдеры и модели](/ru/integrations/providers/llm.md)
+- [Провайдеры поиска](/ru/integrations/providers/web-search.md)
+- [Провайдеры генерации видео](/ru/integrations/providers/video.md)
+- [Встроенный провайдер памяти](/ru/integrations/providers/memory/builtin.md)
+
+### Развёртывание
+
+- [Обзор самостоятельного развёртывания](/ru/self-hosted.md)
+- [Server Deploy](/ru/self-hosted/docker.md)
+- [Бэкенды рабочих пространств](/ru/self-hosted/workspace-backends.md)
+- [Коннекторы (Connect-It)](/ru/self-hosted/connectors.md)
+
+### Справочник
+
+- [Справочник](/ru/guides.md)
+
+### Начало работы
+
+- [Обзор Memoh](/ru/guides/overview.md)
+- [Быстрый старт](/ru/guides/quick-start.md)
+- [Работа с Bot](/ru/guides/working-with-bots.md)
+- [Сессии](/ru/guides/sessions.md)
+- [Управление файлами Bot](/ru/guides/files.md)
+- [Слэш-команды](/ru/guides/slash-commands.md)
+- [Desktop](/ru/self-hosted/desktop.md)
+
+#### Каналы
+
+- [Каналы](/ru/integrations/channels.md)
+- [Настройка канала Slack](/ru/integrations/channels/slack.md)
+- [Настройка канала Telegram](/ru/integrations/channels/telegram.md)
+- [Настройка канала Feishu (Lark)](/ru/integrations/channels/feishu.md)
+- [Настройка канала Discord](/ru/integrations/channels/discord.md)
+- [Настройка канала QQ](/ru/integrations/channels/qq.md)
+- [Настройка канала LINE](/ru/integrations/channels/line.md)
+- [Настройка канала DingTalk](/ru/integrations/channels/dingtalk.md)
+- [Настройка канала WeCom (WeWork)](/ru/integrations/channels/wecom.md)
+- [Настройка канала WeChat](/ru/integrations/channels/weixin.md)
+
+### Продвинутые возможности
+
+- [Выбор расширения](/ru/guides/extensions.md)
+- [Agents / ACP](/ru/guides/acp.md)
+- [Подтверждения и доверие](/ru/guides/approvals.md)
+- [Контроль доступа Bot](/ru/guides/access.md)
+- [Рабочее пространство](/ru/guides/container.md)
+- [Browser Use и Computer Use](/ru/guides/browser-computer-use.md)
+- [Навыки](/ru/guides/skills.md)
+- [Supermarket](/ru/guides/supermarket.md)
+- [Хуки Bot](/ru/guides/hooks.md)
+- [MCP-подключения](/ru/guides/mcp.md)
+- [Управление памятью Bot](/ru/guides/memory.md)
+- [Сжатие контекста](/ru/guides/compaction.md)
+- [Задачи по расписанию](/ru/guides/schedule.md)
+- [Провайдеры и модели](/ru/integrations/providers/llm.md)
+- [Провайдеры поиска](/ru/integrations/providers/web-search.md)
+- [Провайдеры генерации видео](/ru/integrations/providers/video.md)
+- [Встроенный провайдер памяти](/ru/integrations/providers/memory/builtin.md)
+
+### Развёртывание
+
+- [Обзор самостоятельного развёртывания](/ru/self-hosted.md)
+- [Server Deploy](/ru/self-hosted/docker.md)
+- [Бэкенды рабочих пространств](/ru/self-hosted/workspace-backends.md)
+- [Коннекторы (Connect-It)](/ru/self-hosted/connectors.md)
+
+### Справочник
+
+- [Справочник](/ru/guides.md)
+
+### Начало работы
+
+- [Обзор Memoh](/ru/guides/overview.md)
+- [Быстрый старт](/ru/guides/quick-start.md)
+- [Работа с Bot](/ru/guides/working-with-bots.md)
+- [Сессии](/ru/guides/sessions.md)
+- [Управление файлами Bot](/ru/guides/files.md)
+- [Слэш-команды](/ru/guides/slash-commands.md)
+- [Desktop](/ru/self-hosted/desktop.md)
+
+#### Каналы
+
+- [Каналы](/ru/integrations/channels.md)
+- [Настройка канала Slack](/ru/integrations/channels/slack.md)
+- [Настройка канала Telegram](/ru/integrations/channels/telegram.md)
+- [Настройка канала Feishu (Lark)](/ru/integrations/channels/feishu.md)
+- [Настройка канала Discord](/ru/integrations/channels/discord.md)
+- [Настройка канала QQ](/ru/integrations/channels/qq.md)
+- [Настройка канала LINE](/ru/integrations/channels/line.md)
+- [Настройка канала DingTalk](/ru/integrations/channels/dingtalk.md)
+- [Настройка канала WeCom (WeWork)](/ru/integrations/channels/wecom.md)
+- [Настройка канала WeChat](/ru/integrations/channels/weixin.md)
+
+### Продвинутые возможности
+
+- [Выбор расширения](/ru/guides/extensions.md)
+- [Agents / ACP](/ru/guides/acp.md)
+- [Подтверждения и доверие](/ru/guides/approvals.md)
+- [Контроль доступа Bot](/ru/guides/access.md)
+- [Рабочее пространство](/ru/guides/container.md)
+- [Browser Use и Computer Use](/ru/guides/browser-computer-use.md)
+- [Навыки](/ru/guides/skills.md)
+- [Supermarket](/ru/guides/supermarket.md)
+- [Хуки Bot](/ru/guides/hooks.md)
+- [MCP-подключения](/ru/guides/mcp.md)
+- [Управление памятью Bot](/ru/guides/memory.md)
+- [Сжатие контекста](/ru/guides/compaction.md)
+- [Задачи по расписанию](/ru/guides/schedule.md)
+- [Провайдеры и модели](/ru/integrations/providers/llm.md)
+- [Провайдеры поиска](/ru/integrations/providers/web-search.md)
+- [Провайдеры генерации видео](/ru/integrations/providers/video.md)
+- [Встроенный провайдер памяти](/ru/integrations/providers/memory/builtin.md)
+
+### Развёртывание
+
+- [Обзор самостоятельного развёртывания](/ru/self-hosted.md)
+- [Server Deploy](/ru/self-hosted/docker.md)
+- [Бэкенды рабочих пространств](/ru/self-hosted/workspace-backends.md)
+- [Коннекторы (Connect-It)](/ru/self-hosted/connectors.md)
 
 ### Other
 
 - [About Memoh](/about.md)
 - [Integrations](/integrations.md)
+- [Memoh ドキュメント](/ja.md): Memoh を学び、外部システムと連携し、Bot を普段使いのチャットプラットフォームへ。
+- [Memoh について](/ja/about.md)
 - [Memoh 文档](/zh.md): 学习 Memoh、连接外部系统，把 Bot 带进你常用的聊天平台。
-- [Redirecting](/channels/dingtalk.md)
-- [Redirecting](/channels/discord.md)
 - [Redirecting](/channels/feishu.md)
+- [Redirecting](/channels/discord.md)
 - [Redirecting](/channels.md)
+- [Redirecting](/channels/dingtalk.md)
 - [Redirecting](/channels/qq.md)
-- [Redirecting](/channels/slack.md)
 - [Redirecting](/channels/telegram.md)
-- [Redirecting](/channels/wecom.md)
+- [Redirecting](/channels/slack.md)
 - [Redirecting](/channels/weixin.md)
+- [Redirecting](/channels/wecom.md)
 - [Redirecting](/getting-started/access.md)
-- [Redirecting](/getting-started/bot.md)
 - [Redirecting](/getting-started/acp.md)
+- [Redirecting](/getting-started/bot.md)
 - [Redirecting](/getting-started/browser-computer-use.md)
 - [Redirecting](/getting-started/channels.md)
-- [Redirecting](/getting-started/compaction.md)
 - [Redirecting](/getting-started/container.md)
-- [Redirecting](/getting-started/heartbeat.md)
+- [Redirecting](/getting-started/compaction.md)
 - [Redirecting](/getting-started/files.md)
 - [Redirecting](/getting-started/mcp.md)
-- [Redirecting](/getting-started/memory.md)
+- [Redirecting](/getting-started/heartbeat.md)
 - [Redirecting](/getting-started/plugins.md)
-- [Redirecting](/getting-started/search-provider.md)
+- [Redirecting](/getting-started/memory.md)
 - [Redirecting](/getting-started/provider-and-model.md)
+- [Redirecting](/getting-started/search-provider.md)
 - [Redirecting](/getting-started/schedule.md)
-- [Redirecting](/getting-started/sessions.md)
 - [Redirecting](/getting-started/skills.md)
+- [Redirecting](/getting-started/sessions.md)
 - [Redirecting](/getting-started/slash-commands.md)
 - [Redirecting](/getting-started/supermarket.md)
 - [Redirecting](/guides/bot.md)
 - [Redirecting](/guides/get-started.md)
-- [Redirecting](/installation/docker.md)
 - [Redirecting](/installation/desktop.md)
-- [Redirecting](/installation.md)
+- [Redirecting](/installation/docker.md)
 - [Redirecting](/installation/kata-containerd.md)
-- [Redirecting](/installation/sqlite.md)
+- [Redirecting](/installation.md)
 - [Redirecting](/installation/workspace-backends.md)
+- [Redirecting](/installation/sqlite.md)
+- [Redirecting](/ja/channels/feishu.md)
+- [Redirecting](/ja/channels/discord.md)
+- [Redirecting](/ja/channels/dingtalk.md)
+- [Redirecting](/ja/channels.md)
+- [Redirecting](/ja/channels/slack.md)
+- [Redirecting](/ja/channels/telegram.md)
+- [Redirecting](/ja/channels/qq.md)
+- [Redirecting](/ja/channels/weixin.md)
+- [Redirecting](/ja/getting-started/access.md)
+- [Redirecting](/ja/getting-started/acp.md)
+- [Redirecting](/ja/channels/wecom.md)
+- [Redirecting](/ja/getting-started/bot.md)
+- [Redirecting](/ja/getting-started/browser-computer-use.md)
+- [Redirecting](/ja/getting-started/channels.md)
+- [Redirecting](/ja/getting-started/container.md)
+- [Redirecting](/ja/getting-started/compaction.md)
+- [Redirecting](/ja/getting-started/files.md)
+- [Redirecting](/ja/getting-started/mcp.md)
+- [Redirecting](/ja/getting-started/heartbeat.md)
+- [Redirecting](/ja/getting-started/memory.md)
+- [Redirecting](/ja/getting-started/plugins.md)
+- [Redirecting](/ja/getting-started/provider-and-model.md)
+- [Redirecting](/ja/getting-started/schedule.md)
+- [Redirecting](/ja/getting-started/skills.md)
+- [Redirecting](/ja/getting-started/search-provider.md)
+- [Redirecting](/ja/getting-started/sessions.md)
+- [Redirecting](/ja/getting-started/slash-commands.md)
+- [Redirecting](/ja/getting-started/supermarket.md)
+- [Redirecting](/ja/guides/bot.md)
+- [Redirecting](/ja/guides/get-started.md)
+- [Redirecting](/ja/installation/docker.md)
+- [Redirecting](/ja/installation/desktop.md)
+- [Redirecting](/ja/installation.md)
+- [Redirecting](/ja/installation/kata-containerd.md)
+- [Redirecting](/ja/installation/workspace-backends.md)
+- [Redirecting](/ja/installation/sqlite.md)
+- [Redirecting](/ja/memory-providers/builtin.md)
+- [Redirecting](/ja/memory-providers.md)
 - [Redirecting](/memory-providers/builtin.md)
 - [Redirecting](/memory-providers.md)
-- [Redirecting](/memory-providers/mem0.md)
-- [Redirecting](/memory-providers/openviking.md)
-- [Redirecting](/tts-providers/edge.md)
-- [Redirecting](/tts-providers.md)
-- [Redirecting](/zh/channels/dingtalk.md)
+- [Redirecting](/ru/channels/dingtalk.md)
+- [Redirecting](/ru/channels/discord.md)
+- [Redirecting](/ru/channels/qq.md)
+- [Redirecting](/ru/channels/feishu.md)
+- [Redirecting](/ru/channels.md)
+- [Redirecting](/ru/channels/slack.md)
+- [Redirecting](/ru/channels/weixin.md)
+- [Redirecting](/ru/getting-started/access.md)
+- [Redirecting](/ru/channels/telegram.md)
+- [Redirecting](/ru/channels/wecom.md)
+- [Redirecting](/ru/getting-started/acp.md)
+- [Redirecting](/ru/getting-started/bot.md)
+- [Redirecting](/ru/getting-started/browser-computer-use.md)
+- [Redirecting](/ru/getting-started/channels.md)
+- [Redirecting](/ru/getting-started/container.md)
+- [Redirecting](/ru/getting-started/compaction.md)
+- [Redirecting](/ru/getting-started/heartbeat.md)
+- [Redirecting](/ru/getting-started/memory.md)
+- [Redirecting](/ru/getting-started/files.md)
+- [Redirecting](/ru/getting-started/mcp.md)
+- [Redirecting](/ru/getting-started/plugins.md)
+- [Redirecting](/ru/getting-started/schedule.md)
+- [Redirecting](/ru/getting-started/provider-and-model.md)
+- [Redirecting](/ru/getting-started/sessions.md)
+- [Redirecting](/ru/getting-started/search-provider.md)
+- [Redirecting](/ru/getting-started/skills.md)
+- [Redirecting](/ru/getting-started/slash-commands.md)
+- [Redirecting](/ru/getting-started/supermarket.md)
+- [Redirecting](/ru/guides/bot.md)
+- [Redirecting](/ru/guides/get-started.md)
+- [Redirecting](/ru/installation/desktop.md)
+- [Redirecting](/ru/installation/docker.md)
+- [Redirecting](/ru/installation.md)
+- [Redirecting](/ru/installation/kata-containerd.md)
+- [Redirecting](/ru/installation/sqlite.md)
+- [Redirecting](/ru/installation/workspace-backends.md)
+- [Redirecting](/ru/memory-providers/builtin.md)
+- [Redirecting](/ru/memory-providers.md)
 - [Redirecting](/zh/channels/discord.md)
 - [Redirecting](/zh/channels/feishu.md)
+- [Redirecting](/zh/channels/dingtalk.md)
 - [Redirecting](/zh/channels.md)
 - [Redirecting](/zh/channels/qq.md)
 - [Redirecting](/zh/channels/slack.md)
-- [Redirecting](/zh/channels/weixin.md)
-- [Redirecting](/zh/channels/telegram.md)
 - [Redirecting](/zh/channels/wecom.md)
-- [Redirecting](/zh/getting-started/access.md)
+- [Redirecting](/zh/channels/telegram.md)
+- [Redirecting](/zh/channels/weixin.md)
 - [Redirecting](/zh/getting-started/acp.md)
+- [Redirecting](/zh/getting-started/access.md)
 - [Redirecting](/zh/getting-started/bot.md)
-- [Redirecting](/zh/getting-started/channels.md)
 - [Redirecting](/zh/getting-started/browser-computer-use.md)
+- [Redirecting](/zh/getting-started/channels.md)
 - [Redirecting](/zh/getting-started/compaction.md)
 - [Redirecting](/zh/getting-started/container.md)
-- [Redirecting](/zh/getting-started/files.md)
 - [Redirecting](/zh/getting-started/heartbeat.md)
+- [Redirecting](/zh/getting-started/files.md)
 - [Redirecting](/zh/getting-started/plugins.md)
 - [Redirecting](/zh/getting-started/memory.md)
+- [Redirecting](/zh/getting-started/provider-and-model.md)
 - [Redirecting](/zh/getting-started/mcp.md)
 - [Redirecting](/zh/getting-started/schedule.md)
-- [Redirecting](/zh/getting-started/provider-and-model.md)
 - [Redirecting](/zh/getting-started/sessions.md)
-- [Redirecting](/zh/getting-started/skills.md)
 - [Redirecting](/zh/getting-started/search-provider.md)
+- [Redirecting](/zh/getting-started/skills.md)
 - [Redirecting](/zh/getting-started/slash-commands.md)
 - [Redirecting](/zh/getting-started/supermarket.md)
 - [Redirecting](/zh/guides/bot.md)
 - [Redirecting](/zh/guides/get-started.md)
+- [Redirecting](/zh/installation/docker.md)
 - [Redirecting](/zh/installation/desktop.md)
 - [Redirecting](/zh/installation.md)
-- [Redirecting](/zh/installation/kata-containerd.md)
 - [Redirecting](/zh/installation/sqlite.md)
-- [Redirecting](/zh/installation/docker.md)
 - [Redirecting](/zh/installation/workspace-backends.md)
+- [Redirecting](/zh/installation/kata-containerd.md)
 - [Redirecting](/zh/memory-providers/builtin.md)
 - [Redirecting](/zh/memory-providers.md)
-- [Redirecting](/zh/memory-providers/openviking.md)
-- [Redirecting](/zh/memory-providers/mem0.md)
-- [Redirecting](/zh/tts-providers/edge.md)
-- [Redirecting](/zh/tts-providers.md)
-- [Self-hosted Overview](/self-hosted.md)
-- [Server Deploy](/self-hosted/docker.md)
-- [Workspace Backends](/self-hosted/workspace-backends.md)
+- [Документация Memoh](/ru.md): Изучите Memoh, подключите внешние системы и приведите Bot в привычные чат-платформы.
+- [Интеграции](/ru/integrations.md)
+- [О Memoh](/ru/about.md)
+- [インテグレーション](/ja/integrations.md)
 - [了解 Memoh](/zh/about.md)
-- [工作区后端（Workspace backend）](/zh/self-hosted/workspace-backends.md)
-- [服务器部署（Server Deploy）](/zh/self-hosted/docker.md)
-- [自托管总览](/zh/self-hosted.md)
 - [集成](/zh/integrations.md)
