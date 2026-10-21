@@ -1,9 +1,32 @@
+import { readFileSync, readdirSync } from 'node:fs'
+import { join, relative } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitepress'
 import llmstxt from 'vitepress-plugin-llms'
 import { en } from './en'
 import { zh } from './zh'
 import { ja } from './ja'
 import { ru } from './ru'
+
+const docsDir = fileURLToPath(new URL('..', import.meta.url))
+
+// Old URLs are kept as `title: Redirecting` stub pages that only run a client
+// redirect. They carry no content, so the LLM indexes leave them out.
+function redirectPages(dir = docsDir): string[] {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const path = join(dir, entry.name)
+    if (entry.isDirectory()) {
+      return entry.name.startsWith('.') || entry.name === 'public' ? [] : redirectPages(path)
+    }
+    if (!entry.name.endsWith('.md')) return []
+    return /^---\n(?:[^\n]*\n)*?title: Redirecting\n/.test(readFileSync(path, 'utf8'))
+      ? [relative(docsDir, path)]
+      : []
+  })
+}
+
+// The plugin matches a directory's index.md by its output path, `<dir>.md`.
+const llmsIgnoredPages = redirectPages().map(page => page.replace(/\/index\.md$/, '.md'))
 
 // https://vitepress.vuejs.org/config/app-configs
 export default defineConfig({
@@ -106,6 +129,15 @@ export default defineConfig({
   lastUpdated: true,
 
   vite: {
-    plugins: [llmstxt()],
+    plugins: [llmstxt({
+      // Each locale maps /guides/, /integrations/ and /self-hosted/ to the same
+      // sidebar object, and the plugin builds the llms.txt table of contents
+      // from every sidebar key, so pass each object once.
+      sidebar: sidebar => [...new Set(Object.values(sidebar ?? {}))].flat(),
+      ignoreFilesPerOutput: {
+        llmsTxt: llmsIgnoredPages,
+        llmsFullTxt: llmsIgnoredPages,
+      },
+    })],
   },
 })
