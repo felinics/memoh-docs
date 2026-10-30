@@ -3,6 +3,7 @@ const references = [
     text: '参考文档',
     items: [
       { text: '总览', link: '/zh/guides/' },
+      { text: '最新动态', link: '/zh/whats-new.md' },
     ],
   },
   {
@@ -70,4 +71,5 @@ export const zh = {
   '/zh/guides/': references,
   '/zh/integrations/': references,
   '/zh/self-hosted/': references,
+  '/zh/whats-new': references,
 }

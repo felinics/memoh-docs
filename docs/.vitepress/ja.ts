@@ -3,6 +3,7 @@ const references = [
     text: 'リファレンス',
     items: [
       { text: '総覧', link: '/ja/guides/' },
+      { text: '新着情報', link: '/ja/whats-new.md' },
     ],
   },
   {
@@ -70,4 +71,5 @@ export const ja = {
   '/ja/guides/': references,
   '/ja/integrations/': references,
   '/ja/self-hosted/': references,
+  '/ja/whats-new': references,
 }

@@ -23,6 +23,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Guides', link: '/guides/' },
+          { text: "What's new", link: '/whats-new' },
           { text: 'Help Center', link: 'https://memoh.ai/help' },
         ],
       },
@@ -33,6 +34,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: '教程', link: '/zh/guides/' },
+          { text: '最新动态', link: '/zh/whats-new' },
           { text: '帮助中心', link: 'https://memoh.ai/help' },
         ],
       },
@@ -43,6 +45,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'ガイド', link: '/ja/guides/' },
+          { text: '新着情報', link: '/ja/whats-new' },
           { text: 'ヘルプセンター', link: 'https://memoh.ai/help' },
         ],
       },
@@ -53,6 +56,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Руководства', link: '/ru/guides/' },
+          { text: 'Что нового', link: '/ru/whats-new' },
           { text: 'Центр помощи', link: 'https://memoh.ai/help' },
         ],
       },

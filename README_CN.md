@@ -26,6 +26,7 @@
 - **集成**：渠道和提供方，包括消息平台、LLM、记忆提供方、TTS 和网页搜索。
 - **自托管**：Desktop、Server Deploy、workspace backend、Kata 和 SQLite 等开源部署文档。
 - 英文、中文、日文和俄文文档，分别位于 `docs/`、`docs/zh/`、`docs/ja/` 和 `docs/ru/`。
+- 最新动态，位于 `docs/whats-new.md`：精选的版本更新速览。按版本的完整更新日志见 [GitHub Releases](https://github.com/felinics/Memoh/releases)。
 - 截图、logo 等静态资源，位于 `docs/public/`。
 - VitePress 配置，位于 `docs/.vitepress/`。
 
@@ -101,6 +102,7 @@ pnpm preview
 │   ├── zh/                # 中文文档和重定向页面
 │   ├── ja/                # 日文文档和重定向页面
 │   ├── ru/                # 俄文文档和重定向页面
+│   ├── whats-new.md       # 版本更新速览
 │   └── *.md               # 入口和兼容页面
 ├── package.json
 └── pnpm-lock.yaml
@@ -110,6 +112,7 @@ pnpm preview
 
 ### 2026-10
 
+- **最新动态页面**：各语言新增精选的版本更新速览，顶栏可直达；GitHub Releases 仍是完整的更新日志。第一条为 10 月 19 日更新（Grok Build、云桌面复制粘贴、定时任务会话、Prompt 缓存修复）。Agents / ACP 页补充 Grok Build。
 - **客户端优先修正**：顶栏改为 教程 / 帮助中心（移除 集成 与 关于）；侧边栏恢复自部署分组（Server Deploy、Workspace 后端、连接器）。
 - **应用（App）模型**：应用市场与技能页面按统一的 App 概念重写（一个 App 打包 Skills、依赖和连接器）；技能页改为说明工作区目录，不再描述已移除的管理界面；连接器移入自部署章节。
 - **工作区页面以 Cloud 为基准**：开源后端配置与 CDI/GPU 透传移至 Workspace 后端；移除用户偏好页；记忆提供方条目合并为一个；移除 TTS: Edge。

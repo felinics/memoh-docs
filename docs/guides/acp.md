@@ -2,7 +2,7 @@
 
 Memoh can connect a bot to ACP-compatible coding agents. ACP agents are external coding workflows that work from the bot's chat workspace while keeping their sessions separate from normal chat and discuss conversations.
 
-Two agent profiles ship with Memoh: **Codex** and **Claude Code**. Treat them as supported setup paths, not as the only possible ACP-compatible agents over time.
+Three agent profiles ship with Memoh: **Codex**, **Claude Code**, and **Grok Build**. Treat them as supported setup paths, not as the only possible ACP-compatible agents over time.
 
 ACP agents run inside the bot's container workspace, so the bot must use a container-backed workspace backend.
 
@@ -23,6 +23,7 @@ A row shows one of three states: **Needs setup** (enabled but missing credential
 |-------|---------|-------|--------------|
 | **Codex** | ✅ | ✅ ChatGPT sign-in with device code | ✅ |
 | **Claude Code** | ✅ | ✅ paste a token from `claude setup-token` | ✅ |
+| **Grok Build** | ✅ xAI API key | ✅ Grok account sign-in with device code | — |
 
 **Self-managed** means Memoh launches the agent against configuration you maintain yourself inside the workspace.
 
@@ -32,9 +33,23 @@ In the Codex settings, click **Use Device Code**. Memoh shows a verification URL
 
 > Only enter the code on the displayed OpenAI verification URL — device codes can be used for phishing.
 
+### Grok Build {#grok-build}
+
+Grok Build authenticates with an xAI API key or your Grok account. While creating a bot you can only provide an API key; Grok account sign-in is available in the agent's settings once the bot exists. Memoh shows a verification page and a one-time code — confirm it only on the accounts.x.ai address shown there — and finishes authorization automatically. Memoh encrypts the agent's Grok credentials and provides them to Grok Build only at runtime.
+
+Grok Build applies its own permission mode to its built-in tools:
+
+| Mode | Behavior |
+|------|----------|
+| **Ask** (default) | Ask before each operation that has side effects. |
+| **Auto** | Let Grok decide which operations are safe to run without asking. |
+| **Always approve** | Approve every operation without asking. Memoh's own tool permissions still apply. |
+
+The bot's **Tool Approval** rules govern only the tools Memoh provides. When Grok Build asks for approval, Memoh shows the request as a card for a user with the matching workspace permission to decide. Grok Build can fork a conversation only from its latest turn.
+
 ## Adapter Updates
 
-The Codex and Claude Code adapters are npm-backed. Memoh resolves the adapter's latest published version once per server run (per bot) and launches that version, so adapter fixes arrive without upgrading Memoh itself. If the lookup or launch fails, Memoh falls back to the adapter version bundled in the workspace image until the next server restart.
+The Codex and Claude Code adapters are npm-backed. Memoh resolves the adapter's latest published version once per server run (per bot) and launches that version, so adapter fixes arrive without upgrading Memoh itself. If the lookup or launch fails, Memoh falls back to the adapter version bundled in the workspace image until the next server restart. Grok Build needs no adapter: it speaks ACP natively, and Memoh runs the `grok` CLI provided as a managed workspace dependency.
 
 ---
 

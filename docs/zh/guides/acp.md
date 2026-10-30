@@ -2,7 +2,7 @@
 
 Memoh 可以把 Bot 连接到 ACP 兼容的编码智能体。ACP 智能体是外部编码工作流，可以从 Bot 的聊天 workspace 里工作，同时把自己的会话和普通 chat / discuss 分开。
 
-内置两个 agent profile：**Codex**、**Claude Code**。它们是当前支持的配置路径，不代表未来只能接这两种。
+内置三个 agent profile：**Codex**、**Claude Code**、**Grok Build**。它们是当前支持的配置路径，不代表未来只能接这三种。
 
 ACP 智能体在 Bot 的容器 workspace 里运行，所以 Bot 必须使用容器类 workspace backend。
 
@@ -23,6 +23,7 @@ ACP 智能体在 Bot 的容器 workspace 里运行，所以 Bot 必须使用容�
 |--------|---------|-------|--------------|
 | **Codex** | ✅ | ✅ ChatGPT 登录（设备码） | ✅ |
 | **Claude Code** | ✅ | ✅ 粘贴 `claude setup-token` 生成的 token | ✅ |
+| **Grok Build** | ✅ xAI API Key | ✅ Grok 账号登录（设备码） | — |
 
 **Self-managed** 表示 Memoh 直接用你在 workspace 里自己维护的配置来启动智能体。
 
@@ -32,9 +33,23 @@ ACP 智能体在 Bot 的容器 workspace 里运行，所以 Bot 必须使用容�
 
 > 一次性代码只在显示的 OpenAI 验证 URL 上输入——设备码可能被用于钓鱼。
 
+### Grok Build {#grok-build}
+
+Grok Build 用 xAI API Key 或 Grok 账号认证。创建 Bot 时只能先填 API Key；Grok 账号要等 Bot 创建之后，在该智能体的设置里登录。Memoh 会显示验证页面和一次性代码，你在页面显示的 accounts.x.ai 地址上确认后，授权自动完成。不要在其他地址上确认这个代码。Memoh 会加密保存这个智能体的 Grok 凭据，并且只在运行时提供给 Grok Build。
+
+Grok Build 的内置工具遵循它自己的权限模式：
+
+| 模式 | 行为 |
+|------|------|
+| **每次询问**（默认） | 执行有副作用的操作前先由你确认。 |
+| **自动判断** | 由 Grok 判断哪些操作可以安全执行，不再逐一询问。 |
+| **全部批准** | 所有操作直接批准，不再询问；Memoh 工具权限仍然生效。 |
+
+Bot 的 **工具审核** 规则只约束 Memoh 提供的工具。Grok Build 发来的询问会以卡片展示，由持有对应工作区权限的用户决定。Grok Build 只能从最新一轮分叉对话。
+
 ## Adapter 自动升级
 
-Codex 和 Claude Code 的 adapter 是 npm 包。Memoh 每次服务进程启动后（按 bot）解析一次 npm 上的最新版本并启动它，adapter 的修复不需要升级 Memoh 就能拿到。解析或启动失败时回退到 workspace 镜像里内置的版本，直到下次服务重启。
+Codex 和 Claude Code 的 adapter 是 npm 包。Memoh 每次服务进程启动后（按 bot）解析一次 npm 上的最新版本并启动它，adapter 的修复不需要升级 Memoh 就能拿到。解析或启动失败时回退到 workspace 镜像里内置的版本，直到下次服务重启。Grok Build 不需要 adapter：它原生支持 ACP，Memoh 运行的是作为受管工作区依赖提供的 `grok` CLI。
 
 ---
 

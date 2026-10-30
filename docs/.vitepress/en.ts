@@ -3,6 +3,7 @@ const references = [
     text: 'References',
     items: [
       { text: 'Overview', link: '/guides/' },
+      { text: "What's new", link: '/whats-new.md' },
     ],
   },
   {
@@ -70,4 +71,5 @@ export const en = {
   '/guides/': references,
   '/integrations/': references,
   '/self-hosted/': references,
+  '/whats-new': references,
 }

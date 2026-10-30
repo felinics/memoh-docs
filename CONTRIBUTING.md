@@ -69,6 +69,16 @@ This keeps links stable across locales and rewordings.
 - Every destructive action notes what it does **not** undo. Example: "Deleting a session removes its message history permanently; it does not delete memories already extracted from it."
 - Example prompts end with a safety constraint. Example: "Summarize this thread and draft a reply, and ask me before sending anything."
 
+## Announce Releases in What's New, Not a Changelog
+
+`docs/whats-new.md` (mirrored in every locale) is a curated digest of changes that alter how someone uses Memoh. The exhaustive per-version record is the [GitHub release notes](https://github.com/felinics/Memoh/releases); the docs keep no changelog page of their own.
+
+- **Belongs in What's new:** new agents and capabilities, user-visible workflow changes, notable performance wins, and Memoh Cloud notices such as plan or billing changes. Release announcements (for example, posts on X) map here.
+- **Stays in the release notes only:** refactors, error-code plumbing, test fixes, dependency bumps, and other changes nobody would notice while using the product.
+- **One section per announcement**, newest first, headed by its date with an explicit anchor: `## October 19, 2026 {#2026-10-19}`. Entries are `###` headings that lead with a verb and carry `{#YYYY-MM-DD-short-slug}`, so deep links match across locales.
+- **Each entry** is one to three short paragraphs that link to the docs page for the feature. End the section with a link to that version's GitHub release.
+- **Update the feature docs first.** An entry must never link to a page that contradicts it.
+
 ## Run the Parity Check Before Opening a PR
 
 ```sh
@@ -147,6 +157,16 @@ FAQ 条目和所有要被深链的标题带显式 ASCII `{#id}`，**所有语言
 - 用确切数字，不用含糊说法：「256+ 个声音、50+ 种语言」，不写「很多声音」。
 - 每个破坏性操作都写明它**不会**撤销什么。例：「删除会话会永久移除消息历史；已经从中抽取的记忆不会随之删除。」
 - 示例提示词以安全约束收尾。例：「总结这个帖子并起草回复，发送任何内容前先问我。」
+
+## 版本更新写进最新动态，不另建 changelog
+
+`docs/whats-new.md`（每种语言都有镜像）是精选的更新速览，只收录会改变使用方式的变化。按版本穷举的完整记录是 [GitHub Release](https://github.com/felinics/Memoh/releases)，文档站不再单独维护 changelog 页面。
+
+- **写进最新动态：** 新的 Agent 和能力、用户能感知到的流程变化、明显的性能提升，以及 Memoh Cloud 的套餐、计费等通知。发版公告（例如 X 上的推文）就对应这里。
+- **只留在 Release 里：** 重构、错误码梳理、测试修复、依赖升级等使用时察觉不到的改动。
+- **每次公告一节**，最新的在最上面，标题写日期并带显式锚点：`## 2026 年 10 月 19 日 {#2026-10-19}`。条目用 `###` 标题、以动词开头，并带 `{#YYYY-MM-DD-short-slug}`，保证各语言深链一致。
+- **每个条目**一到三段短文，链接到该功能的文档页。这一节最后链接到对应版本的 GitHub Release。
+- **先更新功能文档。** 条目链接过去的页面不能和条目内容矛盾。
 
 ## 发 PR 前跑一致性检查
 

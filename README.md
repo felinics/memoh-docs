@@ -26,6 +26,7 @@ The product source code lives in [`felinics/Memoh`](https://github.com/felinics/
 - **Integrations** for channels and providers, including messaging platforms, LLMs, memory providers, TTS, and web search.
 - **Self-hosted** docs for Desktop, Server Deploy, workspace backends, Kata, and SQLite.
 - **English, Chinese, Japanese, and Russian docs** under `docs/`, `docs/zh/`, `docs/ja/`, and `docs/ru/`.
+- **What's new** in `docs/whats-new.md`: a curated digest of release highlights. The full per-version changelog lives in [GitHub Releases](https://github.com/felinics/Memoh/releases).
 - **Static assets** under `docs/public/`, including screenshots and logos.
 - **VitePress config** under `docs/.vitepress/`.
 
@@ -101,6 +102,7 @@ pnpm preview
 │   ├── zh/                # Simplified Chinese documentation and redirects
 │   ├── ja/                # Japanese documentation and redirects
 │   ├── ru/                # Russian documentation and redirects
+│   ├── whats-new.md       # Release highlights digest
 │   └── *.md               # Landing and compatibility pages
 ├── package.json
 └── pnpm-lock.yaml
@@ -110,6 +112,7 @@ pnpm preview
 
 ### 2026-10
 
+- **What's new page**: a curated digest of release highlights in every locale, linked from the top nav; GitHub Releases remains the full changelog. First entry: the October 19 update (Grok Build, cloud desktop copy and paste, scheduled-task sessions, prompt-cache fixes). Agents / ACP now documents Grok Build.
 - **Client-first corrections round**: top nav is now Guides / Help Center (Integrations and About removed); the Deployment sidebar group is back (Server Deploy, Workspace Backends, Connectors).
 - **Apps model**: Supermarket and Skills pages rewritten around the unified App concept (an App bundles Skills, dependencies, and connectors); Skills now documents workspace directories instead of a removed management UI; Connectors moved to the Deployment section.
 - **Cloud-baseline Workspace page**: open-source backend configuration and CDI/GPU passthrough moved to Workspace Backends; Preferences page removed; Memory provider entries consolidated into one; TTS: Edge removed.
